@@ -16,15 +16,20 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [Key]
         [Column("CourseID")]
         public int CourseId { get; set; }
-        [StringLength(50)]
-        public string CourseDescription { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime? CourseDueDate { get; set; }
+
         [StringLength(50)]
         public string CourseName { get; set; }
 
+        [StringLength(50)]
+        public string CourseDescription { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? CourseDueDate { get; set; }
+      
+
         [InverseProperty("Course")]
         public virtual ICollection<Lesson> Lesson { get; set; }
+
         [InverseProperty("Course")]
         public virtual ICollection<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
     }

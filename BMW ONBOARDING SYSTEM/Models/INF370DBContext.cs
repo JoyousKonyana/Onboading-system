@@ -67,7 +67,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.Property(e => e.Country).IsUnicode(false);
+                entity.Property(e => e.CityName).IsUnicode(false);
             });
 
             modelBuilder.Entity<Country>(entity =>

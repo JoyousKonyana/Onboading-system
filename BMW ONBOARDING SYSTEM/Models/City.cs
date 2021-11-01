@@ -11,6 +11,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [Column("CityID")]
         public int CityId { get; set; }
         [StringLength(50)]
-        public string Country { get; set; }
+        public string CityName { get; set; }
     }
 }
