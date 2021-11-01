@@ -16,7 +16,7 @@ import { User_RoleService, EmployeeService, AlertService } from './_services';
 })
 export class AppComponent implements OnInit{
 
-  //Pages and their boolean 
+  //Pages and their boolean
   users: boolean = false;
   administrator: boolean = false;
   equipment: boolean = false;
@@ -53,8 +53,8 @@ export class AppComponent implements OnInit{
         ) {
         //this.authenticationService.user.subscribe(x => this.user = x);
     }
-    
-  ngOnInit() { 
+
+  ngOnInit() {
     this.loadAll();
     this.findUserRole();
   }
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit{
   }
 
   findUserRole() {
-    this.dataHolder = this.user.userRole.userRoleDescription ;
+    this.dataHolder = this.user.userRole.userRoleName ;
     this.role = this.dataHolder.split(" ");//This split string to an array when system detects space
 
     for(let i=0; i < this.role.length; i++){

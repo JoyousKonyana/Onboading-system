@@ -191,18 +191,15 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     var tokenString = tokenHandler.WriteToken(token);
 
                     // return basic user info and authentication token
-                    //return Ok(new
-                    //{
-                    //    //Id = user.UserId,
-                    //    //Username = user.Username,
-                    //    //employeeID = user.EmployeeId,
-                    //    //Token = tokenString,
-                    //    Userrole = user.UserRole.UserRoleName
-                    //});
+                    return Ok(new
+                    {
+                        Id = user.UserId,
+                        Username = user.Username,
+                        employeeID = user.EmployeeId,
+                        Token = tokenString,
+                        Userrole = user.UserRole.UserRoleName
+                    });
 
-                    return Ok(user.UserRole.UserRoleName);
-                    //return _mapper.Map<User>(user);
-                    //return Created($"/api/User{model.UserName}", _mapper.Map<User>(user));
                 }
                 return BadRequest("OTP incorrect");
 
