@@ -9,9 +9,9 @@ namespace BMW_ONBOARDING_SYSTEM.Models
     {
         public LessonOutcome()
         {
-          //added for relationship
-            QuestionBank = new HashSet<QuestionBank>();
+            Quiz = new HashSet<Quiz>();
         }
+
         [Key]
         [Column("LessonOutcomeID")]
         public int LessonOutcomeId { get; set; }
@@ -25,9 +25,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [ForeignKey(nameof(LessonId))]
         [InverseProperty("LessonOutcome")]
         public virtual Lesson Lesson { get; set; }
-
-        //added for relationship
         [InverseProperty("LessonOutcome")]
-        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
+        public virtual ICollection<Quiz> Quiz { get; set; }
     }
 }

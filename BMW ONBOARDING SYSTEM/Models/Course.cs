@@ -11,7 +11,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         {
             Lesson = new HashSet<Lesson>();
             OnboarderCourseEnrollment = new HashSet<OnboarderCourseEnrollment>();
-            QuestionBank = new HashSet<QuestionBank>();
         }
 
         [Key]
@@ -28,7 +27,5 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual ICollection<Lesson> Lesson { get; set; }
         [InverseProperty("Course")]
         public virtual ICollection<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
-        [InverseProperty("Course")]
-        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
     }
 }

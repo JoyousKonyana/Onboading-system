@@ -10,7 +10,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public Employee()
         {
             Onboarder = new HashSet<Onboarder>();
-            User = new HashSet<User>();
         }
 
         [Key]
@@ -49,6 +48,5 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual Title Title { get; set; }
         [InverseProperty("Employee")]
         public virtual ICollection<Onboarder> Onboarder { get; set; }
-        public virtual ICollection<User> User { get; set; }
     }
 }

@@ -15,57 +15,11 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         {
         }
 
-        public virtual DbSet<Achievement> Achievement { get; set; }
-        public virtual DbSet<AchievementType> AchievementType { get; set; }
-        public virtual DbSet<ActiveLog> ActiveLog { get; set; }
-        public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<ArchiveStatus> ArchiveStatus { get; set; }
-        public virtual DbSet<AuditLog> AuditLog { get; set; }
-        public virtual DbSet<Badge> Badge { get; set; }
-        public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Course> Course { get; set; }
-        public virtual DbSet<CourseCompletionStatus> CourseCompletionStatus { get; set; }
-        public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<EmployeeCalendar> EmployeeCalendar { get; set; }
-        public virtual DbSet<Equipment> Equipment { get; set; }
-        public virtual DbSet<EquipmentBrand> EquipmentBrand { get; set; }
-        public virtual DbSet<EquipmentQuery> EquipmentQuery { get; set; }
-        public virtual DbSet<EquipmentQueryStatus> EquipmentQueryStatus { get; set; }
-        public virtual DbSet<EquipmentTradeInStatus> EquipmentTradeInStatus { get; set; }
-        public virtual DbSet<EquipmentType> EquipmentType { get; set; }
-        public virtual DbSet<Faq> Faq { get; set; }
-        public virtual DbSet<Gender> Gender { get; set; }
-        public virtual DbSet<Lesson> Lesson { get; set; }
-        public virtual DbSet<LessonCompletionStatus> LessonCompletionStatus { get; set; }
-        public virtual DbSet<LessonContent> LessonContent { get; set; }
-        public virtual DbSet<LessonContentType> LessonContentType { get; set; }
-        public virtual DbSet<LessonOutcome> LessonOutcome { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<Onboarder> Onboarder { get; set; }
-        public virtual DbSet<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
-        public virtual DbSet<OnboarderEquipment> OnboarderEquipment { get; set; }
-        public virtual DbSet<Option> Option { get; set; }
-        public virtual DbSet<Otp> Otp { get; set; }
-        public virtual DbSet<PostalCode> PostalCode { get; set; }
-        public virtual DbSet<Province> Province { get; set; }
-        public virtual DbSet<QueryStatus> QueryStatus { get; set; }
-        public virtual DbSet<Question> Question { get; set; }
-        public virtual DbSet<QuestionBank> QuestionBank { get; set; }
-        public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
-        public virtual DbSet<Quiz> Quiz { get; set; }
-        public virtual DbSet<Suburb> Suburb { get; set; }
-        public virtual DbSet<Title> Title { get; set; }
-        public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=INF 3705;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=INF 3705;Trusted_Connection=True;");
             }
         }
 
@@ -260,31 +214,31 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                     .WithMany(p => p.Onboarder)
                     .HasForeignKey(d => d.EmployeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Emplo__5224328E");
+                    .HasConstraintName("FK__Onboarder__Emplo__01142BA1");
             });
 
             modelBuilder.Entity<OnboarderCourseEnrollment>(entity =>
             {
                 entity.HasKey(e => new { e.OnboarderId, e.CourseId })
-                    .HasName("PK__Onboarde__2C42895D6775A25D");
+                    .HasName("PK__Onboarde__2C42895D0C624168");
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.OnboarderCourseEnrollment)
                     .HasForeignKey(d => d.CourseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Cours__531856C7");
+                    .HasConstraintName("FK__Onboarder__Cours__02084FDA");
 
                 entity.HasOne(d => d.Onboarder)
                     .WithMany(p => p.OnboarderCourseEnrollment)
                     .HasForeignKey(d => d.OnboarderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Onboa__540C7B00");
+                    .HasConstraintName("FK__Onboarder__Onboa__02FC7413");
             });
 
             modelBuilder.Entity<OnboarderEquipment>(entity =>
             {
                 entity.HasKey(e => new { e.EquipmentId, e.OnboarderId })
-                    .HasName("PK__Onboarde__704A407DF2C8652A");
+                    .HasName("PK__Onboarde__704A407D484BC86A");
 
                 entity.Property(e => e.EquipmentCheckInCondition).IsUnicode(false);
 
@@ -292,13 +246,13 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                     .WithMany(p => p.OnboarderEquipment)
                     .HasForeignKey(d => d.EquipmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Equip__55009F39");
+                    .HasConstraintName("FK__Onboarder__Equip__03F0984C");
 
                 entity.HasOne(d => d.Onboarder)
                     .WithMany(p => p.OnboarderEquipment)
                     .HasForeignKey(d => d.OnboarderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Onboa__55F4C372");
+                    .HasConstraintName("FK__Onboarder__Onboa__04E4BC85");
             });
 
             modelBuilder.Entity<Option>(entity =>
@@ -345,11 +299,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
             modelBuilder.Entity<QuestionBank>(entity =>
             {
                 entity.Property(e => e.QuestionBankDescription).IsUnicode(false);
-
-                entity.HasOne(d => d.Course)
-                    .WithMany(p => p.QuestionBank)
-                    .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK_QuestionBank_Course");
             });
 
             modelBuilder.Entity<QuestionCategory>(entity =>
@@ -362,6 +311,11 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.QuizDescription).IsUnicode(false);
 
                 entity.Property(e => e.QuizMarkRequirement).IsUnicode(false);
+
+                entity.HasOne(d => d.LessonOutcome)
+                    .WithMany(p => p.Quiz)
+                    .HasForeignKey(d => d.LessonOutcomeId)
+                    .HasConstraintName("FK_Quiz_LessonOutcome");
 
                 entity.HasOne(d => d.QuestionBank)
                     .WithMany(p => p.Quiz)
@@ -402,5 +356,51 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public virtual DbSet<Achievement> Achievement { get; set; }
+        public virtual DbSet<AchievementType> AchievementType { get; set; }
+        public virtual DbSet<ActiveLog> ActiveLog { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<ArchiveStatus> ArchiveStatus { get; set; }
+        public virtual DbSet<AuditLog> AuditLog { get; set; }
+        public virtual DbSet<Badge> Badge { get; set; }
+        public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<CourseCompletionStatus> CourseCompletionStatus { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeCalendar> EmployeeCalendar { get; set; }
+        public virtual DbSet<Equipment> Equipment { get; set; }
+        public virtual DbSet<EquipmentBrand> EquipmentBrand { get; set; }
+        public virtual DbSet<EquipmentQuery> EquipmentQuery { get; set; }
+        public virtual DbSet<EquipmentQueryStatus> EquipmentQueryStatus { get; set; }
+        public virtual DbSet<EquipmentTradeInStatus> EquipmentTradeInStatus { get; set; }
+        public virtual DbSet<EquipmentType> EquipmentType { get; set; }
+        public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Lesson> Lesson { get; set; }
+        public virtual DbSet<LessonCompletionStatus> LessonCompletionStatus { get; set; }
+        public virtual DbSet<LessonContent> LessonContent { get; set; }
+        public virtual DbSet<LessonContentType> LessonContentType { get; set; }
+        public virtual DbSet<LessonOutcome> LessonOutcome { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<Onboarder> Onboarder { get; set; }
+        public virtual DbSet<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
+        public virtual DbSet<OnboarderEquipment> OnboarderEquipment { get; set; }
+        public virtual DbSet<Option> Option { get; set; }
+        public virtual DbSet<Otp> Otp { get; set; }
+        public virtual DbSet<PostalCode> PostalCode { get; set; }
+        public virtual DbSet<Province> Province { get; set; }
+        public virtual DbSet<QueryStatus> QueryStatus { get; set; }
+        public virtual DbSet<Question> Question { get; set; }
+        public virtual DbSet<QuestionBank> QuestionBank { get; set; }
+        public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
+        public virtual DbSet<Quiz> Quiz { get; set; }
+        public virtual DbSet<Suburb> Suburb { get; set; }
+        public virtual DbSet<Title> Title { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
+
     }
 }

@@ -10,7 +10,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public Lesson()
         {
             LessonOutcome = new HashSet<LessonOutcome>();
-            QuestionBank = new HashSet<QuestionBank>();
         }
 
         [Key]
@@ -30,9 +29,5 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual Course Course { get; set; }
         [InverseProperty("Lesson")]
         public virtual ICollection<LessonOutcome> LessonOutcome { get; set; }
-
-        //added for relationship
-        [InverseProperty("Lesson")]
-        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
     }
 }

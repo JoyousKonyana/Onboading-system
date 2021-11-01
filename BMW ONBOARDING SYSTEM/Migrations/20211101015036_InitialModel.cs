@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BMW_ONBOARDING_SYSTEM.Migrations
 {
-    public partial class Changedstreetnumberfromdecimaltoint : Migration
+    public partial class InitialModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,39 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    constraints: table =>
             //    {
             //        table.PrimaryKey("PK_Achievement", x => x.AchievementID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "ActiveLog",
+            //    columns: table => new
+            //    {
+            //        ActiveLogID = table.Column<int>(nullable: false),
+            //        UserID = table.Column<int>(nullable: true),
+            //        ActiveLogDeviceIPAddress = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+            //        ActiveLogLoginTimestamp = table.Column<DateTime>(type: "datetime", nullable: true),
+            //        ActiveLogLoginLastActiveTimestamp = table.Column<DateTime>(type: "datetime", nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_ActiveLog", x => x.ActiveLogID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "Address",
+            //    columns: table => new
+            //    {
+            //        AddressID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        SuburbID = table.Column<int>(nullable: true),
+            //        ProvinceID = table.Column<int>(nullable: true),
+            //        CityID = table.Column<int>(nullable: true),
+            //        CountryID = table.Column<int>(nullable: true),
+            //        StreetNumber = table.Column<string>(nullable: true),
+            //        StreetName = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_Address", x => x.AddressID);
             //    });
 
             //migrationBuilder.CreateTable(
@@ -147,6 +180,35 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
+            //    name: "EquipmentQuery",
+            //    columns: table => new
+            //    {
+            //        EquipmentQueryID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        EquipmentID = table.Column<int>(nullable: true),
+            //        OnboarderID = table.Column<int>(nullable: true),
+            //        EquipmentQueryDescription = table.Column<string>(unicode: false, nullable: true),
+            //        EquipmentQueryDate = table.Column<DateTime>(type: "datetime", nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_EquipmentQuery", x => x.EquipmentQueryID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "EquipmentQueryStatus.",
+            //    columns: table => new
+            //    {
+            //        EquipmentQueryStatusID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        EquipmentQueryID = table.Column<int>(nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_EquipmentQueryStatus.", x => x.EquipmentQueryStatusID);
+            //    });
+
+            //migrationBuilder.CreateTable(
             //    name: "EquipmentTradeInStatus",
             //    columns: table => new
             //    {
@@ -227,6 +289,36 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
+            //    name: "Notification",
+            //    columns: table => new
+            //    {
+            //        NotificationID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        NotificationTypeID = table.Column<int>(nullable: true),
+            //        NotificationMessageDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+            //        CourseID = table.Column<int>(nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_Notification", x => x.NotificationID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "OTP",
+            //    columns: table => new
+            //    {
+            //        OTP_ID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        User_ID = table.Column<int>(nullable: false),
+            //        OtpValue = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
+            //        Timestamp = table.Column<DateTime>(type: "datetime", nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_OTP", x => x.OTP_ID);
+            //    });
+
+            //migrationBuilder.CreateTable(
             //    name: "PostalCode",
             //    columns: table => new
             //    {
@@ -271,11 +363,39 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    {
             //        QuestionBankID = table.Column<int>(nullable: false)
             //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        QuestionBankDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //        QuestionBankDescription = table.Column<string>(unicode: false, maxLength: 250, nullable: true)
             //    },
             //    constraints: table =>
             //    {
             //        table.PrimaryKey("PK_QuestionBank", x => x.QuestionBankID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "QuestionCategory",
+            //    columns: table => new
+            //    {
+            //        QuestionCategoryID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        QuestionBankID = table.Column<int>(nullable: true),
+            //        QuestionCategoryDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_QuestionCategory", x => x.QuestionCategoryID);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "Suburb",
+            //    columns: table => new
+            //    {
+            //        SuburbID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        PostalCodeID = table.Column<int>(nullable: true),
+            //        SuburbName = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_Suburb", x => x.SuburbID);
             //    });
 
             //migrationBuilder.CreateTable(
@@ -306,21 +426,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "Warranty",
-            //    columns: table => new
-            //    {
-            //        WarrantyID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        WarrantyStartDate = table.Column<DateTime>(type: "datetime", nullable: true),
-            //        WarrantyENdDate = table.Column<DateTime>(type: "datetime", nullable: true),
-            //        WarrantyStatus = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_Warranty", x => x.WarrantyID);
-            //    });
-
-            //migrationBuilder.CreateTable(
             //    name: "AchievementType",
             //    columns: table => new
             //    {
@@ -341,27 +446,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "Notification",
-            //    columns: table => new
-            //    {
-            //        NotificationID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        NotificationTypeID = table.Column<int>(nullable: true),
-            //        NotificationMessageDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        CourseID = table.Column<int>(nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_Notification", x => x.NotificationID);
-            //        table.ForeignKey(
-            //            name: "FK_Notification_Course",
-            //            column: x => x.CourseID,
-            //            principalTable: "Course",
-            //            principalColumn: "CourseID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
             //    name: "Lesson",
             //    columns: table => new
             //    {
@@ -370,7 +454,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //        CourseID = table.Column<int>(nullable: true),
             //        LessonCompletionStatusID = table.Column<int>(nullable: true),
             //        LessonDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        LessonName = table.Column<byte[]>(maxLength: 50, nullable: true)
+            //        LessonName = table.Column<string>(maxLength: 50, nullable: true)
             //    },
             //    constraints: table =>
             //    {
@@ -381,48 +465,85 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //            principalTable: "Course",
             //            principalColumn: "CourseID",
             //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Lesson_LessonCompletionStatus",
-            //            column: x => x.LessonCompletionStatusID,
-            //            principalTable: "LessonCompletionStatus",
-            //            principalColumn: "LessonCompletionStatusID",
-            //            onDelete: ReferentialAction.Restrict);
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "Suburb",
+            //    name: "Equipment",
             //    columns: table => new
             //    {
-            //        SuburbID = table.Column<int>(nullable: false)
+            //        EquipmentID = table.Column<int>(nullable: false)
             //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        PostalCodeID = table.Column<int>(nullable: true),
-            //        SuburbName = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //        EquipmentTypeID = table.Column<int>(nullable: true),
+            //        EquipmentTradeInStatus = table.Column<int>(nullable: true),
+            //        EquipmentBrandID = table.Column<int>(nullable: true),
+            //        EquipmentTradeUnDeadline = table.Column<DateTime>(type: "datetime", nullable: true),
+            //        EquipmentSerialNumber = table.Column<decimal>(type: "numeric(18, 0)", nullable: true)
             //    },
             //    constraints: table =>
             //    {
-            //        table.PrimaryKey("PK_Suburb", x => x.SuburbID);
+            //        table.PrimaryKey("PK_Equipment", x => x.EquipmentID);
             //        table.ForeignKey(
-            //            name: "FK_Suburb_PostalCode",
-            //            column: x => x.PostalCodeID,
-            //            principalTable: "PostalCode",
-            //            principalColumn: "PostalCodeID",
+            //            name: "FK_Equipment_EquipmentBrand_EquipmentBrandID",
+            //            column: x => x.EquipmentBrandID,
+            //            principalTable: "EquipmentBrand",
+            //            principalColumn: "EquipmentBrandID",
+            //            onDelete: ReferentialAction.Restrict);
+            //        table.ForeignKey(
+            //            name: "FK_Equipment_EquipmentType_EquipmentTypeID",
+            //            column: x => x.EquipmentTypeID,
+            //            principalTable: "EquipmentType",
+            //            principalColumn: "EquipmentTypeID",
             //            onDelete: ReferentialAction.Restrict);
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "QuestionCategory",
+            //    name: "LessonContent",
             //    columns: table => new
             //    {
-            //        QuestionCategoryID = table.Column<int>(nullable: false)
+            //        LessonConentID = table.Column<int>(nullable: false)
             //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        LessonContenetTypeID = table.Column<int>(nullable: true),
+            //        LessonOutcomeID = table.Column<int>(nullable: true),
+            //        ArchiveStatusID = table.Column<int>(nullable: true),
+            //        LessonContentDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+            //        LessonContent = table.Column<string>(unicode: false, nullable: true),
+            //        LessonContentTypeId = table.Column<int>(nullable: true)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_LessonContent", x => x.LessonConentID);
+            //        table.ForeignKey(
+            //            name: "FK_LessonContent_ArchiveStatus_ArchiveStatusID",
+            //            column: x => x.ArchiveStatusID,
+            //            principalTable: "ArchiveStatus",
+            //            principalColumn: "ArchiveStatusID",
+            //            onDelete: ReferentialAction.Restrict);
+            //        table.ForeignKey(
+            //            name: "FK_LessonContent_LessonContentType_LessonContentTypeId",
+            //            column: x => x.LessonContentTypeId,
+            //            principalTable: "LessonContentType",
+            //            principalColumn: "LessonContentTypeID",
+            //            onDelete: ReferentialAction.Restrict);
+            //    });
+
+            //migrationBuilder.CreateTable(
+            //    name: "Question",
+            //    columns: table => new
+            //    {
+            //        QuestionID = table.Column<int>(nullable: false)
+            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        QuizID = table.Column<int>(nullable: true),
+            //        QuestionCategoryID = table.Column<int>(nullable: true),
+            //        QuestionDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+            //        QuestionAnswer = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
             //        QuestionBankID = table.Column<int>(nullable: true),
-            //        QuestionCategoryDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //        QuestionMarkAllocation = table.Column<decimal>(type: "numeric(18, 0)", nullable: true)
             //    },
             //    constraints: table =>
             //    {
-            //        table.PrimaryKey("PK_QuestionCategory", x => x.QuestionCategoryID);
+            //        table.PrimaryKey("PK_Question", x => x.QuestionID);
             //        table.ForeignKey(
-            //            name: "FK_QuestionCategory_QuestionBank",
+            //            name: "FK_Question_QuestionBank",
             //            column: x => x.QuestionBankID,
             //            principalTable: "QuestionBank",
             //            principalColumn: "QuestionBankID",
@@ -458,19 +579,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //            principalColumn: "DepatmentID",
             //            onDelete: ReferentialAction.Restrict);
             //        table.ForeignKey(
-            //            name: "FK_Employee_Calendar",
-            //            column: x => x.EmployeeCalendarID,
-            //            principalTable: "EmployeeCalendar",
-            //            principalColumn: "EmployeeCalendarID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Employee_Gender",
-            //            column: x => x.GenderID,
-            //            principalTable: "Gender",
-            //            principalColumn: "GenderID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Employee_Title",
+            //            name: "FK_Employee_Title_TitleID",
             //            column: x => x.TitleID,
             //            principalTable: "Title",
             //            principalColumn: "TitleID",
@@ -500,48 +609,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "Equipment",
-            //    columns: table => new
-            //    {
-            //        EquipmentID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        EquipmentTypeID = table.Column<int>(nullable: true),
-            //        EquipmentTradeInStatus = table.Column<int>(nullable: true),
-            //        WarrantyID = table.Column<int>(nullable: true),
-            //        EquipmentBrandID = table.Column<int>(nullable: true),
-            //        EquipmentTradeUnDeadline = table.Column<DateTime>(type: "datetime", nullable: true),
-            //        EquipmentSerialNumber = table.Column<decimal>(type: "numeric(18, 0)", nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_Equipment", x => x.EquipmentID);
-            //        table.ForeignKey(
-            //            name: "FK_Equipment_EquipmentBrand",
-            //            column: x => x.EquipmentBrandID,
-            //            principalTable: "EquipmentBrand",
-            //            principalColumn: "EquipmentBrandID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Equipment_EquipmentTradeInStatus",
-            //            column: x => x.EquipmentTradeInStatus,
-            //            principalTable: "EquipmentTradeInStatus",
-            //            principalColumn: "EquipmentTradeInStatusID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Equipment_EquipmentType",
-            //            column: x => x.EquipmentTypeID,
-            //            principalTable: "EquipmentType",
-            //            principalColumn: "EquipmentTypeID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Equipment_Warranty",
-            //            column: x => x.WarrantyID,
-            //            principalTable: "Warranty",
-            //            principalColumn: "WarrantyID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
             //    name: "LessonOutcome",
             //    columns: table => new
             //    {
@@ -563,45 +630,24 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "Address",
+            //    name: "Option",
             //    columns: table => new
             //    {
-            //        AddressID = table.Column<int>(nullable: false)
+            //        OptionId = table.Column<int>(nullable: false)
             //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        SuburbID = table.Column<int>(nullable: true),
-            //        ProvinceID = table.Column<int>(nullable: true),
-            //        CityID = table.Column<int>(nullable: true),
-            //        CountryID = table.Column<int>(nullable: true),
-            //        StreetNumber = table.Column<int>(nullable: false),
-            //        StreetName = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+            //        QuestionId = table.Column<int>(nullable: false),
+            //        OptionNumber = table.Column<int>(nullable: false),
+            //        OptionDescription = table.Column<string>(unicode: false, maxLength: 100, nullable: false)
             //    },
             //    constraints: table =>
             //    {
-            //        table.PrimaryKey("PK_Address", x => x.AddressID);
+            //        table.PrimaryKey("PK_Option", x => x.OptionId);
             //        table.ForeignKey(
-            //            name: "FK_Address_City",
-            //            column: x => x.CityID,
-            //            principalTable: "City",
-            //            principalColumn: "CityID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Address_Country",
-            //            column: x => x.CountryID,
-            //            principalTable: "Country",
-            //            principalColumn: "CountryID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Address_Province",
-            //            column: x => x.ProvinceID,
-            //            principalTable: "Province",
-            //            principalColumn: "ProvinceID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Address_Suburb",
-            //            column: x => x.SuburbID,
-            //            principalTable: "Suburb",
-            //            principalColumn: "SuburbID",
-            //            onDelete: ReferentialAction.Restrict);
+            //            name: "FK_Option_Question_QuestionId",
+            //            column: x => x.QuestionId,
+            //            principalTable: "Question",
+            //            principalColumn: "QuestionID",
+            //            onDelete: ReferentialAction.Cascade);
             //    });
 
             //migrationBuilder.CreateTable(
@@ -610,37 +656,16 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    {
             //        OnboarderID = table.Column<int>(nullable: false)
             //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        EmployeeID = table.Column<int>(nullable: true)
+            //        EmployeeID = table.Column<int>(nullable: false)
             //    },
             //    constraints: table =>
             //    {
             //        table.PrimaryKey("PK_Onboarder", x => x.OnboarderID);
             //        table.ForeignKey(
-            //            name: "FK_Onboarder_Employee",
+            //            name: "FK__Onboarder__Emplo__01142BA1",
             //            column: x => x.EmployeeID,
             //            principalTable: "Employee",
             //            principalColumn: "EmployeeID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
-            //    name: "ActiveLog",
-            //    columns: table => new
-            //    {
-            //        ActiveLogID = table.Column<int>(nullable: false),
-            //        UserID = table.Column<int>(nullable: true),
-            //        ActiveLogDeviceIPAddress = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        ActiveLogLoginTimestamp = table.Column<DateTime>(type: "datetime", nullable: true),
-            //        ActiveLogLoginLastActiveTimestamp = table.Column<DateTime>(type: "datetime", nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_ActiveLog", x => x.ActiveLogID);
-            //        table.ForeignKey(
-            //            name: "FK_ActiveLog_User",
-            //            column: x => x.UserID,
-            //            principalTable: "User",
-            //            principalColumn: "UserID",
             //            onDelete: ReferentialAction.Restrict);
             //    });
 
@@ -667,41 +692,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    });
 
             //migrationBuilder.CreateTable(
-            //    name: "LessonContent",
-            //    columns: table => new
-            //    {
-            //        LessonConentID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        LessonContenetTypeID = table.Column<int>(nullable: true),
-            //        LessonOutcomeID = table.Column<int>(nullable: true),
-            //        ArchiveStatusID = table.Column<int>(nullable: true),
-            //        LessonContentDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        LessonContent = table.Column<string>(unicode: false, nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_LessonContent", x => x.LessonConentID);
-            //        table.ForeignKey(
-            //            name: "FK_LessonContent_ArchiveStatus1",
-            //            column: x => x.ArchiveStatusID,
-            //            principalTable: "ArchiveStatus",
-            //            principalColumn: "ArchiveStatusID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_LessonContent_LessonContentType",
-            //            column: x => x.LessonContenetTypeID,
-            //            principalTable: "LessonContentType",
-            //            principalColumn: "LessonContentTypeID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_LessonContent_LessonOutcome",
-            //            column: x => x.LessonOutcomeID,
-            //            principalTable: "LessonOutcome",
-            //            principalColumn: "LessonOutcomeID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
             //    name: "Quiz",
             //    columns: table => new
             //    {
@@ -712,6 +702,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //        QuizMarkRequirement = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
             //        QuizDueDate = table.Column<DateTime>(type: "datetime", nullable: true),
             //        QuizCompletionDate = table.Column<DateTime>(type: "datetime", nullable: true),
+            //        QuestionBankID = table.Column<int>(nullable: true),
             //        NumberOfQuestions = table.Column<decimal>(type: "numeric(18, 0)", nullable: true)
             //    },
             //    constraints: table =>
@@ -723,29 +714,35 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //            principalTable: "LessonOutcome",
             //            principalColumn: "LessonOutcomeID",
             //            onDelete: ReferentialAction.Restrict);
+            //        table.ForeignKey(
+            //            name: "FK_Quiz_QuestionBank",
+            //            column: x => x.QuestionBankID,
+            //            principalTable: "QuestionBank",
+            //            principalColumn: "QuestionBankID",
+            //            onDelete: ReferentialAction.Restrict);
             //    });
 
             //migrationBuilder.CreateTable(
             //    name: "OnboarderCourseEnrollment",
             //    columns: table => new
             //    {
-            //        CourseID = table.Column<int>(nullable: false),
             //        OnboarderID = table.Column<int>(nullable: false),
-            //        OnboarderEnrollmentDate = table.Column<DateTime>(type: "datetime", nullable: true),
-            //        BadgeTotal = table.Column<int>(nullable: true),
+            //        CourseID = table.Column<int>(nullable: false),
+            //        OnboarderEnrollmentDate = table.Column<DateTime>(type: "datetime", nullable: false),
+            //        BadgeTotal = table.Column<int>(nullable: false),
             //        OnboarderGraduationDate = table.Column<DateTime>(type: "datetime", nullable: true)
             //    },
             //    constraints: table =>
             //    {
-            //        table.PrimaryKey("PK_OnboarderCourseEnrollment", x => x.CourseID);
+            //        table.PrimaryKey("PK__Onboarde__2C42895D0C624168", x => new { x.OnboarderID, x.CourseID });
             //        table.ForeignKey(
-            //            name: "FK_OnboarderCourseEnrollment_Course",
+            //            name: "FK__Onboarder__Cours__02084FDA",
             //            column: x => x.CourseID,
             //            principalTable: "Course",
             //            principalColumn: "CourseID",
             //            onDelete: ReferentialAction.Restrict);
             //        table.ForeignKey(
-            //            name: "FK_OnboarderCourseEnrollment_Onboarder",
+            //            name: "FK__Onboarder__Onboa__02FC7413",
             //            column: x => x.OnboarderID,
             //            principalTable: "Onboarder",
             //            principalColumn: "OnboarderID",
@@ -756,8 +753,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    name: "OnboarderEquipment",
             //    columns: table => new
             //    {
-            //        EquipmentID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
+            //        EquipmentID = table.Column<int>(nullable: false),
             //        OnboarderID = table.Column<int>(nullable: false),
             //        EquipmentCheckOutDate = table.Column<DateTime>(type: "datetime", nullable: true),
             //        EquipmentCheckInDate = table.Column<DateTime>(type: "datetime", nullable: true),
@@ -765,94 +761,18 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    },
             //    constraints: table =>
             //    {
-            //        table.PrimaryKey("PK_OnboarderEquipment", x => x.EquipmentID);
+            //        table.PrimaryKey("PK__Onboarde__704A407D484BC86A", x => new { x.EquipmentID, x.OnboarderID });
             //        table.ForeignKey(
-            //            name: "FK_OnboarderEquipment_Equipment",
+            //            name: "FK__Onboarder__Equip__03F0984C",
             //            column: x => x.EquipmentID,
             //            principalTable: "Equipment",
             //            principalColumn: "EquipmentID",
             //            onDelete: ReferentialAction.Restrict);
             //        table.ForeignKey(
-            //            name: "FK_OnboarderEquipment_Onboarder",
+            //            name: "FK__Onboarder__Onboa__04E4BC85",
             //            column: x => x.OnboarderID,
             //            principalTable: "Onboarder",
             //            principalColumn: "OnboarderID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
-            //    name: "Question",
-            //    columns: table => new
-            //    {
-            //        QuestionID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        QuizID = table.Column<int>(nullable: true),
-            //        QuestionCategoryID = table.Column<int>(nullable: true),
-            //        QuestionDescription = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        QuestionAnswer = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-            //        QuestionMarkAllocation = table.Column<decimal>(type: "numeric(18, 0)", nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_Question", x => x.QuestionID);
-            //        table.ForeignKey(
-            //            name: "FK_Question_QuestionCategory",
-            //            column: x => x.QuestionCategoryID,
-            //            principalTable: "QuestionCategory",
-            //            principalColumn: "QuestionCategoryID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_Question_Quiz",
-            //            column: x => x.QuizID,
-            //            principalTable: "Quiz",
-            //            principalColumn: "QuizID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
-            //    name: "EquipmentQuery",
-            //    columns: table => new
-            //    {
-            //        EquipmentQueryID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        EquipmentID = table.Column<int>(nullable: true),
-            //        OnboarderID = table.Column<int>(nullable: true),
-            //        EquipmentQueryDescription = table.Column<string>(unicode: false, nullable: true),
-            //        EquipmentQueryDate = table.Column<DateTime>(type: "datetime", nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_EquipmentQuery", x => x.EquipmentQueryID);
-            //        table.ForeignKey(
-            //            name: "FK_EquipmentQuery_OnboarderEquipment",
-            //            column: x => x.EquipmentID,
-            //            principalTable: "OnboarderEquipment",
-            //            principalColumn: "EquipmentID",
-            //            onDelete: ReferentialAction.Restrict);
-            //    });
-
-            //migrationBuilder.CreateTable(
-            //    name: "EquipmentQueryStatus.",
-            //    columns: table => new
-            //    {
-            //        EquipmentQueryStatusID = table.Column<int>(nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        EquipmentQueryID = table.Column<int>(nullable: true)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK_EquipmentQueryStatus.", x => x.EquipmentQueryStatusID);
-            //        table.ForeignKey(
-            //            name: "FK_EquipmentQueryStatus._EquipmentQuery",
-            //            column: x => x.EquipmentQueryID,
-            //            principalTable: "EquipmentQuery",
-            //            principalColumn: "EquipmentQueryID",
-            //            onDelete: ReferentialAction.Restrict);
-            //        table.ForeignKey(
-            //            name: "FK_EquipmentQueryStatus._QueryStatus",
-            //            column: x => x.EquipmentQueryStatusID,
-            //            principalTable: "QueryStatus",
-            //            principalColumn: "EquipmentQueryStatusID",
             //            onDelete: ReferentialAction.Restrict);
             //    });
 
@@ -860,31 +780,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    name: "IX_AchievementType_BadgeID",
             //    table: "AchievementType",
             //    column: "BadgeID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_ActiveLog_UserID",
-            //    table: "ActiveLog",
-            //    column: "UserID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Address_CityID",
-            //    table: "Address",
-            //    column: "CityID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Address_CountryID",
-            //    table: "Address",
-            //    column: "CountryID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Address_ProvinceID",
-            //    table: "Address",
-            //    column: "ProvinceID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Address_SuburbID",
-            //    table: "Address",
-            //    column: "SuburbID");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_AuditLog_UserID",
@@ -897,16 +792,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "DepartmentID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Employee_EmployeeCalendarID",
-            //    table: "Employee",
-            //    column: "EmployeeCalendarID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Employee_GenderID",
-            //    table: "Employee",
-            //    column: "GenderID");
-
-            //migrationBuilder.CreateIndex(
             //    name: "IX_Employee_TitleID",
             //    table: "Employee",
             //    column: "TitleID");
@@ -917,29 +802,9 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "EquipmentBrandID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Equipment_EquipmentTradeInStatus",
-            //    table: "Equipment",
-            //    column: "EquipmentTradeInStatus");
-
-            //migrationBuilder.CreateIndex(
             //    name: "IX_Equipment_EquipmentTypeID",
             //    table: "Equipment",
             //    column: "EquipmentTypeID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Equipment_WarrantyID",
-            //    table: "Equipment",
-            //    column: "WarrantyID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_EquipmentQuery_EquipmentID",
-            //    table: "EquipmentQuery",
-            //    column: "EquipmentID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_EquipmentQueryStatus._EquipmentQueryID",
-            //    table: "EquipmentQueryStatus.",
-            //    column: "EquipmentQueryID");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_Lesson_CourseID",
@@ -947,24 +812,14 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "CourseID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Lesson_LessonCompletionStatusID",
-            //    table: "Lesson",
-            //    column: "LessonCompletionStatusID");
-
-            //migrationBuilder.CreateIndex(
             //    name: "IX_LessonContent_ArchiveStatusID",
             //    table: "LessonContent",
             //    column: "ArchiveStatusID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_LessonContent_LessonContenetTypeID",
+            //    name: "IX_LessonContent_LessonContentTypeId",
             //    table: "LessonContent",
-            //    column: "LessonContenetTypeID");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_LessonContent_LessonOutcomeID",
-            //    table: "LessonContent",
-            //    column: "LessonOutcomeID");
+            //    column: "LessonContentTypeId");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_LessonOutcome_LessonID",
@@ -972,19 +827,14 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "LessonID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Notification_CourseID",
-            //    table: "Notification",
-            //    column: "CourseID");
-
-            //migrationBuilder.CreateIndex(
             //    name: "IX_Onboarder_EmployeeID",
             //    table: "Onboarder",
             //    column: "EmployeeID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_OnboarderCourseEnrollment_OnboarderID",
+            //    name: "IX_OnboarderCourseEnrollment_CourseID",
             //    table: "OnboarderCourseEnrollment",
-            //    column: "OnboarderID");
+            //    column: "CourseID");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_OnboarderEquipment_OnboarderID",
@@ -992,9 +842,14 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "OnboarderID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Question_QuestionCategoryID",
+            //    name: "IX_Option_QuestionId",
+            //    table: "Option",
+            //    column: "QuestionId");
+
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Question_QuestionBankID",
             //    table: "Question",
-            //    column: "QuestionCategoryID");
+            //    column: "QuestionBankID");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_Question_QuizID",
@@ -1002,19 +857,14 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
             //    column: "QuizID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_QuestionCategory_QuestionBankID",
-            //    table: "QuestionCategory",
-            //    column: "QuestionBankID");
-
-            //migrationBuilder.CreateIndex(
             //    name: "IX_Quiz_LessonOutcomeID",
             //    table: "Quiz",
             //    column: "LessonOutcomeID");
 
             //migrationBuilder.CreateIndex(
-            //    name: "IX_Suburb_PostalCodeID",
-            //    table: "Suburb",
-            //    column: "PostalCodeID");
+            //    name: "IX_Quiz_QuestionBankID",
+            //    table: "Quiz",
+            //    column: "QuestionBankID");
 
             //migrationBuilder.CreateIndex(
             //    name: "IX_User_UserRoleID",
@@ -1040,13 +890,34 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                 name: "AuditLog");
 
             migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
                 name: "CourseCompletionStatus");
+
+            migrationBuilder.DropTable(
+                name: "EmployeeCalendar");
+
+            migrationBuilder.DropTable(
+                name: "EquipmentQuery");
 
             migrationBuilder.DropTable(
                 name: "EquipmentQueryStatus.");
 
             migrationBuilder.DropTable(
+                name: "EquipmentTradeInStatus");
+
+            migrationBuilder.DropTable(
                 name: "FAQ");
+
+            migrationBuilder.DropTable(
+                name: "Gender");
+
+            migrationBuilder.DropTable(
+                name: "LessonCompletionStatus");
 
             migrationBuilder.DropTable(
                 name: "LessonContent");
@@ -1058,37 +929,22 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                 name: "OnboarderCourseEnrollment");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "OnboarderEquipment");
 
             migrationBuilder.DropTable(
-                name: "Badge");
+                name: "Option");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "OTP");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "PostalCode");
 
             migrationBuilder.DropTable(
                 name: "Province");
 
             migrationBuilder.DropTable(
-                name: "Suburb");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "EquipmentQuery");
-
-            migrationBuilder.DropTable(
                 name: "QueryStatus");
-
-            migrationBuilder.DropTable(
-                name: "ArchiveStatus");
-
-            migrationBuilder.DropTable(
-                name: "LessonContentType");
 
             migrationBuilder.DropTable(
                 name: "QuestionCategory");
@@ -1097,19 +953,19 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                 name: "Quiz");
 
             migrationBuilder.DropTable(
-                name: "PostalCode");
+                name: "Suburb");
 
             migrationBuilder.DropTable(
-                name: "UserRole");
+                name: "Badge");
 
             migrationBuilder.DropTable(
-                name: "OnboarderEquipment");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "QuestionBank");
+                name: "ArchiveStatus");
 
             migrationBuilder.DropTable(
-                name: "LessonOutcome");
+                name: "LessonContentType");
 
             migrationBuilder.DropTable(
                 name: "Equipment");
@@ -1118,40 +974,37 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                 name: "Onboarder");
 
             migrationBuilder.DropTable(
-                name: "Lesson");
+                name: "Question");
+
+            migrationBuilder.DropTable(
+                name: "LessonOutcome");
+
+            migrationBuilder.DropTable(
+                name: "UserRole");
 
             migrationBuilder.DropTable(
                 name: "EquipmentBrand");
 
             migrationBuilder.DropTable(
-                name: "EquipmentTradeInStatus");
-
-            migrationBuilder.DropTable(
                 name: "EquipmentType");
-
-            migrationBuilder.DropTable(
-                name: "Warranty");
 
             migrationBuilder.DropTable(
                 name: "Employee");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "QuestionBank");
 
             migrationBuilder.DropTable(
-                name: "LessonCompletionStatus");
+                name: "Lesson");
 
             migrationBuilder.DropTable(
                 name: "Department");
 
             migrationBuilder.DropTable(
-                name: "EmployeeCalendar");
-
-            migrationBuilder.DropTable(
-                name: "Gender");
-
-            migrationBuilder.DropTable(
                 name: "Title");
+
+            migrationBuilder.DropTable(
+                name: "Course");
         }
     }
 }

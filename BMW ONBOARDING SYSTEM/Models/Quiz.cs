@@ -25,6 +25,9 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [Column(TypeName = "numeric(18, 0)")]
         public decimal? NumberOfQuestions { get; set; }
 
+        [ForeignKey(nameof(LessonOutcomeId))]
+        [InverseProperty("Quiz")]
+        public virtual LessonOutcome LessonOutcome { get; set; }
         [ForeignKey(nameof(QuestionBankId))]
         [InverseProperty("Quiz")]
         public virtual QuestionBank QuestionBank { get; set; }

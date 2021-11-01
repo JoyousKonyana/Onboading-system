@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BMW_ONBOARDING_SYSTEM.Migrations
 {
     [DbContext(typeof(INF370DBContext))]
-    [Migration("20211028113947_added realtionships")]
-    partial class addedrealtionships
+    [Migration("20211101015036_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -786,7 +786,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .HasColumnType("datetime");
 
                     b.HasKey("OnboarderId", "CourseId")
-                        .HasName("PK__Onboarde__2C42895D6775A25D");
+                        .HasName("PK__Onboarde__2C42895D0C624168");
 
                     b.HasIndex("CourseId");
 
@@ -815,7 +815,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .HasColumnType("datetime");
 
                     b.HasKey("EquipmentId", "OnboarderId")
-                        .HasName("PK__Onboarde__704A407DF2C8652A");
+                        .HasName("PK__Onboarde__704A407D484BC86A");
 
                     b.HasIndex("OnboarderId");
 
@@ -979,26 +979,12 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseId")
-                        .HasColumnName("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LessonId")
-                        .HasColumnName("LessonID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LessonOutcomeId")
-                        .HasColumnName("LessonOutcomeID")
-                        .HasColumnType("int");
-
                     b.Property<string>("QuestionBankDescription")
                         .HasColumnType("varchar(250)")
                         .HasMaxLength(250)
                         .IsUnicode(false);
 
                     b.HasKey("QuestionBankId");
-
-                    b.HasIndex("CourseId");
 
                     b.ToTable("QuestionBank");
                 });
@@ -1062,6 +1048,8 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
 
                     b.HasKey("QuizId");
 
+                    b.HasIndex("LessonOutcomeId");
+
                     b.HasIndex("QuestionBankId");
 
                     b.ToTable("Quiz");
@@ -1115,7 +1103,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnName("EmployeeID")
                         .HasColumnType("int");
 
@@ -1133,8 +1121,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .IsUnicode(false);
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("UserRoleId");
 
@@ -1235,7 +1221,7 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Employee", "Employee")
                         .WithMany("Onboarder")
                         .HasForeignKey("EmployeeId")
-                        .HasConstraintName("FK__Onboarder__Emplo__5224328E")
+                        .HasConstraintName("FK__Onboarder__Emplo__01142BA1")
                         .IsRequired();
                 });
 
@@ -1244,13 +1230,13 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Course", "Course")
                         .WithMany("OnboarderCourseEnrollment")
                         .HasForeignKey("CourseId")
-                        .HasConstraintName("FK__Onboarder__Cours__531856C7")
+                        .HasConstraintName("FK__Onboarder__Cours__02084FDA")
                         .IsRequired();
 
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Onboarder", "Onboarder")
                         .WithMany("OnboarderCourseEnrollment")
                         .HasForeignKey("OnboarderId")
-                        .HasConstraintName("FK__Onboarder__Onboa__540C7B00")
+                        .HasConstraintName("FK__Onboarder__Onboa__02FC7413")
                         .IsRequired();
                 });
 
@@ -1259,13 +1245,13 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Equipment", "Equipment")
                         .WithMany("OnboarderEquipment")
                         .HasForeignKey("EquipmentId")
-                        .HasConstraintName("FK__Onboarder__Equip__55009F39")
+                        .HasConstraintName("FK__Onboarder__Equip__03F0984C")
                         .IsRequired();
 
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Onboarder", "Onboarder")
                         .WithMany("OnboarderEquipment")
                         .HasForeignKey("OnboarderId")
-                        .HasConstraintName("FK__Onboarder__Onboa__55F4C372")
+                        .HasConstraintName("FK__Onboarder__Onboa__04E4BC85")
                         .IsRequired();
                 });
 
@@ -1286,16 +1272,13 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                         .HasConstraintName("FK_Question_QuestionBank");
                 });
 
-            modelBuilder.Entity("BMW_ONBOARDING_SYSTEM.Models.QuestionBank", b =>
-                {
-                    b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Course", "Course")
-                        .WithMany("QuestionBank")
-                        .HasForeignKey("CourseId")
-                        .HasConstraintName("FK_QuestionBank_Course");
-                });
-
             modelBuilder.Entity("BMW_ONBOARDING_SYSTEM.Models.Quiz", b =>
                 {
+                    b.HasOne("BMW_ONBOARDING_SYSTEM.Models.LessonOutcome", "LessonOutcome")
+                        .WithMany("Quiz")
+                        .HasForeignKey("LessonOutcomeId")
+                        .HasConstraintName("FK_Quiz_LessonOutcome");
+
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.QuestionBank", "QuestionBank")
                         .WithMany("Quiz")
                         .HasForeignKey("QuestionBankId")
@@ -1304,12 +1287,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
 
             modelBuilder.Entity("BMW_ONBOARDING_SYSTEM.Models.User", b =>
                 {
-                    b.HasOne("BMW_ONBOARDING_SYSTEM.Models.Employee", "Employee")
-                        .WithMany("User")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BMW_ONBOARDING_SYSTEM.Models.UserRole", "UserRole")
                         .WithMany("User")
                         .HasForeignKey("UserRoleId")
