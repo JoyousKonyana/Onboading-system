@@ -9,59 +9,59 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // used to create fake backend
 import { AuthenticationService } from './_services'; //Authentication
 // import { JwtInterceptor, ErrorInterceptor } from './_helpers';
- import { ExcelService } from './_services';
+import { ExcelService } from './_services';
 
 import {
-   Register_EmployeeComponent,
-   Assign_EquipmentComponent,
-   SS_AdministratorComponent,
-   CRUD_FAQComponent,
-   CRUD_EmployeeComponent,
-   Import_EmployeeComponent,
-   AdminDashboardComponent,
-   OnboarderComponent,
-   DepartChartComponent,
- } from './administrator';
+  Register_EmployeeComponent,
+  Assign_EquipmentComponent,
+  SS_AdministratorComponent,
+  CRUD_FAQComponent,
+  CRUD_EmployeeComponent,
+  Import_EmployeeComponent,
+  AdminDashboardComponent,
+  OnboarderComponent,
+  DepartChartComponent,
+} from './administrator';
 
- import {
-   EquipmentComponent,
-   SS_EquipmentComponent,
-   My_EquipmentComponent,
-   EquipDashboardComponent,
+import {
+  EquipmentComponent,
+  SS_EquipmentComponent,
+  My_EquipmentComponent,
+  EquipDashboardComponent,
 
-   //Charts
-   TypeChartComponent,
-   BrandChartComponent,
- } from './equipment';
+  //Charts
+  TypeChartComponent,
+  BrandChartComponent,
+} from './equipment';
 
- import {
-    CourseComponent, 
-    Assign_CourseComponent,
-    Learning_OutcomeComponent,
-    Learning_ContentComponent,
-    SS_CourseComponent,
-    CRUD_AchievementComponent,
-    LessonComponent,
-    Set_QuizComponent,
-    QuestionComponent,
-    OptionComponent,
-    Question_BankComponent
+import {
+  CourseComponent,
+  Assign_CourseComponent,
+  Learning_OutcomeComponent,
+  Learning_ContentComponent,
+  SS_CourseComponent,
+  CRUD_AchievementComponent,
+  LessonComponent,
+  Set_QuizComponent,
+  QuestionComponent,
+  OptionComponent,
+  Question_BankComponent
 } from './course';
 
 import {
-   Take_CourseComponent,
-   Take_LessonComponent,
-   Take_Learning_OutcomeComponent,
-   Take_QuizComponent,
-   Take_ContentComponent,
-   ProgressComponent,
-   FAQComponent,
-   QuizComponent,
+  Take_CourseComponent,
+  Take_LessonComponent,
+  Take_Learning_OutcomeComponent,
+  Take_QuizComponent,
+  Take_ContentComponent,
+  ProgressComponent,
+  FAQComponent,
+  QuizComponent,
   BookingComponent,
   SS_OnboarderComponent
 } from './onboarder';
 
-import { 
+import {
   Assign_User_RoleComponent,
   User_RoleComponent,
   SS_UsersComponent
@@ -108,14 +108,15 @@ import { NgSelectModule } from '@ng-select/ng-select'; //This essentially allows
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 //This will assist the code to convert whatever into PDF, ITS A FEATURE
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { IntlModule } from '@progress/kendo-angular-intl';
 import { GridModule } from '@progress/kendo-angular-grid';
 //Charts and graphs
 import { ChartsModule } from 'ng2-charts';
+import { CommonModule } from '@angular/common';
 //Date Picker
 //import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -154,7 +155,7 @@ import { ChartsModule } from 'ng2-charts';
     Set_QuizComponent,
     QuestionComponent,
     Question_BankComponent,
-  
+
     QuestionComponent,
     OptionComponent,
 
@@ -197,13 +198,15 @@ import { ChartsModule } from 'ng2-charts';
     AccountComponent,
 
     //Home
-    AboutComponent
+    AboutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule,
 
     //Features
     FormsModule,
@@ -231,10 +234,10 @@ import { ChartsModule } from 'ng2-charts';
 
     ExcelService,
 
-        // provider used to create fake backend
-        //fakeBackendProvider
+    // provider used to create fake backend
+    //fakeBackendProvider
   ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

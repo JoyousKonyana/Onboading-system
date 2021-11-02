@@ -8,102 +8,95 @@ import { CourseService, AlertService } from '../_services';
 import { Router } from '@angular/router';
 import { ModalService } from '../_modal';
 
-@Component({ 
-    templateUrl: 'course.component.html',
-    styleUrls: ['./ss_course.component.css'] 
+@Component({
+  templateUrl: 'course.component.html',
+  styleUrls: ['./ss_course.component.css']
 })
 
 export class CourseComponent implements OnInit {
   course: any[] = [];
 
   searchText = '';
-
   item: any;
-
   date!: string;
+  myValue = 0;
 
-  constructor(
-      private courseService: CourseService,
-      private alertService: AlertService,
-
-      private router: Router,
-  ) {
-
-  }
-
-  ngOnInit() { 
-      this.loadAll();
-
-      this.date = new Date().toISOString().slice(0, 10);
-  }
-
-  private loadAll() {
-    this.courseService.getAllCourse()
-    .pipe(first())
-    .subscribe(
-      course => {
-        this.course = course;
-      },
-      error => {
-        this.alertService.error('Error, Data was unsuccesfully retrieved');
-      } 
-    );
-  }
-
-    newCourseClicked = false;
+  newCourseClicked = false;
 
   model: any = {};
-  model2: any = {}; 
+  model2: any = {};
 
-  model3:Course = {
+  model3: Course = {
     CourseId: 1,
-    CourseDescription:'',
+    CourseDescription: '',
     CourseDueDate: '',
     CourseName: '',
   };
 
-  addCourse() { 
-    if(Object.keys(this.model).length < 3)
-    {
+  constructor(
+    private courseService: CourseService,
+    private alertService: AlertService,
+    private router: Router,
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.loadAll();
+    this.date = new Date().toISOString().slice(0, 10);
+  }
+
+  private loadAll() {
+    this.courseService.getAllCourse()
+      .pipe(first())
+      .subscribe(
+        course => {
+          this.course = course;
+        },
+        error => {
+          this.alertService.error('Error, Data was unsuccesfully retrieved');
+        }
+      );
+  }
+
+  addCourse() {
+    if (Object.keys(this.model).length < 3) {
       this.alertService.error("Error, you have an empty feild");
       this.newCourseClicked = !this.newCourseClicked;
       this.model = {};
     }
-    else if((Object.keys(this.model).length== 3))
-    {
+    else if ((Object.keys(this.model).length == 3)) {
       this.model3.CourseDescription = this.model.CourseDescription;
       this.model3.CourseDueDate = this.model.CourseDueDate;
       this.model3.CourseName = this.model.CourseName;
-    
+
       this.courseService.create(this.model3)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Creation was successful', true);
-                    this.loadAll();
-                    this.newCourseClicked = !this.newCourseClicked;
-                    this.model = {};
-                },
-                error => {
-                    this.alertService.error('Error, Creation was unsuccesful');
-                });
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.alertService.success('Creation was successful', true);
+            this.loadAll();
+            this.newCourseClicked = !this.newCourseClicked;
+            this.model = {};
+          },
+          error => {
+            this.alertService.error('Error, Creation was unsuccesful');
+          });
     }
   }
-  
+
   deleteCourse(i: number) {
     this.courseService.delete(i)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Deletion was successful', true);
-                    this.loadAll();
-                },
-                error => {
-                    this.alertService.error('Error, Deletion was unsuccesful');
-                });
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success('Deletion was successful', true);
+          this.loadAll();
+        },
+        error => {
+          this.alertService.error('Error, Deletion was unsuccesful');
+        });
   }
-
-  myValue = 0;
 
   editCourse(editCourseInfo: number) {
     this.model2.CourseDescription = this.course[editCourseInfo].courseDescription;
@@ -115,33 +108,30 @@ export class CourseComponent implements OnInit {
   updateCourse() {
     let editCourseInfo = this.myValue;
 
-    for(let i = 0; i < this.course.length; i++) {
+    for (let i = 0; i < this.course.length; i++) {
 
-      if(i == editCourseInfo) 
-      {
+      if (i == editCourseInfo) {
         this.model3.CourseDescription = this.model2.CourseDescription;
         this.model3.CourseDueDate = this.model2.CourseDueDate;
         this.model3.CourseName = this.model2.CourseName;
 
         this.courseService.update(this.course[editCourseInfo].courseId, this.model3)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Update was successful', true);
-                    this.loadAll();
-                    this.model2 = {};
-                },
-                error => {
-                    this.alertService.error('Error, Update was unsuccesful');
-                });
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.alertService.success('Update was successful', true);
+              this.loadAll();
+              this.model2 = {};
+            },
+            error => {
+              this.alertService.error('Error, Update was unsuccesful');
+            });
       }
     }
-    }
+  }
 
-    addNewCourseBtn() {
-        this.newCourseClicked = !this.newCourseClicked;
-      }
-
-      
+  addNewCourseBtn() {
+    this.newCourseClicked = !this.newCourseClicked;
+  }
 
 }
