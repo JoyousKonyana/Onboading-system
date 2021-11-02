@@ -37,9 +37,7 @@ export class CourseComponent implements OnInit {
     private courseService: CourseService,
     private alertService: AlertService,
     private router: Router,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.loadAll();
@@ -132,6 +130,10 @@ export class CourseComponent implements OnInit {
 
   addNewCourseBtn() {
     this.newCourseClicked = !this.newCourseClicked;
+  }
+
+  onNavigateToCourseLessons(course:any){
+    this.router.navigate(['/lesson',course.courseId])
   }
 
 }

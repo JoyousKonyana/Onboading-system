@@ -10,9 +10,9 @@ import { LessonService, AuthenticationService, AlertService } from '../_services
 
 import { ModalService } from '../_modal';
 
-@Component({ 
+@Component({
     templateUrl: 'lesson.component.html',
-    styleUrls: ['./ss_course.component.css'] 
+    styleUrls: ['./ss_course.component.css']
 })
 
 export class LessonComponent implements OnInit {
@@ -36,9 +36,9 @@ export class LessonComponent implements OnInit {
     //this.id = this.router.getCurrentNavigation().extras.state.example
   }
 
-  ngOnInit() { 
-      this._Activatedroute.paramMap.subscribe(params => { 
-        this.id = params.get('id'); 
+  ngOnInit() {
+      this._Activatedroute.paramMap.subscribe(params => {
+        this.id = params.get('id');
       });
 
       this.loadAll();
@@ -53,7 +53,7 @@ export class LessonComponent implements OnInit {
       },
       error => {
         this.alertService.error('Error, Data (Lesson) was unsuccesfully retrieved');
-      } 
+      }
     );
 
     this.courseService.getCourseById(this.id)
@@ -61,17 +61,18 @@ export class LessonComponent implements OnInit {
     .subscribe(
       course => {
         this.course = course;
+        console.log(this.course)
       },
       error => {
         this.alertService.error('Error, Data was unsuccesfully retrieved');
-      } 
+      }
     );
   }
 
     newLessonClicked = false;
 
   model: any = {};
-  model2: any = {}; 
+  model2: any = {};
 
   model3:Lesson = {
     LessonId: 0,
@@ -81,7 +82,7 @@ export class LessonComponent implements OnInit {
      LessonName: ''
   };
 
-  addLesson() { 
+  addLesson() {
     if(Object.keys(this.model).length < 2)
     {
       this.alertService.error("Error, you have an empty feild");
@@ -93,7 +94,7 @@ export class LessonComponent implements OnInit {
       this.model3.CourseId = this.id;
       this.model3.LessonDescription = this.model.LessonDescription;
       this.model3.LessonName = this.model.LessonName;
-    
+
       this.lessonService.create(this.model3)
             .pipe(first())
             .subscribe(
@@ -108,8 +109,8 @@ export class LessonComponent implements OnInit {
                 });
     }
   }
-    
-  
+
+
   deleteLesson(i: number) {
     this.lessonService.delete(i)
             .pipe(first())
@@ -139,7 +140,7 @@ export class LessonComponent implements OnInit {
     this.model3.LessonName = this.model2.LessonName;
 
     for(let i = 0; i < this.lesson.length; i++) {
-      if(i == editLessonInfo) 
+      if(i == editLessonInfo)
       {
         this.lessonService.update(this.lesson[editLessonInfo].lessonId, this.model3)
             .pipe(first())
@@ -153,13 +154,13 @@ export class LessonComponent implements OnInit {
                 });
       }
     }
-    
+
     }
 
     addNewLessonBtn() {
         this.newLessonClicked = !this.newLessonClicked;
       }
 
-      
+
 
 }

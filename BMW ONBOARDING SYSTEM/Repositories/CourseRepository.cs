@@ -31,8 +31,6 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         {
             IQueryable<Course> existingCourse = _inf370ContextDB.Course.Where(id => id.CourseId == courseId);
 
-
-
             return existingCourse.FirstOrDefaultAsync();
 
         }
