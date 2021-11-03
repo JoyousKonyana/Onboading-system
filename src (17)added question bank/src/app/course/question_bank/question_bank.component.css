@@ -1,0 +1,75 @@
+.tableWrapper {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f6f6f6;
+}
+
+.add-new-container {
+  display: flex;
+  flex-direction: column;
+  background: #f6f6f6;
+  padding: 20px 20px 0px 20px;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.add-new-button {
+  width: 5%;
+  margin: 1rem 0;
+}
+
+.editEmployeeTitleContainer {
+  background: #f6f6f6;
+  padding: 20px 20px 0px 20px;
+  font-size: 22px;
+  font-weight: bold;
+  font-style: italic;
+  border-top-left-radius: 10px;
+}
+
+.name {
+  padding: 0px 15px 15px 20px;
+  background: #f6f6f6;
+}
+
+.position {
+  background: #f6f6f6;
+  padding: 0px 15px 15px 20px;
+}
+
+.input {
+  border: none;
+  height: 32px;
+  padding-left: 10px;
+  width: 60%;
+  border-radius: 5px;
+}
+
+.positionInput {
+  border: none;
+  height: 32px;
+  padding-left: 10px;
+  width: 60%;
+  border-radius: 5px;
+}
+
+.submitBtnContainer {
+  background: #f6f6f6;
+  padding: 0px 0px 20px 20px;
+}
+
+.tree-container {
+  display: flex;
+  width: 100%;
+}
+
+.tree-item {
+  margin: 0 0.2rem;
+}

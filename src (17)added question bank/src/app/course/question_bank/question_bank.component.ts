@@ -1,16 +1,19 @@
-import { Question } from './../_models/question';
-import { QuizService } from './../_services/quiz.service';
-import { CourseService } from './../_services/course.service';
+
 
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { AlertService, Learning_OutcomeService, LessonService } from '../_services';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { QuestionBank } from '../_models/QuestionBank';
+import { HttpEventType } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Question } from 'src/app/_models';
+import { QuestionBank } from 'src/app/_models/QuestionBank';
+import { QuizService, AlertService, CourseService, Learning_OutcomeService, LessonService } from 'src/app/_services';
+import { ManageCoursesService } from 'src/app/_services/manage-courses/manage-courses.service';
+import { N_questionBank } from 'src/app/_services/manage-courses/manage-courses.types';
 
 @Component({
   templateUrl: 'question_bank.component.html',
-  styleUrls: ['./ss_course.component.css']
+  styleUrls: ['question_bank.component.css']
 })
 
 export class Question_BankComponent implements OnInit {
@@ -18,11 +21,10 @@ export class Question_BankComponent implements OnInit {
   course: any[] = [];
   lesson: any[] = [];
   lessonOutcome: any[] = [];
-  questionBanks: any[] = [];
-
   searchText = '';
-
   selectedCourseId: number = 0;
+
+  questionBanks: N_questionBank[] = [];
 
   constructor(
     private quizService: QuizService,
@@ -31,10 +33,14 @@ export class Question_BankComponent implements OnInit {
     private lessonOutcomeService: Learning_OutcomeService,
     private lessonService: LessonService,
     private form: FormBuilder,
+    private _manageCoursesService: ManageCoursesService,
+    private _ngxSpinner: NgxSpinnerService,
+
   ) {
   }
 
   ngOnInit() {
+    this.getAllQuestionBooksByFromServer();
     this.loadAll();
   }
 
@@ -58,19 +64,6 @@ export class Question_BankComponent implements OnInit {
         }
       );
 
-
-    this.quizService.getAllQuestion()
-      .pipe(first())
-      .subscribe(
-        question => {
-          this.question = question;
-        },
-        error => {
-          this.alertService.error('Error, Could not return questions');
-        }
-      );
-
-
     //get all lessons
     this.lessonService.getAllLessons2()
       .pipe(first())
@@ -80,18 +73,6 @@ export class Question_BankComponent implements OnInit {
         },
         error => {
           this.alertService.error('Error, Could not return lessons');
-        }
-      );
-
-    //get question banks
-    this.quizService.getAllQuestionBanks()
-      .pipe(first())
-      .subscribe(
-        QuestionBank => {
-          this.questionBanks = QuestionBank
-        },
-        error => {
-          this.alertService.error('Error, Could not return question banks');
         }
       );
 
@@ -241,6 +222,22 @@ export class Question_BankComponent implements OnInit {
 
   addNewQuestionBtn() {
     this.newQuestionClicked = !this.newQuestionClicked;
+  }
+
+  private getAllQuestionBooksByFromServer() {
+    this._manageCoursesService.getAllQuestionBanks().subscribe(event => {
+      if (event.type === HttpEventType.Sent) {
+        this._ngxSpinner.show();
+      }
+      if (event.type === HttpEventType.Response) {
+        this.questionBanks = event.body as N_questionBank[];
+        this._ngxSpinner.hide();
+      }
+    },
+      error => {
+        this._ngxSpinner.hide();
+        this.alertService.error('Error: Could not return question banks');
+      });
   }
 
   private delay(ms: number) {

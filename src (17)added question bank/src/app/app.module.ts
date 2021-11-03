@@ -45,7 +45,6 @@ import {
   Set_QuizComponent,
   QuestionComponent,
   OptionComponent,
-  Question_BankComponent
 } from './course';
 
 import {
@@ -117,6 +116,8 @@ import { GridModule } from '@progress/kendo-angular-grid';
 //Charts and graphs
 import { ChartsModule } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { Question_BankComponent } from './course/question_bank/question_bank.component';
 //Date Picker
 //import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -207,6 +208,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
+    NgxSpinnerModule,
 
     //Features
     FormsModule,
