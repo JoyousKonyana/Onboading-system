@@ -26,20 +26,20 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             _inf370ContextDB.Remove(entity);
         }
 
-        public Task<Option> GetOptionByIDAsync(int optionID)
-        {
-            IQueryable<Option> options = _inf370ContextDB.Option.Where(x => x.OptionId == optionID);
+        //public Task<Option> GetOptionByIDAsync(int optionID)
+        //{
+        //    IQueryable<Option> options = _inf370ContextDB.Option.Where(x => x.OptionId == optionID);
 
-            return options.FirstOrDefaultAsync();
+        //    return options.FirstOrDefaultAsync();
 
-        }
+        //}
 
-        public Task<Option[]> GetOptionByQuestionIDAsync(int questionId)
-        {
-            IQueryable<Option> options = _inf370ContextDB.Option.Where(x => x.QuestionId == questionId);
+        //public Task<Option[]> GetOptionByQuestionIDAsync(int questionId)
+        //{
+        //    IQueryable<Option> options = _inf370ContextDB.Option.Where(x => x.QuestionId == questionId);
 
-            return options.ToArrayAsync();
-        }
+        //    return options.ToArrayAsync();
+        //}
 
         public async Task<bool> SaveChangesAsync()
         {

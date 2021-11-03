@@ -8,6 +8,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20211101141156_RenaneCityName.cs" />
     <Compile Remove="Migrations\20211101141156_RenaneCityName.Designer.cs" />
+    <Compile Remove="Migrations\20211103065041_RemodelCourseAndLessonEntities.cs" />
+    <Compile Remove="Migrations\20211103065041_RemodelCourseAndLessonEntities.Designer.cs" />
+    <Compile Remove="Migrations\20211103075340_RemodelCourseEntities.cs" />
+    <Compile Remove="Migrations\20211103075340_RemodelCourseEntities.Designer.cs" />
+    <Compile Remove="Migrations\20211103083119_RemodelCourseEntities.cs" />
+    <Compile Remove="Migrations\20211103083119_RemodelCourseEntities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

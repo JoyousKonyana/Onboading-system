@@ -5,27 +5,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
-    public partial class LessonOutcome
+    public class LessonOutcome
     {
         public LessonOutcome()
         {
-            Quiz = new HashSet<Quiz>();
+            Quizzes = new List<Quiz>();
         }
 
         [Key]
-        [Column("LessonOutcomeID")]
-        public int LessonOutcomeId { get; set; }
-        [Column("LessonID")]
-        public int? LessonId { get; set; }
-        [StringLength(50)]
+        public int LessonOutcomeID { get; set; }
+
+        [StringLength(255)]
         public string LessonOutcomeDescription { get; set; }
-        [StringLength(50)]
+
+        [StringLength(255)]
         public string LessonOutcomeName { get; set; }
 
-        [ForeignKey(nameof(LessonId))]
-        [InverseProperty("LessonOutcome")]
+
+        public int LessonID { get; set; }
         public virtual Lesson Lesson { get; set; }
-        [InverseProperty("LessonOutcome")]
-        public virtual ICollection<Quiz> Quiz { get; set; }
+
+        public virtual List<Quiz> Quizzes { get; set; }
     }
 }

@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
-    public partial class Employee
+    public class Employee
     {
         public Employee()
         {
-            Onboarder = new HashSet<Onboarder>();
+            Onboarder = new List<Onboarder>();
         }
 
         [Key]
-        [Column("EmployeeID")]
-        public int EmployeeId { get; set; }
+        public int EmployeeID { get; set; }
+
         [Column("DepartmentID")]
         public int? DepartmentId { get; set; }
         [Column("GenderID")]
@@ -46,7 +46,8 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [ForeignKey(nameof(TitleId))]
         [InverseProperty("Employee")]
         public virtual Title Title { get; set; }
-        [InverseProperty("Employee")]
-        public virtual ICollection<Onboarder> Onboarder { get; set; }
+
+
+        public virtual List<Onboarder> Onboarder { get; set; }
     }
 }

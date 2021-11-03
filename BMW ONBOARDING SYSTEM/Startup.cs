@@ -73,7 +73,7 @@ namespace BMW_ONBOARDING_SYSTEM
             services.AddScoped<ILessonOutcome, LessonOutcomeRepository>();
 
             services.AddScoped<ILessonContentRepository, lessonContentRepository>();
-            services.AddScoped<IQuizRepository, QuizRepository>();
+            //services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IOnboarderRepository, OnboarderRepository>();
 

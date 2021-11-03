@@ -35,7 +35,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
 
         public Task<Employee> GetEmployeeByID(int id)
         {
-            IQueryable<Employee> result = _inf370ContextDB.Employee.Where(i => i.EmployeeId == id);
+            IQueryable<Employee> result = _inf370ContextDB.Employee.Where(i => i.EmployeeID == id);
             return result.FirstOrDefaultAsync();
         }
 
@@ -47,7 +47,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         {
 
             //Change to user ID
-            IQueryable<Employee> result = _inf370ContextDB.Employee.Where(i => i.EmployeeId == id);
+            IQueryable<Employee> result = _inf370ContextDB.Employee.Where(i => i.EmployeeID == id);
             return result.FirstOrDefaultAsync();
         }
 

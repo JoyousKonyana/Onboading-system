@@ -1,36 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
-    public partial class Course
+    public class Course
     {
         public Course()
         {
-            Lesson = new HashSet<Lesson>();
-            OnboarderCourseEnrollment = new HashSet<OnboarderCourseEnrollment>();
+            Lessons = new List<Lesson>();
+            OnBoarders = new List<OnboarderCourseEnrollment>();
         }
 
         [Key]
-        [Column("CourseID")]
-        public int CourseId { get; set; }
+        public int CourseID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(255)]
         public string CourseName { get; set; }
 
-        [StringLength(50)]
+        [StringLength(255)]
         public string CourseDescription { get; set; }
 
-        [Column(TypeName = "datetime")]
         public DateTime? CourseDueDate { get; set; }
-      
 
-        [InverseProperty("Course")]
-        public virtual ICollection<Lesson> Lesson { get; set; }
+        public virtual List<Lesson> Lessons { get; set; }
 
-        [InverseProperty("Course")]
-        public virtual ICollection<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
+        public virtual List<OnboarderCourseEnrollment> OnBoarders { get; set; }
     }
 }
