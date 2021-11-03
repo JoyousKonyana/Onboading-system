@@ -391,12 +391,10 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual DbSet<Onboarder> Onboarder { get; set; }
         public virtual DbSet<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
         public virtual DbSet<OnboarderEquipment> OnboarderEquipment { get; set; }
-        //public virtual DbSet<Option> Option { get; set; }
         public virtual DbSet<Otp> Otp { get; set; }
         public virtual DbSet<PostalCode> PostalCode { get; set; }
         public virtual DbSet<Province> Province { get; set; }
         public virtual DbSet<QueryStatus> QueryStatus { get; set; }
-        //public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<QuestionBank> QuestionBank { get; set; }
         public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
         public virtual DbSet<Quiz> Quiz { get; set; }
@@ -404,6 +402,10 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual DbSet<Title> Title { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<QuestionAnswerOption> QuestionAnswerOptions { get; set; }
+
 
     }
 }

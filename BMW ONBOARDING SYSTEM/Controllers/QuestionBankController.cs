@@ -39,7 +39,7 @@
 //                if (await _questionBankRepository.SaveChangesAsync())
 //                {
 //                    AuditLog auditLog = new AuditLog();
-//                    auditLog.AuditLogDescription = "Created Question with description" + ' ' ;
+//                    auditLog.AuditLogDescription = "Created Question with description" + ' ';
 //                    auditLog.AuditLogDatestamp = DateTime.Now;
 //                    auditLog.UserId = userid;
 
@@ -84,7 +84,7 @@
 //        {
 //            try
 //            {
-//                var questionBanks = await _questionBankRepository.GetQuestionBankbyIDsNameAsync(lessonid,courseid,lessonoutcomeid);
+//                var questionBanks = await _questionBankRepository.GetQuestionBankbyIDsNameAsync(lessonid, courseid, lessonoutcomeid);
 //                return Ok(questionBanks);
 //            }
 //            catch (Exception)
@@ -97,7 +97,7 @@
 //        //[Authorize(Roles = Role.Admin)]
 //        [HttpPut("{id}")]
 //        [Route("[action]/{id}/{userid}")]
-//        public async Task<ActionResult<QuestionBankViewModel>> UpdateQuestionBank(int id,int userid, QuestionBankViewModel updatedQuestionBankModel)
+//        public async Task<ActionResult<QuestionBankViewModel>> UpdateQuestionBank(int id, int userid, QuestionBankViewModel updatedQuestionBankModel)
 //        {
 //            try
 //            {

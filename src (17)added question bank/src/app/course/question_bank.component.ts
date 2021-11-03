@@ -101,7 +101,6 @@ export class Question_BankComponent implements OnInit {
       .subscribe(
         lessonOutcome => {
           this.lessonOutcome = lessonOutcome
-          console.log(this.lessonOutcome);
         },
         error => {
           this.alertService.error('Error,Could not return lesson outcomes');
@@ -118,7 +117,7 @@ export class Question_BankComponent implements OnInit {
       .subscribe(
         lesson => {
           this.lesson = lesson;
-          this.lesson = lesson.filter(e => e.courseId == course.value);
+          this.lesson = lesson.filter(e => e.courseID == course.value);
         },
         error => {
           this.alertService.error('Error, Data (Question) was unsuccesfully retrieved');
@@ -131,7 +130,7 @@ export class Question_BankComponent implements OnInit {
       .pipe(first())
       .subscribe(
         lessonOutcome => {
-          this.lessonOutcome = lessonOutcome.filter(e => e.lessonId == state.value);
+          this.lessonOutcome = lessonOutcome.filter(e => e.lessonID == state.value);
         },
         error => {
           this.alertService.error('Error, Data (Question) was unsuccesfully retrieved');

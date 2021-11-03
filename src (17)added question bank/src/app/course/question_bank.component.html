@@ -66,8 +66,8 @@
           <mat-form-field appearance="fill">
             <mat-label>Course</mat-label>
             <mat-select formControlName="course" (selectionChange)="onSelectCourse($event)">
-              <mat-option *ngFor="let item of course" [value]="item.courseId">
-                {{item.courseDescription}}
+              <mat-option *ngFor="let item of course" [value]="item.courseID">
+                {{item.courseName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -78,8 +78,8 @@
           <mat-form-field appearance="fill" (click)="oNClickLessonTreeItem()">
             <mat-label>Lesson</mat-label>
             <mat-select formControlName="lesson" (selectionChange)="onSelectlesson($event)">
-              <mat-option *ngFor="let item of lesson" [value]="item.lessonId">
-                {{item.lessonDescription}}
+              <mat-option *ngFor="let item of lesson" [value]="item.lessonID">
+                {{item.lessonName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -90,7 +90,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Lesson Outcome</mat-label>
             <mat-select formControlName="lessonOutcome">
-              <mat-option *ngFor="let item of lessonOutcome" [value]="item.lessonOutcomeId">
+              <mat-option *ngFor="let item of lessonOutcome" [value]="item.lessonOutcomeID">
                 {{item.lessonOutcomeName}}
               </mat-option>
             </mat-select>

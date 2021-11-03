@@ -133,7 +133,7 @@ export class CourseComponent implements OnInit {
   }
 
   onNavigateToCourseLessons(course:any){
-    this.router.navigate(['/lesson',course.courseId])
+    this.router.navigate(['/lesson',course.courseID])
   }
 
 }
