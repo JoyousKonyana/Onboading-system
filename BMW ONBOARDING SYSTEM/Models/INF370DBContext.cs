@@ -66,10 +66,10 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.BadgeDecription).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<City>(entity =>
-            //{
-            //    entity.Property(e => e.CityName).IsUnicode(false);
-            //});
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.Property(e => e.CityName).IsUnicode(false);
+            });
 
             modelBuilder.Entity<Country>(entity =>
             {
@@ -367,7 +367,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual DbSet<ArchiveStatus> ArchiveStatus { get; set; }
         public virtual DbSet<AuditLog> AuditLog { get; set; }
         public virtual DbSet<Badge> Badge { get; set; }
-        //public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<CourseCompletionStatus> CourseCompletionStatus { get; set; }
