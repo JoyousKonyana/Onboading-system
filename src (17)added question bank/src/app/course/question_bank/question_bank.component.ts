@@ -1,8 +1,6 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Question } from 'src/app/_models';
@@ -10,6 +8,7 @@ import { QuestionBank } from 'src/app/_models/QuestionBank';
 import { QuizService, AlertService, CourseService, Learning_OutcomeService, LessonService } from 'src/app/_services';
 import { ManageCoursesService } from 'src/app/_services/manage-courses/manage-courses.service';
 import { N_questionBank } from 'src/app/_services/manage-courses/manage-courses.types';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: 'question_bank.component.html',
@@ -26,6 +25,11 @@ export class Question_BankComponent implements OnInit {
 
   questionBanks: N_questionBank[] = [];
 
+  addQuestionBankForm: FormGroup;
+  questionsAddedToBank: any[] = [];
+  formToSendToServer: any = {};
+
+
   constructor(
     private quizService: QuizService,
     private alertService: AlertService,
@@ -35,21 +39,21 @@ export class Question_BankComponent implements OnInit {
     private form: FormBuilder,
     private _manageCoursesService: ManageCoursesService,
     private _ngxSpinner: NgxSpinnerService,
+    private _snackBar: MatSnackBar
 
   ) {
+
+    this.buildAddQuestionBankForm();
   }
+
+
 
   ngOnInit() {
     this.getAllQuestionBooksByFromServer();
     this.loadAll();
   }
 
-  QuestionBankForm = this.form.group({
-    course: new FormControl('', Validators.required),
-    lesson: new FormControl('', Validators.required),
-    lessonOutcome: new FormControl('', Validators.required),
-    questionBankDescription: new FormControl('', Validators.required)
-  })
+
 
   private loadAll() {
     //getCourse
@@ -87,8 +91,6 @@ export class Question_BankComponent implements OnInit {
           this.alertService.error('Error,Could not return lesson outcomes');
         }
       );
-
-
   }
 
   onSelectCourse(course: any) {
@@ -150,27 +152,7 @@ export class Question_BankComponent implements OnInit {
     QuestionBankDescription: ''
   }
 
-  addQuestion() {
-    alert(this.QuestionBankForm.get('course')?.value);
-    this.mquestionBankmodel.CourseId = this.QuestionBankForm.get('course')?.value;
-    alert(this.QuestionBankForm.get('course')?.value);
-    this.mquestionBankmodel.LessonId = this.QuestionBankForm.get('lesson')?.value;
-    this.mquestionBankmodel.LessonOutcomeId = this.QuestionBankForm.get('lessonOutcome')?.value;
-    this.mquestionBankmodel.QuestionBankDescription = this.QuestionBankForm.get('questionBankDescription')?.value;
 
-    this.quizService.createQuestionBank(this.mquestionBankmodel)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.alertService.success('Creation (Question) was successful', true);
-          this.loadAll();
-          this.newQuestionClicked = !this.newQuestionClicked;
-          this.model = {};
-        },
-        error => {
-          this.alertService.error('Error, Creation (Question) was unsuccesful');
-        })
-  }
 
   deleteQuestion(i: number) {
     this.quizService.deleteQuestion(i)
@@ -224,6 +206,74 @@ export class Question_BankComponent implements OnInit {
     this.newQuestionClicked = !this.newQuestionClicked;
   }
 
+  onAddQuestionToBank(question: string) {
+    let questionObj: any = {}
+
+    questionObj.Name = question;
+
+    this.questionsAddedToBank.push(questionObj);
+  }
+
+  onRemoveQuestionFromBank(question: any) {
+    let index = this.questionsAddedToBank.indexOf(question);
+    if (index > -1) {
+      this.questionsAddedToBank.splice(index, 1);
+    }
+  }
+
+  private prepareFormToSendToServer() {
+    this.formToSendToServer['Name'] = this.Name.value;
+    this.formToSendToServer['LessonOutcomeId'] = this.LessonOutcomeId.value;
+    this.formToSendToServer['Questions'] = this.questionsAddedToBank;
+
+  }
+
+
+  onSubmitAddQuestionBank() {
+    if (this.questionsAddedToBank.length < 2) {
+      this.openSnackBar("Error", "Bank should have a minimum of 2 questions!", 3000);
+      return;
+    }
+    if (this.addQuestionBankForm.valid) {
+      this.prepareFormToSendToServer();
+      this.alertService.clear();
+
+      this._manageCoursesService.addQuestionBank(this.formToSendToServer)
+        .subscribe(event => {
+          if (event.type === HttpEventType.Sent) {
+            this._ngxSpinner.show();
+          }
+          if (event.type === HttpEventType.Response) {
+            this._ngxSpinner.hide();
+            this.getAllQuestionBooksByFromServer();
+            this.openSnackBar("Add Question Bank", "Success!", 3000);
+          }
+        },
+          error => {
+            this._ngxSpinner.hide();
+            this.alertService.error('Server Error:' + error.error.message);
+          });
+    }
+    else {
+      this.alertService.error('Input Error: Provid all required fields');
+
+    }
+  }
+
+  private buildAddQuestionBankForm() {
+    this.addQuestionBankForm = this.form.group({
+      CourseId: ['', [Validators.required]],
+      LessonId: ['', [Validators.required]],
+      LessonOutcomeId: ['', [Validators.required]],
+      Name: ['', [Validators.required]]
+    });
+  }
+
+  get CourseId() { return this.addQuestionBankForm.get('CourseId') }
+  get LessonId() { return this.addQuestionBankForm.get('LessonId') }
+  get LessonOutcomeId() { return this.addQuestionBankForm.get('LessonOutcomeId') }
+  get Name() { return this.addQuestionBankForm.get('Name') }
+
   private getAllQuestionBooksByFromServer() {
     this._manageCoursesService.getAllQuestionBanks().subscribe(event => {
       if (event.type === HttpEventType.Sent) {
@@ -232,6 +282,7 @@ export class Question_BankComponent implements OnInit {
       if (event.type === HttpEventType.Response) {
         this.questionBanks = event.body as N_questionBank[];
         this._ngxSpinner.hide();
+        this.newQuestionClicked = false;
       }
     },
       error => {
@@ -242,5 +293,12 @@ export class Question_BankComponent implements OnInit {
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private openSnackBar(message: string, action: string, _duration: number) {
+    this._snackBar.open(message, action, {
+      duration: _duration,
+      verticalPosition: 'top'
+    });
   }
 }

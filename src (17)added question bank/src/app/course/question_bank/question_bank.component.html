@@ -12,7 +12,6 @@
   <br />
 </div>
 
-<hr>
 <!-- Update -->
 <div *ngIf="updateQuestionClicked">
   <div class="editEmployeeTitleContainer">
@@ -51,105 +50,117 @@
   </form>
 </div>
 
-<hr>
-
 <div *ngIf="newQuestionClicked">
   <div class="formWrapper">
-    <form [formGroup]="QuestionBankForm">
-      <div class="tree-container">
+    <mat-horizontal-stepper linear #stepper class="stepper-container">
+      <mat-step [stepControl]="addQuestionBankForm" [editable]="true">
+        <form [formGroup]="addQuestionBankForm" class="form">
+          <ng-template matStepLabel>Bank Details</ng-template>
 
-        <div class="tree-item">
-          <h4>Select Course</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Course</mat-label>
-            <mat-select formControlName="course" (selectionChange)="onSelectCourse($event)">
-              <mat-option *ngFor="let item of course" [value]="item.courseID">
-                {{item.courseName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+          <div class="tree-container">
+            <div class="tree-item">
+              <mat-form-field appearance="fill">
+                <mat-label>Select Course</mat-label>
+                <mat-select formControlName="CourseId" (selectionChange)="onSelectCourse($event)">
+                  <mat-option *ngFor="let item of course" [value]="item.courseID">
+                    {{item.courseName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="CourseId.touched && CourseId.invalid">
+                  <div *ngIf="CourseId.errors.required">Couse is required.</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-        <div class="tree-item">
-          <h4>Select Lesson</h4>
-          <mat-form-field appearance="fill" (click)="oNClickLessonTreeItem()">
-            <mat-label>Lesson</mat-label>
-            <mat-select formControlName="lesson" (selectionChange)="onSelectlesson($event)">
-              <mat-option *ngFor="let item of lesson" [value]="item.lessonID">
-                {{item.lessonName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+            <div class="tree-item">
+              <mat-form-field appearance="fill" (click)="oNClickLessonTreeItem()">
+                <mat-label>Select Lesson</mat-label>
+                <mat-select formControlName="LessonId" (selectionChange)="onSelectlesson($event)">
+                  <mat-option *ngFor="let item of lesson" [value]="item.lessonID">
+                    {{item.lessonName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="LessonId.touched && LessonId.invalid">
+                  <div *ngIf="LessonId.errors.required">Lesson is required.</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-        <div class="tree-item">
-          <h4>Select Lesson Outcome</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Lesson Outcome</mat-label>
-            <mat-select formControlName="lessonOutcome">
-              <mat-option *ngFor="let item of lessonOutcome" [value]="item.lessonOutcomeID">
-                {{item.lessonOutcomeName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
+            <div class="tree-item">
+              <mat-form-field appearance="fill">
+                <mat-label>Select Lesson Outcome</mat-label>
+                <mat-select formControlName="LessonOutcomeId">
+                  <mat-option *ngFor="let item of lessonOutcome" [value]="item.lessonOutcomeID">
+                    {{item.lessonOutcomeName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="LessonOutcomeId.touched && LessonOutcomeId.invalid">
+                  <div *ngIf="LessonOutcomeId.errors.required">Lesson outcome is required.</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-
-      <div class="form-group name">
-        <label>Enter Question Description:</label>
-        <input type="text" class="form-control input" id="QuestionDescription" name="QuestionDescription"
-          [(ngModel)]="model.QuestionBankDescription" placeholder="Enter Question bank description"
-          formControlName="questionBankDescription">
-      </div>
-
-      <div class="submitBtnContainer">
-        <button type="submit" [disabled]="QuestionBankForm.invalid" class="btn btn-success" (click)="addQuestion()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path
-              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-          </svg>
-          SAVE</button>
-      </div>
-
-      <!-- <div class="form-group name">
-            <label>Enter Question Description:</label>
-            <input type="text"
-                   class="form-control input"
-                   id="QuestionDescription"
-                   name="QuestionDescription"
-                   [(ngModel)]="model.QuestionDescription"
-                   placeholder="Where is the Fountiain?">
+            <div class="tree-item">
+              <mat-form-field appearance="fill" class="tree-item-input">
+                <input matInput type="text" formControlName="Name" placeholder="Bank Name" required>
+                <mat-error *ngIf="Name.touched && Name.invalid">
+                  <div *ngIf="Name.errors.required">Bank Name is required.</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
-           <div class="form-group position">
-            <label>Enter Question Answer:</label>
-            <input type="text"
-                   class="form-control positionInput"
-                   id="QuestionAnswer"
-                   name="QuestionAnswer"
-                   [(ngModel)]="model.QuestionAnswer"
-                   placeholder="By the river">
-          </div>
-          <div class="form-group position">
-            <label>Enter Mark Allocation:</label>
-            <input type="number"
-                   class="form-control positionInput"
-                   id="QuestionMarkAllocation"
-                   name="QuestionMarkAllocation"
-                   [(ngModel)]="model.QuestionMarkAllocation"
-                   placeholder="2">
-          </div>
-          <div class="form-group position">
-            <label>Enter Quiz:</label>
-            <input type="number"
-                   class="form-control positionInput"
-                   id="QuizId"
-                   name="QuizId"
-                   [(ngModel)]="model.QuizId"
-                   placeholder="2">
+
+          <!-- <div class="submitBtnContainer">
+            <button type="submit" class="btn btn-success" (click)="onSubmitAddQuestionBank()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+              </svg>
+              SAVE
+            </button>
           </div> -->
-    </form>
+
+          <div class="button-row">
+            <button mat-raised-button matStepperNext color="primary">Next</button>
+          </div>
+
+        </form>
+      </mat-step>
+      <mat-step [editable]="true">
+        <form class="form">
+          <ng-template matStepLabel>Questions</ng-template>
+          <div class="field-container-inline">
+            <mat-form-field class="question-input-field">
+              <mat-label>Question</mat-label>
+              <input matInput type="text" placeholder="What does BMW stand for?" #question>
+            </mat-form-field>
+
+            <button mat-raised-button color="warn" class="question-add-to-list-button"
+              (click)="onAddQuestionToBank(question.value)">
+              Add to bank
+            </button>
+          </div>
+
+          <div *ngIf="questionsAddedToBank.length > 0" class="field-container-inline list-questions">
+            <mat-list role="list">
+              <mat-list-item *ngFor="let question of questionsAddedToBank" (click)="onRemoveQuestionFromBank(question)"
+                matTooltip="Click to remove" class="question-in-bank">
+                {{question.Name}}
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+          <div class="control-buttons-container">
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext class="procced-button"
+              (click)="onSubmitAddQuestionBank()">
+              Submit
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
   </div>
 </div>
 
@@ -172,9 +183,9 @@
         <td>{{item.lessonName}}</td>
         <td>{{item.lessonOutcomeName}}</td>
         <td>{{item.name}}</td>
-        <td>
+        <td class="table-actions-container">
 
-          <button class="btn btn-primary" (click)="editQuestion(i)">
+          <button class="btn btn-primary table-action-item" (click)="editQuestion(i)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path
@@ -183,19 +194,15 @@
                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
             </svg>
           </button>
-          <button class="btn btn-warning" (click)="deleteQuestion(item.id)">
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-              </svg> -->
-            Questions
-          </button>
-          <button class="btn btn-danger" (click)="deleteQuestion(item.id)">
+
+          <button class="btn btn-danger table-action-item" (click)="deleteQuestion(item.id)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
               viewBox="0 0 16 16">
               <path
                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
             </svg>
           </button>
+          <button class="btn btn-warning table-action-item" (click)="deleteQuestion(item.id)"> Questions </button>
         </td>
       </tr>
     </tbody>

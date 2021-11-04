@@ -11,6 +11,9 @@ import { AuthenticationService } from './_services'; //Authentication
 // import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { ExcelService } from './_services';
 
+
+import { MatInputModule } from "@angular/material/input";
+
 import {
   Register_EmployeeComponent,
   Assign_EquipmentComponent,
@@ -118,6 +121,7 @@ import { ChartsModule } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { Question_BankComponent } from './course/question_bank/question_bank.component';
+import { MaterialModule } from './@material/material.module';
 //Date Picker
 //import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -210,15 +214,16 @@ import { Question_BankComponent } from './course/question_bank/question_bank.com
     CommonModule,
     NgxSpinnerModule,
 
+    //Material
+    MaterialModule,
+
     //Features
     FormsModule,
     NgSelectModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
     PDFExportModule,
     GridModule,
     IntlModule,

@@ -19,7 +19,13 @@ export class ManageCoursesService {
   }
 
   getAllQuestionBanks() {
-    return this._httpClient.get(this.endpointBase.concat("QuestionBanks/GetAll" ),
+    return this._httpClient.get(this.endpointBase.concat("QuestionBanks/GetAll"),
       { reportProgress: true, observe: 'events' });
+  }
+
+  addQuestionBank(payload) {
+    return this._httpClient.post(this.endpointBase.concat("QuestionBanks/Add"),
+    payload,
+    { reportProgress: true, observe: 'events' });
   }
 }

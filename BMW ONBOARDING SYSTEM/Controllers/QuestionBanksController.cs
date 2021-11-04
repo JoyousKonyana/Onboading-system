@@ -73,5 +73,46 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
             return banksInDb;
         }
+
+        [HttpPost("Add")]
+        public IActionResult AddQuestionBank(AddQuestionBankDto model)
+        {
+            var message = "";
+            if (!ModelState.IsValid)
+            {
+                message = "Something went wrong on your side.";
+                return BadRequest(new { message });
+            }
+
+            var isLessonOutcomeInDb = _context.LessonOutcome
+                .FirstOrDefault(item => item.LessonOutcomeID == model.LessonOutcomeId);
+
+            if (isLessonOutcomeInDb == null)
+            {
+                message = "Lesson outcome not found.";
+                return BadRequest(new { message });
+            }
+
+            var newBank = new QuestionBank()
+            {
+                Name = model.Name,
+                LessonOutcomeID = isLessonOutcomeInDb.LessonOutcomeID
+            };
+            _context.QuestionBank.Add(newBank);
+            _context.SaveChanges();
+
+            foreach (var question in model.Questions)
+            {
+                var newQuestion = new Question()
+                {
+                    QuestionBankId = newBank.Id,
+                    Title = question.Name
+                };
+                _context.Questions.Add(newQuestion);
+                _context.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 }
