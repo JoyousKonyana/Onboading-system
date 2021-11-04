@@ -9,6 +9,7 @@ import { QuizService, AlertService, CourseService, Learning_OutcomeService, Less
 import { ManageCoursesService } from 'src/app/_services/manage-courses/manage-courses.service';
 import { N_questionBank } from 'src/app/_services/manage-courses/manage-courses.types';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'question_bank.component.html',
@@ -39,7 +40,8 @@ export class Question_BankComponent implements OnInit {
     private form: FormBuilder,
     private _manageCoursesService: ManageCoursesService,
     private _ngxSpinner: NgxSpinnerService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _router: Router
 
   ) {
 
@@ -228,7 +230,6 @@ export class Question_BankComponent implements OnInit {
 
   }
 
-
   onSubmitAddQuestionBank() {
     if (this.questionsAddedToBank.length < 2) {
       this.openSnackBar("Error", "Bank should have a minimum of 2 questions!", 3000);
@@ -260,19 +261,10 @@ export class Question_BankComponent implements OnInit {
     }
   }
 
-  private buildAddQuestionBankForm() {
-    this.addQuestionBankForm = this.form.group({
-      CourseId: ['', [Validators.required]],
-      LessonId: ['', [Validators.required]],
-      LessonOutcomeId: ['', [Validators.required]],
-      Name: ['', [Validators.required]]
-    });
+  onManageBankQuestions(bank: N_questionBank) {
+    this._router.navigate(['/manage-bank-questions/', bank.id])
   }
 
-  get CourseId() { return this.addQuestionBankForm.get('CourseId') }
-  get LessonId() { return this.addQuestionBankForm.get('LessonId') }
-  get LessonOutcomeId() { return this.addQuestionBankForm.get('LessonOutcomeId') }
-  get Name() { return this.addQuestionBankForm.get('Name') }
 
   private getAllQuestionBooksByFromServer() {
     this._manageCoursesService.getAllQuestionBanks().subscribe(event => {
@@ -290,6 +282,20 @@ export class Question_BankComponent implements OnInit {
         this.alertService.error('Error: Could not return question banks');
       });
   }
+
+  private buildAddQuestionBankForm() {
+    this.addQuestionBankForm = this.form.group({
+      CourseId: ['', [Validators.required]],
+      LessonId: ['', [Validators.required]],
+      LessonOutcomeId: ['', [Validators.required]],
+      Name: ['', [Validators.required]]
+    });
+  }
+
+  get CourseId() { return this.addQuestionBankForm.get('CourseId') }
+  get LessonId() { return this.addQuestionBankForm.get('LessonId') }
+  get LessonOutcomeId() { return this.addQuestionBankForm.get('LessonOutcomeId') }
+  get Name() { return this.addQuestionBankForm.get('Name') }
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));

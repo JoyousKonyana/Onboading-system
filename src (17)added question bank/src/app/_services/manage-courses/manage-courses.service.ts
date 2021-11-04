@@ -23,9 +23,25 @@ export class ManageCoursesService {
       { reportProgress: true, observe: 'events' });
   }
 
+  getQuestionBank(questionBankId: number) {
+    return this._httpClient.get(this.endpointBase.concat("QuestionBanks/Get/" + questionBankId),
+      { reportProgress: true, observe: 'events' });
+  }
+
   addQuestionBank(payload) {
     return this._httpClient.post(this.endpointBase.concat("QuestionBanks/Add"),
-    payload,
-    { reportProgress: true, observe: 'events' });
+      payload,
+      { reportProgress: true, observe: 'events' });
+  }
+
+  addQuestionAnswerOptions(payload) {
+    return this._httpClient.post(this.endpointBase.concat("QuestionBanks/Question/AnswerOptions/Add"),
+      payload,
+      { reportProgress: true, observe: 'events' });
+  }
+
+  getQuestionAnswerOptions(quesitonId: number) {
+    return this._httpClient.get(this.endpointBase.concat("QuestionBanks/Question/AnswerOptions/GetAll/" + quesitonId),
+      { reportProgress: true, observe: 'events' });
   }
 }

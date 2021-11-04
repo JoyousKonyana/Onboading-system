@@ -88,6 +88,7 @@ import {
 
 import { AuthGuard } from './_helpers';
 import { Question_BankComponent } from './course/question_bank/question_bank.component';
+import { ManageBankQuestionsComponent } from './course/manage-bank-questions/manage-bank-questions.component';
 
 const routes: Routes = [
   {
@@ -323,6 +324,7 @@ const routes: Routes = [
     path: 'question_bank',
     component: Question_BankComponent,
   },
+  { path: 'manage-bank-questions/:bankId', component: ManageBankQuestionsComponent },
   {
     path: 'option/:id',
     component: OptionComponent,

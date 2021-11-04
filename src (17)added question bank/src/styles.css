@@ -19,3 +19,13 @@ body {
   display: flex;
   margin: 0 0.2rem;
 }
+
+.bread-arrows {
+  /* color: blue; */
+}
+
+.page-title {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
