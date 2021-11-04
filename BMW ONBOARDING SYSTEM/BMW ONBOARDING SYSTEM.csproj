@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211101141156_RenaneCityName.cs" />
+    <Compile Remove="Migrations\20211101141156_RenaneCityName.Designer.cs" />
+    <Compile Remove="Migrations\20211103065041_RemodelCourseAndLessonEntities.cs" />
+    <Compile Remove="Migrations\20211103065041_RemodelCourseAndLessonEntities.Designer.cs" />
+    <Compile Remove="Migrations\20211103075340_RemodelCourseEntities.cs" />
+    <Compile Remove="Migrations\20211103075340_RemodelCourseEntities.Designer.cs" />
+    <Compile Remove="Migrations\20211103083119_RemodelCourseEntities.cs" />
+    <Compile Remove="Migrations\20211103083119_RemodelCourseEntities.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />

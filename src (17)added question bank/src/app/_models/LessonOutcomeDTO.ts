@@ -1,7 +1,7 @@
 export class LessonOutcomeDTO {
-    lessonOutcomeId!: number;
-    lessonId!: number;
+    lessonOutcomeID!: number;
+    lessonID!: number;
     lessonOutcomeDescription!: string;
     lessonOutcomeName!: string;
-    
+
 }

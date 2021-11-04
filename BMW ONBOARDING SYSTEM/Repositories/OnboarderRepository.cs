@@ -21,7 +21,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         public Task<Onboarder> GetOnboarderbyEmpID(int empid)
         {
             IQueryable<Onboarder> border = _inf370ContextDB.Onboarder.
-                Where(x => x.EmployeeId == empid);
+                Where(x => x.EmployeeID == empid);
 
             return border.FirstOrDefaultAsync();
         }
@@ -31,7 +31,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         {
             IQueryable<OnboarderCourseEnrollment> enrollments = _inf370ContextDB.OnboarderCourseEnrollment.
                 Include(x => x.Course).
-                Where(x => x.OnboarderId == onboarderid);
+                Where(x => x.OnboarderID == onboarderid);
 
             return enrollments.ToArrayAsync();
         }
@@ -40,7 +40,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         {
             IQueryable<OnboarderCourseEnrollment> enrollments = _inf370ContextDB.OnboarderCourseEnrollment.
 
-                Where(x => x.OnboarderId == onboarderid && x.CourseId == courseID);
+                Where(x => x.OnboarderID == onboarderid && x.CourseID == courseID);
 
             return enrollments.FirstOrDefaultAsync();
         }

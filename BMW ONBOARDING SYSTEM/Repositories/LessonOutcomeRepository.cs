@@ -29,7 +29,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         public Task<LessonOutcome> GetLessonOutcomeIdAsync(int lessonOutcomeId)
         {
             IQueryable<LessonOutcome> existingLessonOutcome = _inf370ContextDB.LessonOutcome.
-                Where(id => id.LessonOutcomeId == lessonOutcomeId);
+                Where(id => id.LessonOutcomeID == lessonOutcomeId);
 
             return existingLessonOutcome.FirstOrDefaultAsync();
         }
@@ -62,7 +62,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             //Lesson lesson1 = _inf370ContextDB.Lesson.Where(cd =>
             //cd.CourseId == lessonOutcomeId).FirstOrDefault();
 
-            IQueryable<LessonOutcome> lessonout = _inf370ContextDB.LessonOutcome.Where(xx => xx.LessonId == lessonID);
+            IQueryable<LessonOutcome> lessonout = _inf370ContextDB.LessonOutcome.Where(xx => xx.LessonID == lessonID);
 
             return await lessonout.ToArrayAsync();
 

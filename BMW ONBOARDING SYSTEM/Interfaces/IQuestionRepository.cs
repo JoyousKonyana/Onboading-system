@@ -11,9 +11,9 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
         void Add<T>(T entity) where T : class;
 
         void Delete<T>(T entity) where T : class;
-        Task<Question> GetQuestionByquestionIDAsync(int questionID);
-        Task<QuestionBank> GetQuestionByQuestionBankIDAsync(int questionbankID);
-        Task<Question[]> GetQuestionAllquestionAsync();
+        //Task<Question> GetQuestionByquestionIDAsync(int questionID);
+        //Task<QuestionBank> GetQuestionByQuestionBankIDAsync(int questionbankID);
+        //Task<Question[]> GetQuestionAllquestionAsync();
         Task<bool> SaveChangesAsync();
     }
 }

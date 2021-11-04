@@ -1,6 +1,6 @@
 export class LessonDTO {
-    lessonId!: number;
-    courseId!: number;
+    lessonID!: number;
+    courseID!: number;
     lessonCompletionStatusId!: number;
     lessonDescription!: string;
     lessonName!: string;

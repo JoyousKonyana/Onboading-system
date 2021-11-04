@@ -26,18 +26,22 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly INF370DBContext _context;
         private readonly IUserRepository _userRepository;
         private readonly IUserRoleRepository _userRoleRepository;
         private readonly IOTPRepository _otpRepository;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public UserController(IUserRepository userRepository,
+        public UserController(
+            INF370DBContext context,
+            IUserRepository userRepository,
              IOTPRepository otpRepository,
              IUserRoleRepository userRoleRepository,
              IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
+            _context = context;
             _userRepository = userRepository;
             _otpRepository = otpRepository;
             _mapper = mapper;
@@ -191,18 +195,15 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     var tokenString = tokenHandler.WriteToken(token);
 
                     // return basic user info and authentication token
-                    //return Ok(new
-                    //{
-                    //    //Id = user.UserId,
-                    //    //Username = user.Username,
-                    //    //employeeID = user.EmployeeId,
-                    //    //Token = tokenString,
-                    //    Userrole = user.UserRole.UserRoleName
-                    //});
+                    return Ok(new
+                    {
+                        Id = user.UserId,
+                        Username = user.Username,
+                        employeeID = user.EmployeeId,
+                        Token = tokenString,
+                        Userrole = user.UserRole.UserRoleName
+                    });
 
-                    return Ok(user.UserRole.UserRoleName);
-                    //return _mapper.Map<User>(user);
-                    //return Created($"/api/User{model.UserName}", _mapper.Map<User>(user));
                 }
                 return BadRequest("OTP incorrect");
 
@@ -385,43 +386,41 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         [Route("[action]")]
         public async Task<IActionResult> Login2(Authenticate model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { message = "Something went wrong on your side" });
+            }
             try
             {
-                User user = await _userRepository.GetUserByemail(model.UserName.Trim());
+                var user = await _userRepository.GetUserByemail(model.UserName.Trim());
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });
 
-                //var user = _mapper.Map<User>(model);
-
-                string hashedpasswod = hashPassword(model.Password.Trim());
-                string b = user.Password;
-                var m = user.UserRole.UserRoleName.Trim();
-                var n = string.Equals(hashedpasswod, b);
+                var hashedpasswod = hashPassword(model.Password.Trim());
                 if (user.Password == hashedpasswod)
                 {
                     var otpGenerator = "";
-                    Random otp = new Random();
+                    var otp = new Random();
                     otpGenerator = (otp.Next(100000, 999999)).ToString();
-                    DateTime date = new DateTime();
-                    OTPViewModel newotp = new OTPViewModel();
-                    newotp.Timestamp = DateTime.Now;
-                    newotp.UserId = user.UserId;
-                    newotp.OtpValue = otpGenerator;
 
-                    var OTP1 = _mapper.Map<Otp>(newotp);
-
-                    _userRepository.Add(OTP1);
-                    if (await _userRepository.SaveChangesAsync())
+                    var newOTP = new Otp()
                     {
-                        sendOTpEmail(newotp.OtpValue, user.Username);
-                        return Ok(user.UserId);
+                        OtpValue = otpGenerator,
+                        UserId = user.UserId,
+                        Timestamp = DateTime.Now,
+                    };
 
-                        //return _mapper.Map<User>(user);
-                        //return Created($"/api/User{model.UserName}", _mapper.Map<User>(user));
+                    _context.Otp.Add(newOTP);
+                    await _context.SaveChangesAsync();
 
-                    }
+                    sendOTpEmail(newOTP.OtpValue, user.Username);
+                    return Ok(user.UserId);
                 }
-                return BadRequest();
+                else
+                {
+                    return BadRequest(new { message = "Incorrect username and/or password." });
+
+                }
             }
             catch (Exception e)
             {

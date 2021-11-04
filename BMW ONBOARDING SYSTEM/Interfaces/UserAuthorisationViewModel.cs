@@ -1,4 +1,4 @@
-﻿namespace bmw_onboarding_system.interfaces
+﻿namespace BMW_ONBOARDING_SYSTEM.Interfaces
 {
     public class userauthorisationviewmodel
     {

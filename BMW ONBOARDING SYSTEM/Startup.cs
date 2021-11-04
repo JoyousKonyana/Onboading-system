@@ -48,42 +48,49 @@ namespace BMW_ONBOARDING_SYSTEM
 
             // Configure the database
             services.AddDbContext<INF370DBContext>(options =>
-       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ICourseRepository, CourseRepository>();
-            services.AddScoped<ILessonOutcome, LessonOutcomeRepository>();
             services.AddScoped<IAchievementTypeRepository, AchievementTypeRepository>();
-            //services.AddScoped<ICertificateTypeRepository, CertificateTypeRepository>();
-            services.AddScoped<ILessonContentRepository, lessonContentRepository>();
+            services.AddScoped<IActiveLogRepository, ActiveLogRepository>();
+            services.AddScoped<IAuditLogRepository, AuditRepository>();
             services.AddScoped<IBadgeRepository, BadgeRepository>();
+            //services.AddScoped<ICertificateTypeRepository, CertificateTypeRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IEmployeeCalendarRepository, EmployeeCalendarRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IQuizRepository, QuizRepository>();
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<ITitleRepository, TitleRepository>();
-            services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IOnboarderRepository, OnboarderRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
-            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
-            services.AddScoped<IEquipmentQueryRepository, EquipmentQueryRepository>();
-            services.AddScoped<IFaqRepository, FaqRepository>();
-            //services.AddScoped<IActiveLogRepository, ActiveLogRepository>();
-            services.AddScoped<IAuditLogRepository, AuditRepository>();
-            //services.AddScoped<IWarrantyRepository, WarrantyRepository>();
             services.AddScoped<IProvinceRepository, ProvinceRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
-
             services.AddScoped<ISuburbRepository, SuburbRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
+            services.AddScoped<ITitleRepository, TitleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+
+            services.AddScoped<ILessonOutcome, LessonOutcomeRepository>();
+
+            services.AddScoped<ILessonContentRepository, lessonContentRepository>();
+            //services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IOnboarderRepository, OnboarderRepository>();
+
+            //services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            services.AddScoped<IEquipmentQueryRepository, EquipmentQueryRepository>();
+            services.AddScoped<IFaqRepository, FaqRepository>();
+            //services.AddScoped<IWarrantyRepository, WarrantyRepository>();
+
+
+
             services.AddScoped<IEquipementTypeRepository, EquipmentTypeRepository>();
             services.AddScoped<IEquipmentBrandRepository, EquipmentBrandRepository>();
             services.AddScoped<IOTPRepository, OTPRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<IOption, OptionRepository>();
-            services.AddScoped<IQuestionBankRepository, QuestionBankRepository>();
+            //services.AddScoped<IQuestionBankRepository, QuestionBankRepository>();
+
             services.AddCors();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -92,41 +99,41 @@ namespace BMW_ONBOARDING_SYSTEM
             services.Configure<AppSettings>(appSettingsSection);
 
             // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = context =>
-                    {
-                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-                        var userId = int.Parse(context.Principal.Identity.Name);
-                        var user = userService.GetUserByIdAsync(userId);
-                        if (user == null)
-                        {
-                            // return unauthorized if user no longer exists
-                            context.Fail("Unauthorized");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                    //RoleClaimType = true
-                };
-            });
+            //var appSettings = appSettingsSection.Get<AppSettings>();
+            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddJwtBearer(x =>
+            //{
+            //    x.Events = new JwtBearerEvents
+            //    {
+            //        OnTokenValidated = context =>
+            //        {
+            //            var userService = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+            //            var userId = int.Parse(context.Principal.Identity.Name);
+            //            var user = userService.GetUserByIdAsync(userId);
+            //            if (user == null)
+            //            {
+            //                // return unauthorized if user no longer exists
+            //                context.Fail("Unauthorized");
+            //            }
+            //            return Task.CompletedTask;
+            //        }
+            //    };
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false
+            //        //RoleClaimType = true
+            //    };
+            //});
 
 
         }

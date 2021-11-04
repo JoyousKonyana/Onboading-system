@@ -26,28 +26,28 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             _inf370ContextDB.Remove(entity);
         }
 
-        public async Task<Question[]> GetQuestionAllquestionAsync()
-        {
+        //public async Task<Question[]> GetQuestionAllquestionAsync()
+        //{
 
-            IQueryable<Question> questions = _inf370ContextDB.Question;
+        //    IQueryable<Question> questions = _inf370ContextDB.Question;
 
-            return await questions.ToArrayAsync();
-        }
+        //    return await questions.ToArrayAsync();
+        //}
 
-        public Task<Question> GetQuestionByquestionIDAsync(int questionID)
-        {
-            IQueryable<Question> result = _inf370ContextDB.Question.Where(q => q.QuestionId == questionID);
-            return result.FirstOrDefaultAsync();
-        }
+        //public Task<Question> GetQuestionByquestionIDAsync(int questionID)
+        //{
+        //    IQueryable<Question> result = _inf370ContextDB.Question.Where(q => q.QuestionId == questionID);
+        //    return result.FirstOrDefaultAsync();
+        //}
 
-        public Task<QuestionBank> GetQuestionByQuestionBankIDAsync(int questionbankID)
-        {
-            IQueryable<QuestionBank> result = _inf370ContextDB.QuestionBank.
-                Include(x => x.Question).
-                ThenInclude(x => x.Option).
-                Where(x => x.QuestionBankId == questionbankID);
-            return result.FirstOrDefaultAsync();
-        }
+        //public Task<QuestionBank> GetQuestionByQuestionBankIDAsync(int questionBankId)
+        //{
+        //    IQueryable<QuestionBank> result = _inf370ContextDB.QuestionBank.
+        //        Include(x => x.Question).
+        //        ThenInclude(x => x.Option).
+        //        Where(x => x.QuestionBankID == questionBankId);
+        //    return result.FirstOrDefaultAsync();
+        //}
 
         public async Task<bool> SaveChangesAsync()
         {

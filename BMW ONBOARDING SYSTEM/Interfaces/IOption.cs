@@ -14,9 +14,9 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
 
         Task<bool> SaveChangesAsync();
 
-        Task<Option[]> GetOptionByQuestionIDAsync(int questionId);
+        //Task<Option[]> GetOptionByQuestionIDAsync(int questionId);
 
-        Task<Option> GetOptionByIDAsync(int questionID);
+        //Task<Option> GetOptionByIDAsync(int questionID);
 
 
 
