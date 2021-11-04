@@ -59,7 +59,35 @@ export class AddQuestionAnswerComponent implements OnInit {
   }
 
   onSbumitOptions() {
-    this.validateAnswerOptions();
+    var listHasCorrectOption = false;
+    var optionsMarkedAsCorrectCount = 0;
+
+    if (this.answerOptionsList.length < 2) {
+      this.openSnackBar("Error", "You should have a minimum of two options", 3000);
+      console.log("Yes")
+      return;
+    }
+
+    this.answerOptionsList.forEach(option => {
+
+      if (option.Correct == 'Yes') {
+        listHasCorrectOption = true;
+        optionsMarkedAsCorrectCount += 1;
+      }
+
+    });
+
+    if (listHasCorrectOption == false) {
+      this.openSnackBar("Error", "One option must be marked as the answer", 3000);
+      return;
+    }
+
+    if (optionsMarkedAsCorrectCount != 1) {
+      this.openSnackBar("Error", "Only one option must be marked as correct", 3000);
+      return;
+    }
+
+
     this.formToSendToServer["Options"] = this.answerOptionsList;
     this.formToSendToServer["QuestionId"] = this.question.id;
 
@@ -85,32 +113,7 @@ export class AddQuestionAnswerComponent implements OnInit {
 
 
   private validateAnswerOptions() {
-    var listHasCorrectOption = false;
-    var optionsMarkedAsCorrectCount = 0;
 
-    if (this.answerOptionsList.length < 2) {
-      this.openSnackBar("Error", "You should have a minimum of two options", 3000);
-      return;
-    }
-
-    this.answerOptionsList.forEach(option => {
-
-      if (option.Correct == 'Yes') {
-        listHasCorrectOption = true;
-        optionsMarkedAsCorrectCount += 1;
-      }
-
-    });
-
-    if (listHasCorrectOption == false) {
-      this.openSnackBar("Error", "One option must be marked as the answer", 3000);
-      return;
-    }
-
-    if (optionsMarkedAsCorrectCount != 1) {
-      this.openSnackBar("Error", "Only one option must be marked as correct", 3000);
-      return;
-    }
   }
 
   private openSnackBar(message: string, action: string, _duration: number) {
