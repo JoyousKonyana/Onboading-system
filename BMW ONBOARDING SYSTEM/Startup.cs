@@ -55,7 +55,7 @@ namespace BMW_ONBOARDING_SYSTEM
             services.AddScoped<IAuditLogRepository, AuditRepository>();
             services.AddScoped<IBadgeRepository, BadgeRepository>();
             //services.AddScoped<ICertificateTypeRepository, CertificateTypeRepository>();
-            services.AddScoped<ICityRepository, CityRepository>();
+            //services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();

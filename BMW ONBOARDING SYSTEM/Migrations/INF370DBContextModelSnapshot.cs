@@ -207,24 +207,6 @@ namespace BMW_ONBOARDING_SYSTEM.Migrations
                     b.ToTable("Badge");
                 });
 
-            modelBuilder.Entity("BMW_ONBOARDING_SYSTEM.Models.City", b =>
-                {
-                    b.Property<int>("CityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("CityID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CityName")
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.HasKey("CityId");
-
-                    b.ToTable("City");
-                });
-
             modelBuilder.Entity("BMW_ONBOARDING_SYSTEM.Models.Country", b =>
                 {
                     b.Property<int>("CountryId")
