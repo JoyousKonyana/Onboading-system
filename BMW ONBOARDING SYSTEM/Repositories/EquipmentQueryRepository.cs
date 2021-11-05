@@ -42,7 +42,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return queryStatuses.ToArrayAsync();
         }
 
-        public Task<QueryStatus> GetQueryByIDAsync(int id)
+        public Task<QueryStatus> GetQueryStatusByIDAsync(int id)
         {
             IQueryable<QueryStatus> query = _inf370ContextDB.QueryStatus.
                 Where(i => i.EquipmentQueryStatusId == id);
@@ -52,7 +52,9 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
 
         public Task<EquipmentQuery[]> GetQueryByOnboarderIDc(int id)
         {
-            throw new NotImplementedException();
+            IQueryable<EquipmentQuery> query = _inf370ContextDB.EquipmentQuery.Include(x => x.OnboarderId == id);
+
+            return query.ToArrayAsync();
         }
 
         public Task<EquipmentQueryStatus[]> GetQueryStatusByID(ResolveQueryViewModel model)
@@ -77,6 +79,9 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return await _inf370ContextDB.SaveChangesAsync() > 0;
         }
 
-       
+        public Task<QueryStatus> GetQueryByIDAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
