@@ -109,24 +109,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
             return BadRequest();
 
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetQueryStatus()
-        {
-            try
-            {
-                var queryStatus = await _queryRepository.GetAllQueryStatuses();
-                return Ok(queryStatus);
-            }
-            catch (Exception)
-            {
-
-                return BadRequest();
-            }
-        }
-        //for admin to get all queries
+        }   //for admin to get all queries
         //[Authorize(Roles = Role.Admin)]
         [HttpGet]
         [Route("[action]")]
@@ -160,6 +143,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                 return BadRequest();
             }
         }
+
         //used to get all the queries for that onboarder
         [HttpGet]
         [Route("[action]/{id}")]
@@ -176,6 +160,25 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetQueryStatus()
+        {
+            try
+            {
+                var queryStatus = await _queryRepository.GetAllQueryStatuses();
+                return Ok(queryStatus);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+     
+
+      
+       
    
 
         //[Authorize(Roles = Role.Admin)]
