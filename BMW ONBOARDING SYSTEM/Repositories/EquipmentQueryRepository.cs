@@ -27,9 +27,9 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             _inf370ContextDB.Remove(entity);
         }
 
-        public Task<EquipmentQuery[]> GetAllqueriesAsync()
+        public Task<QueryStatus[]> GetAllqueriesAsync()
         {
-            IQueryable<EquipmentQuery> query = _inf370ContextDB.EquipmentQuery;
+            IQueryable<QueryStatus> query = _inf370ContextDB.QueryStatus;
 
 
             return query.ToArrayAsync();
@@ -42,10 +42,10 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return queryStatuses.ToArrayAsync();
         }
 
-        public Task<EquipmentQuery> GetQueryByIDAsync(int id)
+        public Task<QueryStatus> GetQueryByIDAsync(int id)
         {
-            IQueryable<EquipmentQuery> query = _inf370ContextDB.EquipmentQuery.
-                Where(i => i.EquipmentQueryId == id);
+            IQueryable<QueryStatus> query = _inf370ContextDB.QueryStatus.
+                Where(i => i.EquipmentQueryStatusId == id);
 
             return query.FirstOrDefaultAsync();
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BMW_ONBOARDING_SYSTEM.Dtos;
 using BMW_ONBOARDING_SYSTEM.Models;
 using BMW_ONBOARDING_SYSTEM.ViewModel;
 using System;
@@ -142,6 +143,17 @@ namespace BMW_ONBOARDING_SYSTEM.Profiles
 
             this.CreateMap<QuestionBank, QuestionBankViewModel>().
 ReverseMap();
+
+            this.CreateMap<EquipmentType, AddEquipmentypeDto>().
+ReverseMap();
+
+            this.CreateMap<OnboarderEquipment, CheckInEquipmentViewModel>().
+ReverseMap();
+
+            this.CreateMap<QueryStatus, QueryStatusViewModel>().
+ReverseMap();
+
+            
         }
     }
 }

@@ -19,7 +19,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public string Username { get; set; }
         public string Password { get; set; }
         [Column("EmployeeID")]
-        public int? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Column("UserRoleID")]
         public int? UserRoleId { get; set; }
 

@@ -77,7 +77,7 @@ namespace BMW_ONBOARDING_SYSTEM
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IOnboarderRepository, OnboarderRepository>();
 
-            //services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
             services.AddScoped<IEquipmentQueryRepository, EquipmentQueryRepository>();
             services.AddScoped<IFaqRepository, FaqRepository>();
             //services.AddScoped<IWarrantyRepository, WarrantyRepository>();
@@ -89,6 +89,7 @@ namespace BMW_ONBOARDING_SYSTEM
             services.AddScoped<IOTPRepository, OTPRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<IOption, OptionRepository>();
+            services.AddScoped<IEquipmentQueryStatusRepository, EquipmentQueryStatusRepository>();
             //services.AddScoped<IQuestionBankRepository, QuestionBankRepository>();
 
             services.AddCors();

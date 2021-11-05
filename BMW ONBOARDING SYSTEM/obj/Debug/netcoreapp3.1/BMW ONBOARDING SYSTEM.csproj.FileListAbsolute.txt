@@ -902,3 +902,4 @@ C:\Users\konya\OneDrive\Documents\GitHub\Onboading-system\BMW ONBOARDING SYSTEM\
 C:\Users\konya\OneDrive\Documents\GitHub\Onboading-system\BMW ONBOARDING SYSTEM\obj\Debug\netcoreapp3.1\BMW ONBOARDING SYSTEM.dll
 C:\Users\konya\OneDrive\Documents\GitHub\Onboading-system\BMW ONBOARDING SYSTEM\obj\Debug\netcoreapp3.1\BMW ONBOARDING SYSTEM.pdb
 C:\Users\konya\OneDrive\Documents\GitHub\Onboading-system\BMW ONBOARDING SYSTEM\obj\Debug\netcoreapp3.1\BMW ONBOARDING SYSTEM.genruntimeconfig.cache
+C:\Users\konya\OneDrive\Documents\GitHub\Onboading-system\BMW ONBOARDING SYSTEM\obj\Debug\netcoreapp3.1\BMW ONBOARDING SYSTEM.csproj.AssemblyReference.cache
