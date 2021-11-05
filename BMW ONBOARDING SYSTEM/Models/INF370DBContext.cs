@@ -76,12 +76,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.CountryName).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<Course>(entity =>
-            //{
-            //    entity.Property(e => e.CourseDescription).IsUnicode(false);
-
-            //    entity.Property(e => e.CourseName).IsUnicode(false);
-            //});
 
             modelBuilder.Entity<CourseCompletionStatus>(entity =>
             {
@@ -161,16 +155,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.GenderDescription).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<Lesson>(entity =>
-            //{
-            //    entity.Property(e => e.LessonDescription).IsUnicode(false);
-
-            //    entity.HasOne(d => d.Course)
-            //        .WithMany(p => p.Lessons)
-            //        .HasForeignKey(d => d.CourseID)
-            //        .HasConstraintName("FK_Lesson_Course");
-            //});
-
             modelBuilder.Entity<LessonCompletionStatus>(entity =>
             {
                 entity.Property(e => e.LessonCompletionStatusDescription).IsUnicode(false);
@@ -192,50 +176,13 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.LessonContentDescription).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<LessonOutcome>(entity =>
-            //{
-            //    entity.Property(e => e.LessonOutcomeDescription).IsUnicode(false);
-
-            //    entity.Property(e => e.LessonOutcomeName).IsUnicode(false);
-
-            //    entity.HasOne(d => d.Lesson)
-            //        .WithMany(p => p.LessonOutcomes)
-            //        .HasForeignKey(d => d.Quizzes)
-            //        .HasConstraintName("FK_LessonOutcome_Lesson");
-            //});
 
             modelBuilder.Entity<Notification>(entity =>
             {
                 entity.Property(e => e.NotificationMessageDescription).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<Onboarder>(entity =>
-            //{
-            //    entity.HasOne(d => d.Employee)
-            //        .WithMany(p => p.Onboarder)
-            //        .HasForeignKey(d => d.EmployeeID)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK__Onboarder__Emplo__01142BA1");
-            //});
-
-            //modelBuilder.Entity<OnboarderCourseEnrollment>(entity =>
-            //{
-            //    entity.HasKey(e => new { e.OnboarderID, e.CourseID })
-            //        .HasName("PK__Onboarde__2C42895D0C624168");
-
-            //    entity.HasOne(d => d.Course)
-            //        .WithMany(p => p.OnBoarders)
-            //        .HasForeignKey(d => d.CourseID)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK__Onboarder__Cours__02084FDA");
-
-            //    entity.HasOne(d => d.Onboarder)
-            //        .WithMany(p => p.Courses)
-            //        .HasForeignKey(d => d.OnboarderID)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK__Onboarder__Onboa__02FC7413");
-            //});
-
+            
             modelBuilder.Entity<OnboarderEquipment>(entity =>
             {
                 entity.HasKey(e => new { e.EquipmentId, e.OnboarderID })
@@ -255,13 +202,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("FK__Onboarder__Onboa__04E4BC85");
             });
-
-            //modelBuilder.Entity<Option>(entity =>
-            //{
-            //    entity.HasIndex(e => e.QuestionId);
-
-            //    entity.Property(e => e.OptionDescription).IsUnicode(false);
-            //});
 
             modelBuilder.Entity<Otp>(entity =>
             {
@@ -283,46 +223,11 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.EquipmentQueryDescription).IsUnicode(false);
             });
 
-            //modelBuilder.Entity<Question>(entity =>
-            //{
-            //    entity.HasIndex(e => e.QuizId);
-
-            //    entity.Property(e => e.QuestionAnswer).IsUnicode(false);
-
-            //    entity.Property(e => e.QuestionDescription).IsUnicode(false);
-
-            //    entity.HasOne(d => d.QuestionBank)
-            //        .WithMany(p => p.Question)
-            //        .HasForeignKey(d => d.QuestionBankId)
-            //        .HasConstraintName("FK_Question_QuestionBank");
-            //});
-
-            //modelBuilder.Entity<QuestionBank>(entity =>
-            //{
-            //    entity.Property(e => e.QuestionBankDescription).IsUnicode(false);
-            //});
-
+            
             modelBuilder.Entity<QuestionCategory>(entity =>
             {
                 entity.Property(e => e.QuestionCategoryDescription).IsUnicode(false);
             });
-
-            //modelBuilder.Entity<Quiz>(entity =>
-            //{
-            //    entity.Property(e => e.QuizDescription).IsUnicode(false);
-
-            //    entity.Property(e => e.QuizMarkRequirement).IsUnicode(false);
-
-            //    entity.HasOne(d => d.LessonOutcome)
-            //        .WithMany(p => p.Quizzes)
-            //        .HasForeignKey(d => d.LessonOutcomeID)
-            //        .HasConstraintName("FK_Quiz_LessonOutcome");
-
-            //    entity.HasOne(d => d.LessonOutcome)
-            //        .WithMany(p => p.Quizzes)
-            //        .HasForeignKey(d => d.LessonOutcomeID)
-            //        .HasConstraintName("FK_Quiz_QuestionBank");
-            //});
 
             modelBuilder.Entity<Suburb>(entity =>
             {
@@ -397,7 +302,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual DbSet<QueryStatus> QueryStatus { get; set; }
         public virtual DbSet<QuestionBank> QuestionBank { get; set; }
         public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
-        public virtual DbSet<Quiz> Quiz { get; set; }
         public virtual DbSet<Suburb> Suburb { get; set; }
         public virtual DbSet<Title> Title { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -405,6 +309,8 @@ namespace BMW_ONBOARDING_SYSTEM.Models
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionAnswerOption> QuestionAnswerOptions { get; set; }
+        public virtual DbSet<Quiz> Quizzes { get; set; }
+
 
 
     }

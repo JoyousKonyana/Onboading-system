@@ -83,7 +83,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         [HttpGet("GetAll/LessonOutcome/{lessonOutcomeId}")]
         public ActionResult<IEnumerable<GetQuestionBank>> GetQuestionBanksByLessonOutcomeId(int lessonOutcomeId)
         {
-            var isLessonOutcomeInDb = _context.LessonOutcome.FirstOrDefault(item => item.LessonID == lessonOutcomeId);
+            var isLessonOutcomeInDb = _context.LessonOutcome.FirstOrDefault(item => item.LessonOutcomeID == lessonOutcomeId);
 
             if (isLessonOutcomeInDb == null)
             {
@@ -107,6 +107,39 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     LessonName = item.LessonOutcome.Lesson.LessonName,
                     LessonOutcomeId = item.LessonOutcome.LessonOutcomeID,
                     LessonOutcomeName = item.LessonOutcome.LessonOutcomeName
+                }).ToList();
+
+            return banksInDb;
+        }
+
+
+        [HttpGet("GetAll/WithQuestions/LessonOutcome/{lessonOutcomeId}")]
+        public ActionResult<IEnumerable<GetQuestionBankWithQuestionsDto>> GetQuestionBanksWithQuestionsByLessonOutcomeId(int lessonOutcomeId)
+        {
+            var banksInDb = _context.QuestionBank
+                .Where(item => item.LessonOutcomeID == lessonOutcomeId)
+                .Where(item => item.Questions.Any())
+                .Include(item => item.LessonOutcome)
+                .ThenInclude(item => item.Lesson)
+                .ThenInclude(item => item.Course)
+                .Include(item => item.Questions)
+                .ThenInclude(item => item.AnswerOptions)
+                .Select(item => new GetQuestionBankWithQuestionsDto()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    CourseId = item.LessonOutcome.Lesson.Course.CourseID,
+                    CourseName = item.LessonOutcome.Lesson.Course.CourseName,
+                    LessonId = item.LessonOutcome.Lesson.LessonID,
+                    LessonName = item.LessonOutcome.Lesson.LessonName,
+                    LessonOutcomeId = item.LessonOutcome.LessonOutcomeID,
+                    LessonOutcomeName = item.LessonOutcome.LessonOutcomeName,
+                    Questions = item.Questions.Select(question => new GetBankQuestionDto
+                    {
+                        Id = question.Id,
+                        Name = question.Title
+                    }).ToList()
+
                 }).ToList();
 
             return banksInDb;

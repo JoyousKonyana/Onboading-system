@@ -212,3 +212,25 @@ header .overlay {
 .tree-item {
   margin: 0 0.2rem;
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.form-inline-container {
+  width: 100%;
+  margin: 0 0.5rem;
+}
+
+.form-inline {
+}
+
+.form-inline-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inline-control {
+  margin: 0 0.5rem;
+}

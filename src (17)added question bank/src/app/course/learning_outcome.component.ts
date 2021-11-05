@@ -15,7 +15,6 @@ export class Learning_OutcomeComponent implements OnInit {
 
   id: any;
 
-  //lesson_outcome: Learning_Outcome[] = [];
   lesson_outcome_load: any[] = [];
 
   constructor(

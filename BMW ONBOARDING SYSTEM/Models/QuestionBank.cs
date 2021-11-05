@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
@@ -15,10 +13,12 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public int LessonOutcomeID { get; set; }
 
         public virtual List<Question> Questions { get; set; }
+        public virtual List<Quiz> Quizzes { get; set; }
 
         public QuestionBank()
         {
             Questions = new List<Question>();
+            Quizzes = new List<Quiz>();
         }
     }
 }

@@ -7,10 +7,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
 {
     public class LessonOutcome
     {
-        public LessonOutcome()
-        {
-            Quizzes = new List<Quiz>();
-        }
+      
 
         [Key]
         public int LessonOutcomeID { get; set; }
@@ -26,5 +23,10 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public virtual Lesson Lesson { get; set; }
 
         public virtual List<Quiz> Quizzes { get; set; }
+
+        public LessonOutcome()
+        {
+            Quizzes = new List<Quiz>();
+        }
     }
 }

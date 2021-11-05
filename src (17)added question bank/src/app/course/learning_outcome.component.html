@@ -86,7 +86,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="col-1">ID</th>
         <th class="col-3">Lesson Outcome Name</th>
         <th class="col-6">Lesson Outcome Description</th>
         <th class="col-2">Action</th>
@@ -94,14 +93,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of lesson_outcome_load; let i = index">
-        <td>{{item.lessonOutcomeID}}</td>
         <td>{{item.lessonOutcomeName}}</td>
         <td>{{item.lessonOutcomeDescription}}</td>
         <td class="table-actions-container">
-          <button class="btn btn-warning table-action-item" [routerLink]="['/learning_content', item.lessonId]">Lesson Content</button>
-          <br>
-          <br>
-          <button class="btn btn-success table-action-item" [routerLink]="['/set_quiz', item.lessonOutcomeId]">Set Quiz</button>
+          <button class="btn btn-warning table-action-item"
+            [routerLink]="['/learning_content', item.lessonOutcomeID]">Lesson Content</button>
+
+          <button class="btn btn-success table-action-item" [routerLink]="['/set_quiz', item.lessonOutcomeID]">Set
+            Quiz</button>
           <button class="btn btn-primary table-action-item" (click)="editLearning_Outcome(i)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-pencil-square" viewBox="0 0 16 16">
