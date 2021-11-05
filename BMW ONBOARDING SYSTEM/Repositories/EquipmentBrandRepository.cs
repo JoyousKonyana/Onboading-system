@@ -27,6 +27,13 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             _inf370ContextDB.Remove(entity);
         }
 
+        public async Task<EquipmentBrand> GetEquipmentBrandById(int id)
+        {
+            IQueryable<EquipmentBrand> equipmentBrands = _inf370ContextDB.EquipmentBrand.Where(x => x.EquipmentBrandId == id);
+
+            return await equipmentBrands.FirstOrDefaultAsync();
+        }
+
         public async Task<EquipmentBrand[]> GetAllEquipmentBrandsAsync()
         {
             IQueryable<EquipmentBrand> equipmentBrands = _inf370ContextDB.EquipmentBrand;

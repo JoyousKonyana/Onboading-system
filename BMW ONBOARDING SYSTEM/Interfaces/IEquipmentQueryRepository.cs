@@ -15,11 +15,11 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
 
         Task<bool> SaveChangesAsync();
 
-        Task<EquipmentQuery[]> GetAllqueriesAsync();
-        Task<EquipmentQuery> GetQueryByIDAsync(int id);
+        Task<QueryStatus[]> GetAllqueriesAsync();
+        Task<QueryStatus> GetQueryByIDAsync(int id);
         Task<EquipmentQuery[]> GetQueryByOnboarderIDc(int id);
 
-        Task<ResolveQueryViewModel> GetQueryStatusByID(ResolveQueryViewModel model);
+       
 
         Task<QueryStatus[]> GetAllQueryStatuses();
 

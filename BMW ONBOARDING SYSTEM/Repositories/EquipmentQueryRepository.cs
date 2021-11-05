@@ -77,9 +77,6 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return await _inf370ContextDB.SaveChangesAsync() > 0;
         }
 
-        Task<ResolveQueryViewModel> IEquipmentQueryRepository.GetQueryStatusByID(ResolveQueryViewModel model)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
