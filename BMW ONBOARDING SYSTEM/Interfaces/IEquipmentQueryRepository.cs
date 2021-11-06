@@ -17,7 +17,9 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
 
         Task<QueryStatus[]> GetAllqueriesAsync();
         Task<QueryStatus> GetQueryStatusByIDAsync(int id);
-        Task<QueryStatus> GetQueryByIDAsync(int id);
+        Task<EquipmentQuery> GetQueryByIDAsync(int id);
+
+       
         Task<EquipmentQuery[]> GetQueryByOnboarderIDc(int id);
 
        

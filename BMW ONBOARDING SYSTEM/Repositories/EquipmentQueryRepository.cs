@@ -79,9 +79,14 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return await _inf370ContextDB.SaveChangesAsync() > 0;
         }
 
-        public Task<QueryStatus> GetQueryByIDAsync(int id)
+        public Task<EquipmentQuery> GetQueryByIDAsync(int id)
         {
-            throw new NotImplementedException();
+            IQueryable<EquipmentQuery> query = _inf370ContextDB.EquipmentQuery.Where(x=>x.EquipmentQueryId == id);
+
+
+            return query.FirstOrDefaultAsync();
+
+
         }
     }
 }
