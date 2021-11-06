@@ -8,15 +8,15 @@ import { AssignEquipment, Equipment_Query, EquipmentQuery } from '../_models';
 import { EquipmentService, Equipment_QueryService, AlertService } from '../_services';
 
 @Component({ 
-    templateUrl: 'my_equipment.component.html',
+    templateUrl: 'equipment_query.component.html',
     styleUrls: ['./ss_equipment.component.css'] 
 })
 
-export class My_EquipmentComponent implements OnInit {
+export class EquipmentQueryComponent implements OnInit {
 
   x!: any;
   //y: Equipment_Query[] = [];
-  query: any = {};
+  query: any;
 
   constructor(
     private xService: EquipmentService,
@@ -31,7 +31,7 @@ ngOnInit() {
 }
 
 private loadAll() {
-  this.xService.GetAssignedEquipment(1)
+  this.yService.getAllEquipment_Query()
   .pipe(first())
   .subscribe(
     x => {

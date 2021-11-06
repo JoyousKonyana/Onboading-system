@@ -1,5 +1,6 @@
 
 
+
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -47,6 +48,9 @@ import {
   EquipmentComponent,
   SS_EquipmentComponent,
   My_EquipmentComponent,
+  Equipment_TypeComponent,
+  EquipmentQueryComponent,
+  QueryComponent,
   EquipDashboardComponent
 } from './equipment';
 
@@ -184,6 +188,11 @@ const routes: Routes = [
   {
     path: 'crud_employee',
     component: CRUD_EmployeeComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'equipment_type',
+    component: Equipment_TypeComponent,
     //canActivate: [AuthGuard]
   },
 
@@ -345,6 +354,16 @@ const routes: Routes = [
   {
     path: 'my_equipment',
     component: My_EquipmentComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'query',
+    component: QueryComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'my_equipment',
+    component: EquipmentQueryComponent,
     //canActivate: [AuthGuard]
   },
   {
