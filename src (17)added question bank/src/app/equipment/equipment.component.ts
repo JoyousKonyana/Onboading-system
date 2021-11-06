@@ -216,7 +216,8 @@ export class EquipmentComponent implements OnInit {
     EquipmentId: 1,
     OnboarderId: 1,
     EquipmentQueryDescription: '',
-    EquipmentQueryDate: ''
+    EquipmentQueryDate: '',
+    EquipmentQueryId: 0
   }
 
   updateReport_Query() {

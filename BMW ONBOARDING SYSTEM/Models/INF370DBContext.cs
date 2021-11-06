@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
@@ -15,57 +16,11 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         {
         }
 
-        public virtual DbSet<Achievement> Achievement { get; set; }
-        public virtual DbSet<AchievementType> AchievementType { get; set; }
-        public virtual DbSet<ActiveLog> ActiveLog { get; set; }
-        public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<ArchiveStatus> ArchiveStatus { get; set; }
-        public virtual DbSet<AuditLog> AuditLog { get; set; }
-        public virtual DbSet<Badge> Badge { get; set; }
-        public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Course> Course { get; set; }
-        public virtual DbSet<CourseCompletionStatus> CourseCompletionStatus { get; set; }
-        public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<EmployeeCalendar> EmployeeCalendar { get; set; }
-        public virtual DbSet<Equipment> Equipment { get; set; }
-        public virtual DbSet<EquipmentBrand> EquipmentBrand { get; set; }
-        public virtual DbSet<EquipmentQuery> EquipmentQuery { get; set; }
-        public virtual DbSet<EquipmentQueryStatus> EquipmentQueryStatus { get; set; }
-        public virtual DbSet<EquipmentTradeInStatus> EquipmentTradeInStatus { get; set; }
-        public virtual DbSet<EquipmentType> EquipmentType { get; set; }
-        public virtual DbSet<Faq> Faq { get; set; }
-        public virtual DbSet<Gender> Gender { get; set; }
-        public virtual DbSet<Lesson> Lesson { get; set; }
-        public virtual DbSet<LessonCompletionStatus> LessonCompletionStatus { get; set; }
-        public virtual DbSet<LessonContent> LessonContent { get; set; }
-        public virtual DbSet<LessonContentType> LessonContentType { get; set; }
-        public virtual DbSet<LessonOutcome> LessonOutcome { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<Onboarder> Onboarder { get; set; }
-        public virtual DbSet<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
-        public virtual DbSet<OnboarderEquipment> OnboarderEquipment { get; set; }
-        public virtual DbSet<Option> Option { get; set; }
-        public virtual DbSet<Otp> Otp { get; set; }
-        public virtual DbSet<PostalCode> PostalCode { get; set; }
-        public virtual DbSet<Province> Province { get; set; }
-        public virtual DbSet<QueryStatus> QueryStatus { get; set; }
-        public virtual DbSet<Question> Question { get; set; }
-        public virtual DbSet<QuestionBank> QuestionBank { get; set; }
-        public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
-        public virtual DbSet<Quiz> Quiz { get; set; }
-        public virtual DbSet<Suburb> Suburb { get; set; }
-        public virtual DbSet<Title> Title { get; set; }
-        public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=INF 3705;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=INF 3705;Trusted_Connection=True;");
             }
         }
 
@@ -113,7 +68,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
 
             modelBuilder.Entity<City>(entity =>
             {
-                entity.Property(e => e.Country).IsUnicode(false);
+                entity.Property(e => e.CityName).IsUnicode(false);
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -121,12 +76,12 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.CountryName).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Course>(entity =>
-            {
-                entity.Property(e => e.CourseDescription).IsUnicode(false);
+            //modelBuilder.Entity<Course>(entity =>
+            //{
+            //    entity.Property(e => e.CourseDescription).IsUnicode(false);
 
-                entity.Property(e => e.CourseName).IsUnicode(false);
-            });
+            //    entity.Property(e => e.CourseName).IsUnicode(false);
+            //});
 
             modelBuilder.Entity<CourseCompletionStatus>(entity =>
             {
@@ -206,15 +161,15 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.GenderDescription).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Lesson>(entity =>
-            {
-                entity.Property(e => e.LessonDescription).IsUnicode(false);
+            //modelBuilder.Entity<Lesson>(entity =>
+            //{
+            //    entity.Property(e => e.LessonDescription).IsUnicode(false);
 
-                entity.HasOne(d => d.Course)
-                    .WithMany(p => p.Lesson)
-                    .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK_Lesson_Course");
-            });
+            //    entity.HasOne(d => d.Course)
+            //        .WithMany(p => p.Lessons)
+            //        .HasForeignKey(d => d.CourseID)
+            //        .HasConstraintName("FK_Lesson_Course");
+            //});
 
             modelBuilder.Entity<LessonCompletionStatus>(entity =>
             {
@@ -237,54 +192,54 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.LessonContentDescription).IsUnicode(false);
             });
 
-            modelBuilder.Entity<LessonOutcome>(entity =>
-            {
-                entity.Property(e => e.LessonOutcomeDescription).IsUnicode(false);
+            //modelBuilder.Entity<LessonOutcome>(entity =>
+            //{
+            //    entity.Property(e => e.LessonOutcomeDescription).IsUnicode(false);
 
-                entity.Property(e => e.LessonOutcomeName).IsUnicode(false);
+            //    entity.Property(e => e.LessonOutcomeName).IsUnicode(false);
 
-                entity.HasOne(d => d.Lesson)
-                    .WithMany(p => p.LessonOutcome)
-                    .HasForeignKey(d => d.LessonId)
-                    .HasConstraintName("FK_LessonOutcome_Lesson");
-            });
+            //    entity.HasOne(d => d.Lesson)
+            //        .WithMany(p => p.LessonOutcomes)
+            //        .HasForeignKey(d => d.Quizzes)
+            //        .HasConstraintName("FK_LessonOutcome_Lesson");
+            //});
 
             modelBuilder.Entity<Notification>(entity =>
             {
                 entity.Property(e => e.NotificationMessageDescription).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Onboarder>(entity =>
-            {
-                entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.Onboarder)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Emplo__5224328E");
-            });
+            //modelBuilder.Entity<Onboarder>(entity =>
+            //{
+            //    entity.HasOne(d => d.Employee)
+            //        .WithMany(p => p.Onboarder)
+            //        .HasForeignKey(d => d.EmployeeID)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK__Onboarder__Emplo__01142BA1");
+            //});
 
-            modelBuilder.Entity<OnboarderCourseEnrollment>(entity =>
-            {
-                entity.HasKey(e => new { e.OnboarderId, e.CourseId })
-                    .HasName("PK__Onboarde__2C42895D6775A25D");
+            //modelBuilder.Entity<OnboarderCourseEnrollment>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.OnboarderID, e.CourseID })
+            //        .HasName("PK__Onboarde__2C42895D0C624168");
 
-                entity.HasOne(d => d.Course)
-                    .WithMany(p => p.OnboarderCourseEnrollment)
-                    .HasForeignKey(d => d.CourseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Cours__531856C7");
+            //    entity.HasOne(d => d.Course)
+            //        .WithMany(p => p.OnBoarders)
+            //        .HasForeignKey(d => d.CourseID)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK__Onboarder__Cours__02084FDA");
 
-                entity.HasOne(d => d.Onboarder)
-                    .WithMany(p => p.OnboarderCourseEnrollment)
-                    .HasForeignKey(d => d.OnboarderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Onboa__540C7B00");
-            });
+            //    entity.HasOne(d => d.Onboarder)
+            //        .WithMany(p => p.Courses)
+            //        .HasForeignKey(d => d.OnboarderID)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("FK__Onboarder__Onboa__02FC7413");
+            //});
 
             modelBuilder.Entity<OnboarderEquipment>(entity =>
             {
-                entity.HasKey(e => new { e.EquipmentId, e.OnboarderId })
-                    .HasName("PK__Onboarde__704A407DF2C8652A");
+                entity.HasKey(e => new { e.EquipmentId, e.OnboarderID })
+                    .HasName("PK__Onboarde__704A407D484BC86A");
 
                 entity.Property(e => e.EquipmentCheckInCondition).IsUnicode(false);
 
@@ -292,21 +247,21 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                     .WithMany(p => p.OnboarderEquipment)
                     .HasForeignKey(d => d.EquipmentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Equip__55009F39");
+                    .HasConstraintName("FK__Onboarder__Equip__03F0984C");
 
-                entity.HasOne(d => d.Onboarder)
-                    .WithMany(p => p.OnboarderEquipment)
-                    .HasForeignKey(d => d.OnboarderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Onboarder__Onboa__55F4C372");
+                //entity.HasOne(d => d.)
+                //    .WithMany(p => p.OnboarderEquipment)
+                //    .HasForeignKey(d => d.Onboarder)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Onboarder__Onboa__04E4BC85");
             });
 
-            modelBuilder.Entity<Option>(entity =>
-            {
-                entity.HasIndex(e => e.QuestionId);
+            //modelBuilder.Entity<Option>(entity =>
+            //{
+            //    entity.HasIndex(e => e.QuestionId);
 
-                entity.Property(e => e.OptionDescription).IsUnicode(false);
-            });
+            //    entity.Property(e => e.OptionDescription).IsUnicode(false);
+            //});
 
             modelBuilder.Entity<Otp>(entity =>
             {
@@ -328,46 +283,46 @@ namespace BMW_ONBOARDING_SYSTEM.Models
                 entity.Property(e => e.EquipmentQueryDescription).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Question>(entity =>
-            {
-                entity.HasIndex(e => e.QuizId);
+            //modelBuilder.Entity<Question>(entity =>
+            //{
+            //    entity.HasIndex(e => e.QuizId);
 
-                entity.Property(e => e.QuestionAnswer).IsUnicode(false);
+            //    entity.Property(e => e.QuestionAnswer).IsUnicode(false);
 
-                entity.Property(e => e.QuestionDescription).IsUnicode(false);
+            //    entity.Property(e => e.QuestionDescription).IsUnicode(false);
 
-                entity.HasOne(d => d.QuestionBank)
-                    .WithMany(p => p.Question)
-                    .HasForeignKey(d => d.QuestionBankId)
-                    .HasConstraintName("FK_Question_QuestionBank");
-            });
+            //    entity.HasOne(d => d.QuestionBank)
+            //        .WithMany(p => p.Question)
+            //        .HasForeignKey(d => d.QuestionBankId)
+            //        .HasConstraintName("FK_Question_QuestionBank");
+            //});
 
-            modelBuilder.Entity<QuestionBank>(entity =>
-            {
-                entity.Property(e => e.QuestionBankDescription).IsUnicode(false);
-
-                entity.HasOne(d => d.Course)
-                    .WithMany(p => p.QuestionBank)
-                    .HasForeignKey(d => d.CourseId)
-                    .HasConstraintName("FK_QuestionBank_Course");
-            });
+            //modelBuilder.Entity<QuestionBank>(entity =>
+            //{
+            //    entity.Property(e => e.QuestionBankDescription).IsUnicode(false);
+            //});
 
             modelBuilder.Entity<QuestionCategory>(entity =>
             {
                 entity.Property(e => e.QuestionCategoryDescription).IsUnicode(false);
             });
 
-            modelBuilder.Entity<Quiz>(entity =>
-            {
-                entity.Property(e => e.QuizDescription).IsUnicode(false);
+            //modelBuilder.Entity<Quiz>(entity =>
+            //{
+            //    entity.Property(e => e.QuizDescription).IsUnicode(false);
 
-                entity.Property(e => e.QuizMarkRequirement).IsUnicode(false);
+            //    entity.Property(e => e.QuizMarkRequirement).IsUnicode(false);
 
-                entity.HasOne(d => d.QuestionBank)
-                    .WithMany(p => p.Quiz)
-                    .HasForeignKey(d => d.QuestionBankId)
-                    .HasConstraintName("FK_Quiz_QuestionBank");
-            });
+            //    entity.HasOne(d => d.LessonOutcome)
+            //        .WithMany(p => p.Quizzes)
+            //        .HasForeignKey(d => d.LessonOutcomeID)
+            //        .HasConstraintName("FK_Quiz_LessonOutcome");
+
+            //    entity.HasOne(d => d.LessonOutcome)
+            //        .WithMany(p => p.Quizzes)
+            //        .HasForeignKey(d => d.LessonOutcomeID)
+            //        .HasConstraintName("FK_Quiz_QuestionBank");
+            //});
 
             modelBuilder.Entity<Suburb>(entity =>
             {
@@ -399,8 +354,58 @@ namespace BMW_ONBOARDING_SYSTEM.Models
             });
 
             OnModelCreatingPartial(modelBuilder);
+
+
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public virtual DbSet<Achievement> Achievement { get; set; }
+        public virtual DbSet<AchievementType> AchievementType { get; set; }
+        public virtual DbSet<ActiveLog> ActiveLog { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<ArchiveStatus> ArchiveStatus { get; set; }
+        public virtual DbSet<AuditLog> AuditLog { get; set; }
+        public virtual DbSet<Badge> Badge { get; set; }
+        public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<CourseCompletionStatus> CourseCompletionStatus { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<EmployeeCalendar> EmployeeCalendar { get; set; }
+        public virtual DbSet<Equipment> Equipment { get; set; }
+        public virtual DbSet<EquipmentBrand> EquipmentBrand { get; set; }
+        public virtual DbSet<EquipmentQuery> EquipmentQuery { get; set; }
+        public virtual DbSet<EquipmentQueryStatus> EquipmentQueryStatus { get; set; }
+        public virtual DbSet<EquipmentTradeInStatus> EquipmentTradeInStatus { get; set; }
+        public virtual DbSet<EquipmentType> EquipmentType { get; set; }
+        public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Lesson> Lesson { get; set; }
+        public virtual DbSet<LessonCompletionStatus> LessonCompletionStatus { get; set; }
+        public virtual DbSet<LessonContent> LessonContent { get; set; }
+        public virtual DbSet<LessonContentType> LessonContentType { get; set; }
+        public virtual DbSet<LessonOutcome> LessonOutcome { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<Onboarder> Onboarder { get; set; }
+        public virtual DbSet<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
+        public virtual DbSet<OnboarderEquipment> OnboarderEquipment { get; set; }
+        public virtual DbSet<Otp> Otp { get; set; }
+        public virtual DbSet<PostalCode> PostalCode { get; set; }
+        public virtual DbSet<Province> Province { get; set; }
+        public virtual DbSet<QueryStatus> QueryStatus { get; set; }
+        public virtual DbSet<QuestionBank> QuestionBank { get; set; }
+        public virtual DbSet<QuestionCategory> QuestionCategory { get; set; }
+        public virtual DbSet<Quiz> Quiz { get; set; }
+        public virtual DbSet<Suburb> Suburb { get; set; }
+        public virtual DbSet<Title> Title { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<QuestionAnswerOption> QuestionAnswerOptions { get; set; }
+
+
     }
 }

@@ -25,7 +25,7 @@ export class OTPComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService
-    ) { 
+    ) {
     }
 
     OTPInfo:OTP = {
@@ -71,11 +71,12 @@ export class OTPComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                   
-                    localStorage.setItem('SeesionUser',this.session); 
+                    console.log("In Next")
+                    localStorage.setItem('SeesionUser',this.session);
                     this.router.navigate(['/']);
                 },
                 error: error => {
+                  console.log(error)
                     this.error = error;
                     this.loading = false;
                 }

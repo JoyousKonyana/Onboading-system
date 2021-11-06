@@ -10,9 +10,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [Key]
         [Column("EquipmentID")]
         public int EquipmentId { get; set; }
-        [Key]
-        [Column("OnboarderID")]
-        public int OnboarderId { get; set; }
+       
         [Column(TypeName = "datetime")]
         public DateTime? EquipmentCheckOutDate { get; set; }
         [Column(TypeName = "datetime")]
@@ -23,8 +21,9 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [ForeignKey(nameof(EquipmentId))]
         [InverseProperty("OnboarderEquipment")]
         public virtual Equipment Equipment { get; set; }
-        [ForeignKey(nameof(OnboarderId))]
-        [InverseProperty("OnboarderEquipment")]
+
         public virtual Onboarder Onboarder { get; set; }
+        public int OnboarderID { get; set; }
+
     }
 }

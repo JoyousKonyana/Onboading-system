@@ -150,7 +150,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     if (await _employeeRepository.SaveChangesAsync())
                     {
                         CreateUserViewModel user = new CreateUserViewModel();
-                        user.EmployeeId = employee.EmployeeId;
+                        user.EmployeeId = employee.EmployeeID;
 
                         user.UserRoleId = model.UserRoleID;
                         user.Username = employee.EmailAddress;
@@ -171,7 +171,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                         if (user.UserRoleId == 1)
                         {
                             Onboarder onboarder = new Onboarder();
-                            onboarder.EmployeeId = employee.EmployeeId;
+                            onboarder.EmployeeID = employee.EmployeeID;
                             _employeeRepository.Add(onboarder);
 
                             if (await _employeeRepository.SaveChangesAsync())
@@ -371,7 +371,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                             var userrole = await _userRoleRepository.GetUserRoleByname(emp.UserRoleName);
                             if (userrole == null) return BadRequest();
                             CreateUserViewModel user = new CreateUserViewModel();
-                            user.EmployeeId = employee.EmployeeId;
+                            user.EmployeeId = employee.EmployeeID;
                             user.UserRoleId = userrole.UserRoleId;
                             user.Username = employee.EmailAddress;
                             //return Created($"/api/User/registerUser", user);
@@ -389,7 +389,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                             if (user.UserRoleId == 1)
                             {
                                 Onboarder onboarder = new Onboarder();
-                                onboarder.EmployeeId = employee.EmployeeId;
+                                onboarder.EmployeeID = employee.EmployeeID;
                                 _employeeRepository.Add(onboarder);
 
                                 if (!await _employeeRepository.SaveChangesAsync())

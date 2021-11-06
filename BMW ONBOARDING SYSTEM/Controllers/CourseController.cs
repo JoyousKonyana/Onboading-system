@@ -156,8 +156,8 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
         //[Authorize(Roles = Role.Admin)]
         [HttpPut("{id}")]
-        [Route("[action]/{id}")]
-        public async Task<ActionResult<CourseViewModel>> UpdateCourse(int id, CourseViewModel updatedCourseModel)
+        [Route("[action]/{id}/{userid}")]
+        public async Task<ActionResult<CourseViewModel>> UpdateCourse(int id,int userid, CourseViewModel updatedCourseModel)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     AuditLog auditLog = new AuditLog();
                     auditLog.AuditLogDescription = "Updated Course to " + ' ' + updatedCourseModel.CourseName;
                     auditLog.AuditLogDatestamp = DateTime.Now;
-                    auditLog.UserId = id;
+                    auditLog.UserId = userid;
                     return _mapper.Map<CourseViewModel>(existingCourse);
                 }
             }

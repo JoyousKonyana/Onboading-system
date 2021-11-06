@@ -14,9 +14,9 @@ import { User_RoleService, EmployeeService, AlertService } from './_services';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  //Pages and their boolean 
+  //Pages and their boolean
   users: boolean = false;
   administrator: boolean = false;
   equipment: boolean = false;
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
 
   session = '2';
 
-  user: any ;
+  user: any;
 
   user_role: any = {};
 
@@ -43,56 +43,54 @@ export class AppComponent implements OnInit{
   model: any;
   model2: any;
 
-    constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private authenticationService: AuthenticationService,
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
 
-      private employeeService: EmployeeService,
-      private user_roleService: User_RoleService
-        ) {
-        //this.authenticationService.user.subscribe(x => this.user = x);
-    }
-    
-  ngOnInit() { 
-    this.loadAll();
-    this.findUserRole();
+    private employeeService: EmployeeService,
+    private user_roleService: User_RoleService
+  ) {
+    //this.authenticationService.user.subscribe(x => this.user = x);
   }
 
- loadAll() {
+  ngOnInit() {
+    this.loadAll();
+  }
+
+  loadAll() {
     this.model = localStorage.getItem('user');
 
     this.authenticationService.getUserById(this.model)
       .pipe(first())
       .subscribe(user => {
         this.user = user;
-        console.log(this.user);
+        this.findUserRole();
       });
 
-    this.findUserRole()
   }
 
   findUserRole() {
-    this.dataHolder = this.user.userRole.userRoleDescription ;
+    this.dataHolder = this.user.userRole.userRoleName;
     this.role = this.dataHolder.split(" ");//This split string to an array when system detects space
 
-    for(let i=0; i < this.role.length; i++){
-      if(this.role[i] == "users" || this.role[i] == "Users"){
+    for (let i = 0; i < this.role.length; i++) {
+      if (this.role[i] == "users" || this.role[i] == "Users") {
         this.users = true;
       }
-      if(this.role[i] == "administrator" || this.role[i] == "Administrator"){
+      if (this.role[i] == "administrator" || this.role[i] == "Administrator") {
         this.administrator = true;
       }
-      if(this.role[i] == "equipment" || this.role[i] == "Equipment"){
+      if (this.role[i] == "equipment" || this.role[i] == "Equipment") {
         this.equipment = true;
       }
-      if(this.role[i] == "onboarder" || this.role[i] == "Onboarder"){
+      if (this.role[i] == "onboarder" || this.role[i] == "Onboarder") {
         this.onboarder = true;
       }
-      if(this.role[i] == "course" || this.role[i] == "Course"){
+      if (this.role[i] == "course" || this.role[i] == "Course") {
         this.course = true;
       }
-      if(this.role[i] == "report" || this.role[i] == "Report"){
+      if (this.role[i] == "report" || this.role[i] == "Report") {
         this.report = true;
       }
     }
@@ -100,22 +98,22 @@ export class AppComponent implements OnInit{
 
   //Block features according to user role
   get isUsers() {
-    return this.users == true ? true:false;
+    return this.users == true ? true : false;
   }
   get isAdministraor() {
-    return this.administrator == true ? true:false;
+    return this.administrator == true ? true : false;
   }
   get isEquipment() {
-    return this.equipment == true ? true:false;
+    return this.equipment == true ? true : false;
   }
   get isCourse() {
-    return this.course == true ? true:false;
+    return this.course == true ? true : false;
   }
   get isOnboarder() {
-    return this.onboarder == true ? true:false;
+    return this.onboarder == true ? true : false;
   }
   get isReport() {
-    return this.report == true ? true:false;
+    return this.report == true ? true : false;
   }
 
   logout() {

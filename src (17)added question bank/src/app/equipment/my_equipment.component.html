@@ -32,7 +32,7 @@
          name="date"
          [(ngModel)]="model2.EquipmentQueryDate">
 </div>
-<button class="btn btn-success" type="submit" (click)="updateReport_Query()">Report Query</button>
+<button class="btn btn-success" type="submit" (click)="Report_Query()">Report Query</button>
 </form>
 </div>
 </div>
@@ -44,6 +44,8 @@
 <thead>
   <tr>
     <th class="col">Equipment ID</th>
+    <th class="col">Equipment Type</th>
+    <th class="col">Equipment Brand</th>
     <th class="col">Check Out Date</th>
     <th class="col">Check Out Condition</th>
     <th class="col">Check In Date</th>
@@ -54,6 +56,8 @@
 <tbody>
   <tr *ngFor="let equipment of x; let i = index">
     <td>{{equipment.equipmentId}}</td>
+    <td>{{equipment.equipmentType.equipmentTypeDescription}}</td>
+    <td>{{equipment.equipmentBrand.equipmentBrandDescription}}</td>
     <td>{{equipment.equipmentCheckOutDate}}</td>
     <td>{{equipment.EquipmentCheckOutCondition}}</td>
     <td>{{equipment.equipmentCheckInDate}}</td>

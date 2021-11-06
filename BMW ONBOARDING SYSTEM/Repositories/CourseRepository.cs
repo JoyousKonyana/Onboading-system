@@ -29,9 +29,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
 
         public Task<Course> GetCourseByIdAsync(int courseId)
         {
-            IQueryable<Course> existingCourse = _inf370ContextDB.Course.Where(id => id.CourseId == courseId);
-
-
+            IQueryable<Course> existingCourse = _inf370ContextDB.Course.Where(id => id.CourseID == courseId);
 
             return existingCourse.FirstOrDefaultAsync();
 
@@ -58,7 +56,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         {
             IQueryable<OnboarderCourseEnrollment> course = _inf370ContextDB.OnboarderCourseEnrollment.
                 Include(x => x.Course).
-                Where(cc => cc.OnboarderId == onboarderID);
+                Where(cc => cc.OnboarderID == onboarderID);
 
             //course = course.Where(c => c.CourseName == name);
 

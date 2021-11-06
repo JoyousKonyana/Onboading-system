@@ -15,5 +15,6 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
         Task<bool> SaveChangesAsync();
 
         Task<EquipmentBrand[]> GetAllEquipmentBrandsAsync();
+        Task<EquipmentBrand> GetEquipmentBrandById(int id);
     }
 }

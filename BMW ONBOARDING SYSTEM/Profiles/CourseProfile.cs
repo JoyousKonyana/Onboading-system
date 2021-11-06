@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BMW_ONBOARDING_SYSTEM.Dtos;
 using BMW_ONBOARDING_SYSTEM.Models;
 using BMW_ONBOARDING_SYSTEM.ViewModel;
 using System;
@@ -51,8 +52,8 @@ namespace BMW_ONBOARDING_SYSTEM.Profiles
             this.CreateMap<OnboarderCourseEnrollment, OnboarderCourseEnrollmentViewModel>().
             ReverseMap();
 
-            this.CreateMap<Question, QuestionViewModel>().
-            ReverseMap();
+            //this.CreateMap<Question, QuestionViewModel>().
+            //ReverseMap();
 
 
             this.CreateMap<User, CreateUserViewModel>().
@@ -127,21 +128,37 @@ namespace BMW_ONBOARDING_SYSTEM.Profiles
             this.CreateMap<Quiz, CreateQuizViewModel2>().
       ReverseMap();
 
-            this.CreateMap<Question, CreateQuizViewModel2>().
-    ReverseMap();
+            //          this.CreateMap<Question, CreateQuizViewModel2>().
+            //  ReverseMap();
 
 
-            this.CreateMap<Option, CreateQuizViewModel2>().
-    ReverseMap();
+            //          this.CreateMap<Option, CreateQuizViewModel2>().
+            //  ReverseMap();
 
-            this.CreateMap<Option, OptionViewModel>().
-  ReverseMap();
+            //          this.CreateMap<Option, OptionViewModel>().
+            //ReverseMap();
 
             this.CreateMap<User, AssignedUserRoleViewModel>().
  ReverseMap();
 
             this.CreateMap<QuestionBank, QuestionBankViewModel>().
 ReverseMap();
+
+            this.CreateMap<EquipmentType, AddEquipmentypeDto>().
+ReverseMap();
+
+            this.CreateMap<OnboarderEquipment, CheckInEquipmentViewModel>().
+ReverseMap();
+
+            this.CreateMap<QueryStatus, QueryStatusViewModel>().
+ReverseMap();
+
+            this.CreateMap<EquipmentBrand, EquipmentBrandViewModel>().
+ReverseMap();
+
+            
+
+
         }
     }
 }

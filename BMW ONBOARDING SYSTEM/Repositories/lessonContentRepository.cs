@@ -55,6 +55,10 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
             return await _inf370ContextDB.SaveChangesAsync() > 0;
         }
 
-
+        public Task<LessonContent[]> GetArchivedLessonContent()
+        {
+            IQueryable<LessonContent> result = _inf370ContextDB.LessonContent.Where(i => i.ArchiveStatusId == 1); ;
+            return result.ToArrayAsync();
+        }
     }
 }

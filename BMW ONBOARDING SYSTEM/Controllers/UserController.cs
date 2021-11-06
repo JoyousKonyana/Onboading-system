@@ -26,19 +26,27 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly INF370DBContext _context;
         private readonly IUserRepository _userRepository;
         private readonly IUserRoleRepository _userRoleRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly IOTPRepository _otpRepository;
         private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public UserController(IUserRepository userRepository,
+        public UserController(
+            INF370DBContext context,
+            IUserRepository userRepository,
              IOTPRepository otpRepository,
              IUserRoleRepository userRoleRepository,
+              IEmployeeRepository employeeRepository
+             ,
              IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
+            _context = context;
             _userRepository = userRepository;
+            _employeeRepository = employeeRepository;
             _otpRepository = otpRepository;
             _mapper = mapper;
             _appSettings = appSettings.Value;
@@ -64,6 +72,8 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
                 if (await _userRepository.SaveChangesAsync())
                 {
+                    //sendEmail(user, randomPassword);
+                    Employee employee = await _employeeRepository.GetEmployeeByID(user.UserId);
                     sendEmail(user, randomPassword);
                     //AuditLog auditLog = new AuditLog();
                     //auditLog.AuditLogDescription = "Registered user with  username" + ' ' + user.Username;
@@ -191,18 +201,15 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                     var tokenString = tokenHandler.WriteToken(token);
 
                     // return basic user info and authentication token
-                    //return Ok(new
-                    //{
-                    //    //Id = user.UserId,
-                    //    //Username = user.Username,
-                    //    //employeeID = user.EmployeeId,
-                    //    //Token = tokenString,
-                    //    Userrole = user.UserRole.UserRoleName
-                    //});
+                    return Ok(new
+                    {
+                        Id = user.UserId,
+                        Username = user.Username,
+                        employeeID = user.EmployeeId,
+                        Token = tokenString,
+                        Userrole = user.UserRole.UserRoleName
+                    });
 
-                    return Ok(user.UserRole.UserRoleName);
-                    //return _mapper.Map<User>(user);
-                    //return Created($"/api/User{model.UserName}", _mapper.Map<User>(user));
                 }
                 return BadRequest("OTP incorrect");
 
@@ -385,43 +392,41 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         [Route("[action]")]
         public async Task<IActionResult> Login2(Authenticate model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { message = "Something went wrong on your side" });
+            }
             try
             {
-                User user = await _userRepository.GetUserByemail(model.UserName.Trim());
+                var user = await _userRepository.GetUserByemail(model.UserName.Trim());
                 if (user == null)
                     return BadRequest(new { message = "Username or password is incorrect" });
 
-                //var user = _mapper.Map<User>(model);
-
-                string hashedpasswod = hashPassword(model.Password.Trim());
-                string b = user.Password;
-                var m = user.UserRole.UserRoleName.Trim();
-                var n = string.Equals(hashedpasswod, b);
+                var hashedpasswod = hashPassword(model.Password.Trim());
                 if (user.Password == hashedpasswod)
                 {
                     var otpGenerator = "";
-                    Random otp = new Random();
+                    var otp = new Random();
                     otpGenerator = (otp.Next(100000, 999999)).ToString();
-                    DateTime date = new DateTime();
-                    OTPViewModel newotp = new OTPViewModel();
-                    newotp.Timestamp = DateTime.Now;
-                    newotp.UserId = user.UserId;
-                    newotp.OtpValue = otpGenerator;
 
-                    var OTP1 = _mapper.Map<Otp>(newotp);
-
-                    _userRepository.Add(OTP1);
-                    if (await _userRepository.SaveChangesAsync())
+                    var newOTP = new Otp()
                     {
-                        sendOTpEmail(newotp.OtpValue, user.Username);
-                        return Ok(user.UserId);
+                        OtpValue = otpGenerator,
+                        UserId = user.UserId,
+                        Timestamp = DateTime.Now,
+                    };
 
-                        //return _mapper.Map<User>(user);
-                        //return Created($"/api/User{model.UserName}", _mapper.Map<User>(user));
+                    _context.Otp.Add(newOTP);
+                    await _context.SaveChangesAsync();
 
-                    }
+                    sendOTpEmail(newOTP.OtpValue, user.Username);
+                    return Ok(user.UserId);
                 }
-                return BadRequest();
+                else
+                {
+                    return BadRequest(new { message = "Incorrect username and/or password." });
+
+                }
             }
             catch (Exception e)
             {
@@ -484,7 +489,8 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
                 if (await _userRepository.SaveChangesAsync())
                 {
-                    sendEmail(existinguser, randomPassword);
+                    //Employee employee = await _employeeRepository.GetEmployeeByID(existinguser.UserId);
+                    sendEmail(existinguser,randomPassword);
                     return Ok("Check your email for a new password");
                 }
             }
@@ -497,8 +503,10 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
             return BadRequest();
 
         }
-        public void sendEmail(User user, string password)
+        public void sendEmail(User user,string password)
         {
+            //var employee = await _employeeRepository.GetEmployeeByID(Convert.Touser.EmployeeId));
+            var m = "";
             SmtpClient Client = new SmtpClient()
             {
                 Host = "smtp.gmail.com",
@@ -513,7 +521,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                 }
 
             };
-            MailAddress FromMail = new MailAddress("team14onboarding@gmail.com", "Admin");
+            MailAddress FromMail = new MailAddress("team14onboarding@gmail.com", "IT ZA HUB ONBOARDER LOG IN INFORMATION");
             MailAddress ToEmail = new MailAddress(user.Username, "User");
             MailMessage Message = new MailMessage()
             {

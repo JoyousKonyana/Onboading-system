@@ -29,6 +29,8 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
 
         Task<Equipment[]> GetEquiupments();
 
+        //Task<EquipmentQuery[]> GetOnboarderEquipmentQueries()
+
 
     }
 }

@@ -10,7 +10,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public User()
         {
             AuditLog = new HashSet<AuditLog>();
-     
         }
 
         [Key]
@@ -20,12 +19,7 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         public string Username { get; set; }
         public string Password { get; set; }
         [Column("EmployeeID")]
-        public int? EmployeeId { get; set; }
-
-        [ForeignKey(nameof(EmployeeId))]
-        [InverseProperty("User")]
-        public virtual Employee Employee { get; set; }
-
+        public int EmployeeId { get; set; }
         [Column("UserRoleID")]
         public int? UserRoleId { get; set; }
 
@@ -33,10 +27,6 @@ namespace BMW_ONBOARDING_SYSTEM.Models
         [InverseProperty("User")]
         public virtual UserRole UserRole { get; set; }
         [InverseProperty("User")]
-
-        //code copied
-
-        //code copied
         public virtual ICollection<AuditLog> AuditLog { get; set; }
     }
 }

@@ -30,10 +30,10 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         public Task<OnboarderEquipment[]> GetEquipmentByOnboarderIDAsync(int id)
         {
             IQueryable<OnboarderEquipment> onboarderEquipment = _inf370ContextDB.OnboarderEquipment.
-                Include(x => x.Equipment)
+                Include(x => x.Equipment).ThenInclude(x => x.EquipmentBrand)
               //ThenInclude(x => x.EquipmentTradeInStatus)
               //ThenInclude(x => x.Equipment).ThenInclude(x => x.EquipmentBrand)
-              .Where(i => i.OnboarderId == id);
+              .Where(i => i.OnboarderID == id);
 
             return onboarderEquipment.ToArrayAsync();
         }
@@ -54,7 +54,7 @@ namespace BMW_ONBOARDING_SYSTEM.Repositories
         public Task<OnboarderEquipment> GetEquipmentByEquipmentOnboarderId(int onboarderid, int equipmentid)
         {
             IQueryable<OnboarderEquipment> existingEquipment = _inf370ContextDB.OnboarderEquipment
-               .Where(i => i.EquipmentId == equipmentid && i.OnboarderId == onboarderid);
+               .Where(i => i.EquipmentId == equipmentid && i.OnboarderID == onboarderid).Include(x => x.Equipment).ThenInclude(x =>x.EquipmentBrand);
 
             return existingEquipment.FirstOrDefaultAsync();
         }

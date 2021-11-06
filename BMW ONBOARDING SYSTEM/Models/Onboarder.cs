@@ -5,26 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BMW_ONBOARDING_SYSTEM.Models
 {
-    public partial class Onboarder
+    public class Onboarder
     {
         public Onboarder()
         {
-            OnboarderCourseEnrollment = new HashSet<OnboarderCourseEnrollment>();
+            Courses = new List<OnboarderCourseEnrollment>();
             OnboarderEquipment = new HashSet<OnboarderEquipment>();
         }
 
         [Key]
-        [Column("OnboarderID")]
-        public int OnboarderId { get; set; }
-        [Column("EmployeeID")]
-        public int EmployeeId { get; set; }
+        public int OnboarderID { get; set; }
 
-        [ForeignKey(nameof(EmployeeId))]
-        [InverseProperty("Onboarder")]
+
         public virtual Employee Employee { get; set; }
-        [InverseProperty("Onboarder")]
-        public virtual ICollection<OnboarderCourseEnrollment> OnboarderCourseEnrollment { get; set; }
-        [InverseProperty("Onboarder")]
+        public int EmployeeID { get; set; }
+
+
+        public virtual List<OnboarderCourseEnrollment> Courses { get; set; }
+
         public virtual ICollection<OnboarderEquipment> OnboarderEquipment { get; set; }
     }
 }

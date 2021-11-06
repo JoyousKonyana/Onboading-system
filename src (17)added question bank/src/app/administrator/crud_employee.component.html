@@ -27,7 +27,7 @@
 <br/>
 
 <div class="formWrapper">
-  
+
   <form [formGroup]="registerEmployeeForm">
 
     <h4>Select Title</h4>
@@ -49,7 +49,7 @@
              [(ngModel)]="model.FirstName"
              formControlName="FirstName">
     </div>
-  
+
      <div class="form-group position">
       <label>Enter Middle Name:</label>
       <input type="text"
@@ -59,7 +59,7 @@
              [(ngModel)]="model.middleName"
              formControlName="middleName">
     </div>
-  
+
     <div class="form-group name">
       <label>Enter Last Name:</label>
     <input type="text"
@@ -100,7 +100,7 @@
            [(ngModel)]="model.Department"
            disabled>
   </div>
-  
+
   <div class="form-group position">
     <label>Enter ID Number:</label>
   <input type="number"
@@ -111,7 +111,7 @@
          disabled
          >
   </div>
-  
+
   <div class="form-group name">
     <label>Enter Contact Number:</label>
     <input type="number"
@@ -121,7 +121,7 @@
         [(ngModel)]="model.contactNumber"
         formControlName="contactNumber">
   </div>
-          
+
           <div class="form-group name">
             <label>Enter User Role:</label>
             <input type="text"
@@ -131,7 +131,7 @@
                 [(ngModel)]="model.user_role"
                 disabled>
           </div>
-  
+
   <div class="form-group name">
     <label>Enter Job Title:</label>
   <input type="text"
@@ -151,7 +151,7 @@
             </mat-option>
             </mat-select>
         </mat-form-field>
-  
+
           <h4>Select Surburb</h4>
           <mat-form-field appearance="fill">
             <mat-label>Surburb</mat-label>
@@ -161,14 +161,14 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-  
+
           <h4>Select City</h4>
           <mat-form-field appearance="fill">
             <mat-label>City</mat-label>
             <mat-select formControlName="city">
               <mat-option *ngFor="let mycity of city" [value]="mycity.cityId" >
-                {{mycity.country}}
-                
+                {{mycity.cityName}}
+
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -182,7 +182,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-  
+
           <div class="form-group position">
           <h4>Select Country</h4>
           <mat-form-field appearance="fill">
@@ -204,7 +204,7 @@
        [(ngModel)]="model.streetnumber"
        formControlName="streetnumber">
   </div>
-  
+
   <div class="form-group position">
     <label>Enter Street Name:</label>
   <input type="text"
@@ -219,7 +219,7 @@
     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
     I Accept Terms and Condition
   <p></p>
-  
+
     <div class="submitBtnContainer">
       <button type="submit" class="btn btn-success" (click)="updateEmployee()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
