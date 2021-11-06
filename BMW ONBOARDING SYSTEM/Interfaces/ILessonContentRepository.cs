@@ -19,6 +19,8 @@ namespace BMW_ONBOARDING_SYSTEM.Interfaces
 
         Task<LessonContent> GetLessonContentByIdAsync(int id);
 
+        Task<LessonContent[]> GetArchivedLessonContent();
+
 
 
 

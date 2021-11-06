@@ -7,7 +7,7 @@ namespace BMW_ONBOARDING_SYSTEM.ViewModel
 {
     public class LessonContentViewModel
     {
-        public int LessonConentId { get; set; }
+        
         public int? LessonContenetTypeId { get; set; }
         public int? LessonOutcomeId { get; set; }
         public int? ArchiveStatusId { get; set; }
