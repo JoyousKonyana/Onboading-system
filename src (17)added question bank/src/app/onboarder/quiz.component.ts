@@ -47,7 +47,7 @@ export class QuizComponent implements OnInit {
       }
       if (event.type === HttpEventType.Response) {
         this.quiz = event.body as any;
-        console.log(this.quiz)
+        console.log(this.quiz);
         this._ngxSpinner.hide();
       }
     },
