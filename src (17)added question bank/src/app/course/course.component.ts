@@ -135,5 +135,8 @@ export class CourseComponent implements OnInit {
   onNavigateToCourseLessons(course:any){
     this.router.navigate(['/lesson',course.courseID])
   }
+  onNavigateToEnrollments(course:any){
+    this.router.navigate(['/course/enrollments',course.courseID])
+  }
 
 }

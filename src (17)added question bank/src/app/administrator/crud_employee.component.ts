@@ -11,12 +11,12 @@ import { EmployeeService, AuthenticationService, AlertService } from '../_servic
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
-import {ExcelService} from '../_services';
+import { ExcelService } from '../_services';
 import { RegisterEmployee } from '../_models/registerEmployeeDTO';
 
-@Component({ 
-    templateUrl: 'crud_employee.component.html',
-    styleUrls: ['./ss_administrator.component.css'] 
+@Component({
+  templateUrl: 'crud_employee.component.html',
+  styleUrls: ['./ss_administrator.component.css']
 })
 
 export class CRUD_EmployeeComponent implements OnInit {
@@ -28,7 +28,7 @@ export class CRUD_EmployeeComponent implements OnInit {
   department: any[] = [];
   gender: any[] = [];
   title: any[] = [];
- 
+
   employee: any[] = [];
 
   model: any = {};
@@ -36,162 +36,162 @@ export class CRUD_EmployeeComponent implements OnInit {
   submitted = false;
 
   constructor(
-      private employeeService: EmployeeService,
-      private alertService: AlertService,
-      private excelService:ExcelService,
+    private employeeService: EmployeeService,
+    private alertService: AlertService,
+    private excelService: ExcelService,
 
-      private form: FormBuilder,
+    private form: FormBuilder,
   ) {
 
   }
 
-  registerEmployeeForm  = this.form.group({
+  registerEmployeeForm = this.form.group({
     FirstName: new FormControl('', Validators.required),
-    middleName: new FormControl ('',Validators.required),
-    LastName: new FormControl('',Validators.required),
+    middleName: new FormControl('', Validators.required),
+    LastName: new FormControl('', Validators.required),
     Title: new FormControl('', Validators.required),
     Gender: new FormControl('', Validators.required),
     idNumber: new FormControl('', Validators.required),
-    contactNumber:new FormControl('', Validators.required),
+    contactNumber: new FormControl('', Validators.required),
     department: new FormControl('', Validators.required),
-    userRole:new FormControl('', Validators.required),
-    province:new FormControl('', Validators.required),
-    surburb:new FormControl('', Validators.required),
-    city:new FormControl('', Validators.required),
-    country:new FormControl('', Validators.required),
-    streetnumber:new FormControl('', Validators.required),
-    streetname:new FormControl('', Validators.required),
+    userRole: new FormControl('', Validators.required),
+    province: new FormControl('', Validators.required),
+    surburb: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    streetnumber: new FormControl('', Validators.required),
+    streetname: new FormControl('', Validators.required),
     employeeJobTitle: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
   })
 
   // convenience getter for easy access to form fields
   get f() { return this.registerEmployeeForm.controls; }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.loadAll();
-}
+  }
 
-private loadAll() {
+  private loadAll() {
 
-  this.employeeService.getAllEmployee()
-  .pipe(first())
-  .subscribe(
-    employee => {
-      this.employee = employee;
-    },
-    error => {
-      this.alertService.error('Error, Data (Employee) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllEmployee()
+      .pipe(first())
+      .subscribe(
+        employee => {
+          this.employee = employee;
+        },
+        error => {
+          this.alertService.error('Error, Data (Employee) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllCity()
-  .pipe(first())
-  .subscribe(
-    city => {
-      this.city = city;
-    },
-    error => {
-      this.alertService.error('Error, Data (City) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllCity()
+      .pipe(first())
+      .subscribe(
+        city => {
+          this.city = city;
+        },
+        error => {
+          this.alertService.error('Error, Data (City) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllCountry()
-  .pipe(first())
-  .subscribe(
-    country => {
-      this.country = country;
-    },
-    error => {
-      this.alertService.error('Error, Data (Country) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllCountry()
+      .pipe(first())
+      .subscribe(
+        country => {
+          this.country = country;
+        },
+        error => {
+          this.alertService.error('Error, Data (Country) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllTitle()
-  .pipe(first())
-  .subscribe(
-    title => {
-      this.title = title;
-    },
-    error => {
-      this.alertService.error('Error, Data (Title) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllTitle()
+      .pipe(first())
+      .subscribe(
+        title => {
+          this.title = title;
+        },
+        error => {
+          this.alertService.error('Error, Data (Title) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllUser_Role()
-  .pipe(first())
-  .subscribe(
-    user_role => {
-      this.user_role = user_role;
-    },
-    error => {
-      this.alertService.error('Error, Data (User Role) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllUser_Role()
+      .pipe(first())
+      .subscribe(
+        user_role => {
+          this.user_role = user_role;
+        },
+        error => {
+          this.alertService.error('Error, Data (User Role) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllDepartment()
-  .pipe(first())
-  .subscribe(
-    department => {
-      this.department = department;
-    },
-    error => {
-      this.alertService.error('Error, Data (Department) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllDepartment()
+      .pipe(first())
+      .subscribe(
+        department => {
+          this.department = department;
+        },
+        error => {
+          this.alertService.error('Error, Data (Department) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllSuburbs()
-  .pipe(first())
-  .subscribe(
-    suburb => {
-      this.suburb = suburb;
-    },
-    error => {
-      this.alertService.error('Error, Data (Surburbs) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllSuburbs()
+      .pipe(first())
+      .subscribe(
+        suburb => {
+          this.suburb = suburb;
+        },
+        error => {
+          this.alertService.error('Error, Data (Surburbs) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllGender()
-  .pipe(first())
-  .subscribe(
-    gender => {
-      this.gender = gender;
-    },
-    error => {
-      this.alertService.error('Error, Data (Gender) was unsuccesfully retrieved');
-    } 
-  );
+    this.employeeService.getAllGender()
+      .pipe(first())
+      .subscribe(
+        gender => {
+          this.gender = gender;
+        },
+        error => {
+          this.alertService.error('Error, Data (Gender) was unsuccesfully retrieved');
+        }
+      );
 
-  this.employeeService.getAllProvince()
-  .pipe(first())
-  .subscribe(
-    province => {
-      this.province = province;
-    },
-    error => {
-      this.alertService.error('Error, Data (Province) was unsuccesfully retrieved');
-    } 
-  );
-}
+    this.employeeService.getAllProvince()
+      .pipe(first())
+      .subscribe(
+        province => {
+          this.province = province;
+        },
+        error => {
+          this.alertService.error('Error, Data (Province) was unsuccesfully retrieved');
+        }
+      );
+  }
 
   updateEmployeeClicked = false;
-  
+
   deleteEmployee(i: number) {
     this.employeeService.delete(i)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.alertService.success('Deletion was successful', true);
-                    this.loadAll();
-                },
-                error => {
-                    this.alertService.error('Error, Sorry Employee since its registered as a user');
-                });
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success('Deletion was successful', true);
+          this.loadAll();
+        },
+        error => {
+          this.alertService.error('Error, Sorry Employee since its registered as a user');
+        });
   }
 
   myValue = 0;
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.employee, 'Employee');
   }
 
@@ -199,14 +199,14 @@ private loadAll() {
     this.updateEmployeeBtn();
 
     this.model.FirstName = this.employee[editEmployeeInfo].firstName;
-      this.model.middleName = this.employee[editEmployeeInfo].middleName;
-      this.model.lastName = this.employee[editEmployeeInfo].lastName;
-      this.model.email = this.employee[editEmployeeInfo].emailAddress;
-      this.model.idNumber = this.employee[editEmployeeInfo].idnumber;
-      this.model.contactNumber = this.employee[editEmployeeInfo].contactNumber;
-      this.model.jobTitle = this.employee[editEmployeeInfo].employeeJobTitle;
-      this.model.streetnumber = this.employee[editEmployeeInfo].streetNumber;
-      this.model.streetname = this.employee[editEmployeeInfo].streetName;
+    this.model.middleName = this.employee[editEmployeeInfo].middleName;
+    this.model.lastName = this.employee[editEmployeeInfo].lastName;
+    this.model.email = this.employee[editEmployeeInfo].emailAddress;
+    this.model.idNumber = this.employee[editEmployeeInfo].idnumber;
+    this.model.contactNumber = this.employee[editEmployeeInfo].contactNumber;
+    this.model.jobTitle = this.employee[editEmployeeInfo].employeeJobTitle;
+    this.model.streetnumber = this.employee[editEmployeeInfo].streetNumber;
+    this.model.streetname = this.employee[editEmployeeInfo].streetName;
 
     this.myValue = editEmployeeInfo;
   }
@@ -233,7 +233,7 @@ private loadAll() {
     AddressId: undefined,
     EmployeeCalendarId: undefined
   };
-    
+
   updateEmployee() {
     let editEmployeeInfo = this.myValue;
 
@@ -260,31 +260,30 @@ private loadAll() {
       this.alertService.error('Your Form is invalid');
       return;
     }
-    else{
-      for(let i = 0; i < this.employee.length; i++) {
+    else {
+      for (let i = 0; i < this.employee.length; i++) {
 
-        if(i == editEmployeeInfo) 
-        {
+        if (i == editEmployeeInfo) {
           this.employeeService.update(this.employee[editEmployeeInfo].employeeId, this.model2)
-              .pipe(first())
-              .subscribe(
-                  data => {
-                      this.alertService.success('Update was successful', true);
-                      this.loadAll();
-                      this.updateEmployeeBtn();
-                  },
-                  error => {
-                      this.alertService.error('Error, Update was unsuccesful');
-                      this.updateEmployeeBtn();
-                  });
+            .pipe(first())
+            .subscribe(
+              data => {
+                this.alertService.success('Update was successful', true);
+                this.loadAll();
+                this.updateEmployeeBtn();
+              },
+              error => {
+                this.alertService.error('Error, Update was unsuccesful');
+                this.updateEmployeeBtn();
+              });
         }
       }
     }
 
   }
 
-    updateEmployeeBtn() {
-        this.updateEmployeeClicked = !this.updateEmployeeClicked;
-      }
+  updateEmployeeBtn() {
+    this.updateEmployeeClicked = !this.updateEmployeeClicked;
+  }
 
 }

@@ -5,13 +5,10 @@ namespace BMW_ONBOARDING_SYSTEM.Models
 {
     public class OnboarderCourseEnrollment
     {
-        [Key]
-        public int OnboarderCourseEnrollmentID { get; set; }
+        public int Id { get; set; }
 
-        public DateTime OnboarderEnrollmentDate { get; set; }
-        public DateTime? OnboarderGraduationDate { get; set; }
-
-        public int BadgeTotal { get; set; }
+        public DateTime EnrollmentDate { get; set; }
+        public DateTime? GraduationDate { get; set; }
 
         public virtual Course Course { get; set; }
         public int CourseID { get; set; }

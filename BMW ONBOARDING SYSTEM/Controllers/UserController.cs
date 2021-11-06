@@ -53,16 +53,12 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         [Route("[action]")]
         public async Task<ActionResult<User>> registerUser([FromBody] CreateUserViewModel model)
         {
-
-
             try
             {
-
                 var user = _mapper.Map<User>(model);
                 var randomPassword = CreateRandomPassword();
                 user.Password = hashPassword(randomPassword);
                 //user.UserRoleID = 1;
-
 
                 _userRepository.Add(user);
 

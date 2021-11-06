@@ -122,10 +122,12 @@ import { CommonModule } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { Question_BankComponent } from './course/question_bank/question_bank.component';
 import { MaterialModule } from './@material/material.module';;
-import { ManageBankQuestionsComponent } from './course/manage-bank-questions/manage-bank-questions.component';
+import { ManageBankQuestionsComponent } from './course/manage-bank-questions/manage-bank-questions.component'
+;
 import { ListQuestionAnswersComponent } from './course/list-question-answers/list-question-answers.component'
 ;
-import { AddQuestionAnswerComponent } from './course/add-question-answer/add-question-answer.component'//Date Picker
+import { AddQuestionAnswerComponent } from './course/add-question-answer/add-question-answer.component';
+import { ListCourseEnrollmentsComponent } from './course/list-course-enrollments/list-course-enrollments.component'
 //import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
@@ -207,11 +209,13 @@ import { AddQuestionAnswerComponent } from './course/add-question-answer/add-que
 
     //Home
     AboutComponent,
-    HomeComponent,
+    HomeComponent
+,
     ManageBankQuestionsComponent
 ,
     ListQuestionAnswersComponent ,
-    AddQuestionAnswerComponent ],
+    AddQuestionAnswerComponent ,
+    ListCourseEnrollmentsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

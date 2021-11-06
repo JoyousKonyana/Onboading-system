@@ -149,7 +149,6 @@ export class Set_QuizComponent implements OnInit {
       return;
     }
     if (this.addQuizForm.valid) {
-      console.log(this.addQuizForm.value)
       this._manageCoursesService.addQuiz(this.addQuizForm.value)
         .subscribe(event => {
           if (event.type === HttpEventType.Sent) {

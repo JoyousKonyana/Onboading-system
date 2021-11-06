@@ -31,6 +31,8 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         private readonly IUserRoleRepository _userRoleRepository;
         private readonly IGenderRepository _genderRepository;
         private readonly IProvinceRepository _provinceRepository;
+        private readonly INF370DBContext _context;
+
         private readonly IMapper _mapper;
         // functionality not implemented yet
         // create a quiz together with a question
@@ -43,6 +45,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
               IUserRoleRepository userRoleRepository,
               IGenderRepository genderRepository,
                IProvinceRepository provinceRepository,
+            INF370DBContext context,
             IMapper mapper)
         {
             _employeeRepository = employeeRepository;
@@ -56,6 +59,7 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
             _userRoleRepository = userRoleRepository;
             _genderRepository = genderRepository;
             _provinceRepository = provinceRepository;
+            _context = context;
         }
 
         //[Authorize(Roles = Role.Onboarder)]
@@ -133,27 +137,25 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
         public async Task<ActionResult> RegisterEmployee([FromBody] EmployeeViewModel model)
         {
             try
-
-
-
             {
                 var address = _mapper.Map<Address>(model);
                 _employeeRepository.Add(address);
                 if (await _employeeRepository.SaveChangesAsync())
                 {
-
-
                     var employee = _mapper.Map<Employee>(model);
                     _employeeRepository.Add(employee);
 
 
                     if (await _employeeRepository.SaveChangesAsync())
                     {
-                        CreateUserViewModel user = new CreateUserViewModel();
-                        user.EmployeeId = employee.EmployeeID;
+                        var user = new CreateUserViewModel
+                        {
+                            EmployeeId = employee.EmployeeID,
+                            UserRoleId = model.UserRoleID,
+                            Username = employee.EmailAddress
+                        };
 
-                        user.UserRoleId = model.UserRoleID;
-                        user.Username = employee.EmailAddress;
+                        var roleInDb = await _context.UserRole.FindAsync(model.UserRoleID);
 
                         //return Created($"/api/User/registerUser", user);
                         using (var httpClient = new HttpClient())
@@ -162,16 +164,16 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                             var requestContent = new StringContent(userData, Encoding.UTF8, "application/json");
                             using (var response = await httpClient.PostAsync("https://localhost:44319/api/User/registerUser", requestContent))
                             {
-
                                 string apiResponse = await response.Content.ReadAsStringAsync();
-
                             }
                         }
 
-                        if (user.UserRoleId == 1)
+                        if (roleInDb.UserRoleName.ToLower() == "onboarder".ToLower())
                         {
-                            Onboarder onboarder = new Onboarder();
-                            onboarder.EmployeeID = employee.EmployeeID;
+                            var onboarder = new Onboarder
+                            {
+                                EmployeeID = employee.EmployeeID
+                            };
                             _employeeRepository.Add(onboarder);
 
                             if (await _employeeRepository.SaveChangesAsync())
@@ -185,16 +187,12 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
                                     var requestContent = new StringContent(smsData, Encoding.UTF8, "application/json");
                                     using (var response = await httpClient.PostAsync("https://localhost:44319/api/Sms/SendSMS", requestContent))
                                     {
-
                                         string apiResponse = await response.Content.ReadAsStringAsync();
-
                                     }
                                 }
                                 return Ok();
                             }
                         }
-
-
                     }
 
                     //var createAuditLog = _mapper.Map<CreateAuditLogViewModel>(model);

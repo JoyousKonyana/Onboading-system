@@ -52,10 +52,30 @@ export class ManageCoursesService {
     return this._httpClient.get(this.endpointBase.concat("Quiz/GetAll/LessonOutcome/" + lessonOutcomeId),
       { reportProgress: true, observe: 'events' });
   }
-
   addQuiz(payload) {
     return this._httpClient.post(this.endpointBase.concat("Quiz/Add"),
       payload,
+      { reportProgress: true, observe: 'events' });
+  }
+
+  getQuizDetails(quizId: number) {
+    return this._httpClient.get(this.endpointBase.concat("Quiz/Get/" + quizId),
+      { reportProgress: true, observe: 'events' });
+  }
+
+  addOnborderEnrollment(payload) {
+    return this._httpClient.post(this.endpointBase.concat("Onboarder/Enroll"),
+      payload,
+      { reportProgress: true, observe: 'events' });
+  }
+
+  getEnrollmentsByCourseId(courseId: number) {
+    return this._httpClient.get(this.endpointBase.concat("Onboarder/Course/Enrollments/GetAll/" + courseId),
+      { reportProgress: true, observe: 'events' });
+  }
+
+  getCourseDetails(courseId: number) {
+    return this._httpClient.get(this.endpointBase.concat("Course/Get/" + courseId),
       { reportProgress: true, observe: 'events' });
   }
 }

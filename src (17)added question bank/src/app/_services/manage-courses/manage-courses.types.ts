@@ -43,3 +43,18 @@ export interface N_Quiz {
   questionBankId: number,
   questionBankName: string,
 }
+export interface N_Enrollement {
+  id: number,
+  courseId: number,
+  courseName: string,
+  onborderId: number,
+  onborderFullName: number,
+  enrollmentDate: number,
+  graduationDate: number
+}
+
+
+export interface N_courseDetails {
+  id: number,
+  name: string
+}

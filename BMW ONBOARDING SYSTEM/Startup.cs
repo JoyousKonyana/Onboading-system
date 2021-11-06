@@ -40,6 +40,22 @@ namespace BMW_ONBOARDING_SYSTEM
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region  ===== Enable Cors ========
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200/"
+                            )
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials();
+                    });
+            });
+
+            #endregion
 
             // just added for for using .include
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -146,6 +162,12 @@ namespace BMW_ONBOARDING_SYSTEM
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -153,10 +175,7 @@ namespace BMW_ONBOARDING_SYSTEM
             // app.UseHsts();
             // app.UseHttpsRedirection();
             // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+
 
             app.UseAuthentication();
             app.UseAuthorization();

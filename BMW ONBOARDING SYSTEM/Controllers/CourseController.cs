@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BMW_ONBOARDING_SYSTEM.Dtos;
 
 namespace BMW_ONBOARDING_SYSTEM.Controllers
 {
@@ -19,12 +20,16 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IMapper _mapper;
+
+        private readonly INF370DBContext _context;
+
         // functionality not implemented yet
         // create a quiz together with a question
-        public CourseController(ICourseRepository courseRepository, IMapper mapper)
+        public CourseController(ICourseRepository courseRepository, IMapper mapper, INF370DBContext context)
         {
             _courseRepository = courseRepository;
             _mapper = mapper;
+            _context = context;
         }
         //[Authorize(Roles = Role.Admin)]
         [Route("[action]")]
@@ -152,6 +157,31 @@ namespace BMW_ONBOARDING_SYSTEM.Controllers
 
                 return BadRequest();
             }
+        }
+
+        [HttpGet("Get/{courseId}")]
+        public ActionResult<GetCourseDetailsDto> GetCourseDetails(int courseId)
+        {
+            var courseInDb = _context.Course
+                    .FirstOrDefault(item => item.CourseID == courseId)
+                ;
+            if (courseInDb == null)
+            {
+                var message = "Course not found";
+                return BadRequest(new { message });
+            }
+
+            var courseDetails = _context.Course
+                .Where(item => item.CourseID == courseId)
+                .Select(item => new GetCourseDetailsDto
+                {
+                    Id = item.CourseID,
+                    Name = item.CourseName
+                }).First();
+
+
+            return courseDetails;
+
         }
 
         //[Authorize(Roles = Role.Admin)]

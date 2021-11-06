@@ -89,9 +89,9 @@
       <tr>
         <th class="col-1">ID</th>
         <th class="col-3">Name</th>
-        <th class="col-4">Description</th>
+        <th class="col-3">Description</th>
         <th class="col-2">Due Date</th>
-        <th class="col-2">Action</th>
+        <th class="col-4">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -101,7 +101,8 @@
         <td>{{course.courseDescription}}</td>
         <td>{{course.courseDueDate}}</td>
         <td>
-          <button class="btn btn-warning" (click)="onNavigateToCourseLessons(course)">Lesson</button>
+          <button class="btn btn-warning" (click)="onNavigateToEnrollments(course)">Enrollments</button>
+          <button class="btn btn-warning" (click)="onNavigateToCourseLessons(course)">Lessons</button>
           <button class="btn btn-primary" (click)="editCourse(i)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-pencil-square" viewBox="0 0 16 16">

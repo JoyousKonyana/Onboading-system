@@ -2,31 +2,27 @@
   Quiz
 </h1>
 
-<!-- This will containt a list of the available Quiz in their Lesson Outcome and their Instruction -->
 <div>
 
-<div class="container">
-  <div *ngFor="let quiz of quiz; let i = index">
-    
-    <div>
-      <small>This is Quiz: {{quiz.quizId}}</small>
-      <h3>
-        Quiz Description:
-        <br/>
-        {{quiz.quizDescription}}
-      </h3>
-      <p>
-        To pass this Quiz a minimum mark must be achieved of: {{quiz.quizMarkRequirement}}
-      </p>
-      <p>This Quiz is Due: {{quiz.quizDueDate}}</p>
-      <p>There is a total number of Question of: {{quiz.numberOfQuestions}}</p>
-      <a class="btn btn-primary" >Take: Lesson</a>
-      <button class="btn btn-info" [routerLink]="['/quiz', quiz.quizId]">Start Quiz</button>
+  <div class="container">
+    <div *ngFor="let quiz of quizzes; let i = index">
+      <div>
+        <h2>{{i+1}}. {{quiz.name}}</h2>
+
+        <p>
+          To pass this quiz, a minimum mark must be achieved of: 50%
+        </p>
+        <p>
+          To pass and get a gold badge, you must get a minimum of : {{quiz.passMarkPercentage}} %
+        </p>
+        <p>Due Date: {{quiz.dueDate}}</p>
+        <button class="btn btn-info" [routerLink]="['/quiz', quiz.id]">Start Quiz</button>
+      </div>
+      <hr>
     </div>
-
-    <hr>
-
   </div>
 </div>
 
-</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Please wait</p>
+</ngx-spinner>

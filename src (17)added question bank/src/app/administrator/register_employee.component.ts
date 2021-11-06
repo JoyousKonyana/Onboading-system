@@ -229,18 +229,7 @@ export class Register_EmployeeComponent implements OnInit {
 
     if (this.registerEmployeeForm.invalid) {
       this.alertService.error('Your Form is invalid');
-      //return;
-
-      this.employeeService.create(this.model2) //Comment this out please
-        .pipe(first())
-        .subscribe(
-          data => {
-            this._router.navigate(['crud_employee']);
-            this.alertService.success('Registration was successful', true);
-          },
-          error => {
-            this.alertService.error('Error, Registration was unsuccesful');
-          });
+      return;
     }
     else {
       this.employeeService.create(this.model2)
